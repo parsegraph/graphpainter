@@ -1,19 +1,19 @@
 {
-  "name": "parsegraph-TODO-PACKAGE-NAME",
+  "name": "parsegraph-graphpainter",
   "version": "1.6.0",
   "description": "node",
-  "main": "dist/parsegraph-TODO-PACKAGE-NAME.js",
-  "types": "dist/parsegraph-TODO-PACKAGE-NAME.d.ts",
+  "main": "dist/parsegraph-graphpainter.js",
+  "types": "dist/parsegraph-graphpainter.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/parsegraph/TODO-PACKAGE-NAME.git"
+    "url": "git+ssh://git@github.com/parsegraph/graphpainter.git"
   },
   "author": "Rainback, Inc.",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/parsegraph/TODO-PACKAGE-NAME/issues"
+    "url": "https://github.com/parsegraph/graphpainter/issues"
   },
-  "homepage": "https://github.com/parsegraph/TODO-PACKAGE-NAME#readme",
+  "homepage": "https://github.com/parsegraph/graphpainter#readme",
   "dependencies": {
   }
 }

@@ -4,7 +4,7 @@ module.exports = {
   entry: path.resolve(__dirname, "src/index.ts"),
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "parsegraph-TODO-PACKAGE-NAME.js",
+    filename: "parsegraph-graphpainter.js",
     globalObject: "this",
     library: "parsegraph",
     libraryTarget: "umd",

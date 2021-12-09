@@ -25,5 +25,5 @@ jobs:
     - run: NODE_ENV=production make tar-prod
     - uses: actions/upload-artifact@v2
       with:
-        name: parsegraph-TODO-PACKAGE-NAME-prod-${{ github.run_number }}
-        path: parsegraph-TODO-PACKAGE-NAME-prod.tgz
+        name: parsegraph-graphpainter-prod-${{ github.run_number }}
+        path: parsegraph-graphpainter-prod.tgz
