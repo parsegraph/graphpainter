@@ -70,7 +70,7 @@
     "openssl": "^1.1.0",
     "parsegraph-camera": "^1.4.5",
     "parsegraph-direction": "^1.7.5",
-    "parsegraph-input": "^1.6.0",
+    "parsegraph-input": "^1.6.1",
     "parsegraph-interact": "^1.6.0",
     "parsegraph-layout": "^1.7.3",
     "parsegraph-matrix": "^1.4.7",
@@ -92,10 +92,10 @@
     "webpack-cli": "^4.8.0"
   },
   "peerDependencies": {
-    "parsegraph-checkglerror": "^1.5.0",
+    "parsegraph-checkglerror": "^1.5.1",
     "parsegraph-log": "^1.6.1"
   },
   "devDependencies": {
-    "parsegraph-blockpainter": "^1.5.4"
+    "parsegraph-blockpainter": "^1.5.5"
   }
 }

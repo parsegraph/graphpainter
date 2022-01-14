@@ -6,7 +6,7 @@ module.exports = {
       commonjs:"parsegraph-checkglerror",
       commonjs2:"parsegraph-checkglerror",
       amd:"parsegraph-checkglerror",
-      root:"parsegraph"
+      root:"parsegraph_checkglerror"
     },
     "parsegraph-log":{
       commonjs:"parsegraph-log",

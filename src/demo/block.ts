@@ -341,7 +341,6 @@ class BlockComp implements Projected {
    */
   paint(projector: Projector, timeout?: number): boolean {
     if (!this._inputs.has(projector)) {
-      projector.getDOMContainer().style.pointerEvents = "auto";
       this._inputs.set(
         projector,
         new Input(
