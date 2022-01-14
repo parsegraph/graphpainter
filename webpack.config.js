@@ -23,7 +23,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "parsegraph-graphpainter.[name].js",
     globalObject: "this",
-    library: "parsegraph",
+    library: "parsegraph_graphpainter",
     libraryTarget: "umd",
   },
   module: {
