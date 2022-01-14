@@ -68,6 +68,7 @@
     "mocha": "^8.2.1",
     "nyc": "^15.1.0",
     "openssl": "^1.1.0",
+    "parsegraph-blockpainter": "^1.5.5",
     "parsegraph-camera": "^1.4.5",
     "parsegraph-direction": "^1.7.5",
     "parsegraph-input": "^1.6.1",
@@ -94,8 +95,5 @@
   "peerDependencies": {
     "parsegraph-checkglerror": "^1.5.1",
     "parsegraph-log": "^1.6.1"
-  },
-  "devDependencies": {
-    "parsegraph-blockpainter": "^1.5.5"
   }
 }

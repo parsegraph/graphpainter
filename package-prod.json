@@ -15,6 +15,7 @@
   },
   "homepage": "https://github.com/parsegraph/graphpainter#readme",
   "dependencies": {
+    "parsegraph-blockpainter": "^1.5.5",
     "parsegraph-camera": "^1.4.5",
     "parsegraph-direction": "^1.7.5",
     "parsegraph-input": "^1.6.1",
