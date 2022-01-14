@@ -65,6 +65,12 @@ parsegraph-$(DIST_NAME)-dev.tgz: dist/parsegraph-$(DIST_NAME).js
 
 dist/parsegraph-$(DIST_NAME).js: package.json package-lock.json $(SCRIPT_FILES) $(GLSL_SCRIPTS)
 	npm run build
+	test ! -e dist-types/src/demo || (mkdir -p dist/demo && mv -v dist-types/src/demo/* dist/demo)
+	rm -rf dist-types/src/demo
+	test ! -e dist-types/src/freezer || (mkdir -p dist/freezer && mv -v dist-types/src/freezer/* dist/freezer)
+	rm -rf dist-types/src/freezer
+	test ! -e dist-types/src/graphpainter || (mkdir -p dist/graphpainter && mv -v dist-types/src/graphpainter/* dist/graphpainter)
+	rm -rf dist-types/src/graphpainter
 	mv -v dist-types/src/* dist/
 	mv dist/index.d.ts dist/parsegraph-$(DIST_NAME).d.ts
 	mv dist/index.d.ts.map dist/parsegraph-$(DIST_NAME).d.ts.map

@@ -1,10 +1,27 @@
 const path = require("path");
 
 module.exports = {
-  entry: path.resolve(__dirname, "src/index.ts"),
+  externals: {
+    "parsegraph-log":{
+      commonjs:"parsegraph-log",
+      commonjs2:"parsegraph-log",
+      amd:"parsegraph-log",
+      root:"parsegraph_log"
+    },
+    "parsegraph-checkglerror":{
+      commonjs:"parsegraph-checkglerror",
+      commonjs2:"parsegraph-checkglerror",
+      amd:"parsegraph-checkglerror",
+      root:"parsegraph"
+    }
+  },
+  entry: {
+    lib: path.resolve(__dirname, "src/index.ts"),
+    block: path.resolve(__dirname, "src/demo/block.ts"),
+  },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "parsegraph-graphpainter.js",
+    filename: "parsegraph-graphpainter.[name].js",
     globalObject: "this",
     library: "parsegraph",
     libraryTarget: "umd",
