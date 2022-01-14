@@ -60,7 +60,7 @@ export default class FrozenNode {
     if (!this._windowFragments.has(projector)) {
       this._windowFragments.set(projector, []);
     }
-    let fragments = this._windowFragments.get(projector);
+    const fragments = this._windowFragments.get(projector);
 
     if (fragments.length === 0) {
       log("Allocating frozen node");

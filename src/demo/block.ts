@@ -147,7 +147,7 @@ class NodeLinePainter {
     }
     const directionData = node.neighborAt(direction);
 
-    const color = LINE_COLOR; //.premultiply(this.backgroundColor());
+    const color = LINE_COLOR; // .premultiply(this.backgroundColor());
     painter.setBorderColor(color);
     painter.setBackgroundColor(color);
 
@@ -335,10 +335,6 @@ class BlockComp implements Projected {
     return false;
   }
 
-  /**
-   * Paints the scene's assets.
-   * @param timeout
-   */
   paint(projector: Projector, timeout?: number): boolean {
     if (!this._inputs.has(projector)) {
       this._inputs.set(
@@ -395,12 +391,6 @@ class BlockComp implements Projected {
     return this._camera;
   }
 
-  /**
-   * Renders the scene's assets.
-   * @param width
-   * @param height
-   * @param avoidIfPossible
-   */
   render(projector: Projector): boolean {
     const gl = projector.glProvider().gl();
     if (gl.isContextLost()) {
@@ -408,14 +398,9 @@ class BlockComp implements Projected {
     }
     const cam = this.camera();
 
-    const width = document.body.clientWidth;//projector.glProvider().canvas().width;
-    const height = document.body.clientHeight;//projector.glProvider().canvas().height;
-    gl.viewport(
-      0,
-      0,
-      width,
-      height
-    );
+    const width = document.body.clientWidth; // projector.glProvider().canvas().width;
+    const height = document.body.clientHeight; // projector.glProvider().canvas().height;
+    gl.viewport(0, 0, width, height);
     if (!cam.setSize(width, height) && !this.needsRender()) {
       // console.log("Avoided render");
       return false;
@@ -427,7 +412,7 @@ class BlockComp implements Projected {
     const overlay = projector.overlay();
     overlay.textBaseline = "top";
 
-    let needsUpdate = this._painter.render(projector);
+    const needsUpdate = this._painter.render(projector);
     if (needsUpdate) {
       log("World was rendered dirty.");
       this.scheduleRender();
@@ -473,17 +458,12 @@ class BlockComp implements Projected {
     return false;
   }
 
-  /**
-   * Dismount the given window, removing component-specific event
-   * listeners and DOM assets.
-   * @param window the window to unmount this component.
-   */
   unmount(projector: Projector): void {
     if (!this._inputs.has(projector)) {
       return;
     }
-    //const input = this._inputs.get(projector);
-    //input.unmount();
+    // const input = this._inputs.get(projector);
+    // input.unmount();
     this._inputs.delete(projector);
   }
 }
@@ -494,7 +474,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const root: WindowNode = new DirectionNode();
   root.setValue(new Block(root, new Color(1, 1, 1), new Color(0.5)));
   const freezer = new Freezer();
-  //root.value().getCache().freeze(freezer);
+  root.value().getCache().freeze(freezer);
 
   let n = root;
   for (let i = 0; i < 10; ++i) {

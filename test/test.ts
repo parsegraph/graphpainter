@@ -1,7 +1,7 @@
 import { assert } from "chai";
-import {GraphPainter} from "../dist/parsegraph-graphpainter.lib";
+import { GraphPainter } from "../dist/parsegraph-graphpainter.lib";
 import Camera from "parsegraph-camera";
-import {DirectionNode} from "parsegraph-direction";
+import { DirectionNode } from "parsegraph-direction";
 
 describe("Package", function () {
   it("works", () => {

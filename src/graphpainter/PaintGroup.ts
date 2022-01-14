@@ -79,7 +79,7 @@ export default class PaintGroup {
       needsRepaint = subgroup.paint() || needsRepaint;
       const b = subgroup.bounds();
       log("Bounds", b);
-      this._bounds = b; //.include(b.x(), b.y(), b.width(), b.height());
+      this._bounds = b; // .include(b.x(), b.y(), b.width(), b.height());
       log("Included bounds", this._bounds);
     });
 
@@ -194,7 +194,7 @@ export default class PaintGroup {
     );
     if (
       this.root().value().getCache().isFrozen()
-      //&& renderScale < FREEZER_TEXTURE_SCALE
+      // && renderScale < FREEZER_TEXTURE_SCALE
     ) {
       log(
         "Rendering " + this + " from cache. CACHED_RENDERS = ",
