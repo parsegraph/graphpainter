@@ -25,6 +25,14 @@ const getPort = (port) => {
 };
 const port = getPort(3000);
 
+const getRootPath = ()=> {
+  if (process.env.SITE_ROOT) {
+    return process.env.SITE_ROOT;
+  }
+  return "/";
+}
+const root = getRootPath();
+
 async function getDemos() {
   return new Promise((respond, reject) => {
     glob("www/*.html", {}, function (err, files) {
@@ -43,7 +51,7 @@ async function getDemos() {
   });
 }
 
-app.get("/", async (req, res) => {
+app.get(root, async (req, res) => {
   resp = "";
   const write = (text) => {
     resp += text + "\n";
@@ -56,15 +64,15 @@ app.get("/", async (req, res) => {
   write(`</head>`);
   write(`<body>`);
   write(
-    `<h1>graphpainter <a href='/coverage'>Coverage</a> <a href='/docs'>Docs</a></h1>`
+    `<h1>graphpainter <a href='${root}/coverage'>Coverage</a> <a href='${root}/docs'>Docs</a></h1>`
   );
   write(
-    `<p>This library is available as JavaScript UMD module: <a href='/parsegraph-graphpainter.js'>parsegraph-graphpainter.js</a></p>`
+    `<p>This library is available as JavaScript UMD module: <a href='${root}/parsegraph-graphpainter.lib.js'>parsegraph-graphpainter.lib.js</a></p>`
   );
   write(`<h2>Samples &amp; Demos</h2>`);
   write(`<ul>`);
   (await getDemos()).forEach((demo) => {
-    demo && write(`<li><a href='/${demo}.html'>${demo}</li>`);
+    demo && write(`<li><a href='${root}/${demo}.html'>${demo}</li>`);
   });
   write(`</ul>`);
   write(`</body>`);
@@ -73,9 +81,9 @@ app.get("/", async (req, res) => {
   res.end(resp);
 });
 
-app.use(express.static("./src"));
-app.use(express.static("./dist"));
-app.use(express.static("./www"));
+app.use(root, express.static("./src"));
+app.use(root, express.static("./dist"));
+app.use(root, express.static("./www"));
 
 app.listen(port, () => {
   console.log(`See graphpainter build information at http://localhost:${port}`);
