@@ -3,6 +3,8 @@ const glob = require("glob");
 const express = require("express");
 const app = express();
 
+const name = "graphpainter";
+
 const getPort = (port) => {
   if (process.env.SITE_PORT) {
     try {
@@ -29,7 +31,7 @@ const getRootPath = ()=> {
   if (process.env.SITE_ROOT) {
     return process.env.SITE_ROOT;
   }
-  return "/";
+  return "";
 }
 const root = getRootPath();
 
@@ -60,14 +62,14 @@ app.get(root, async (req, res) => {
   write(`<!DOCTYPE html>`);
   write(`<html>`);
   write(`<head>`);
-  write(`<title>graphpainter</title>`);
+  write(`<title>${name}</title>`);
   write(`</head>`);
   write(`<body>`);
   write(
-    `<h1>graphpainter <a href='${root}/coverage'>Coverage</a> <a href='${root}/docs'>Docs</a></h1>`
+    `<h1>${name} <a href='${root}/coverage'>Coverage</a> <a href='${root}/docs'>Docs</a></h1>`
   );
   write(
-    `<p>This library is available as JavaScript UMD module: <a href='${root}/parsegraph-graphpainter.lib.js'>parsegraph-graphpainter.lib.js</a></p>`
+    `<p>This library is available as JavaScript UMD module: <a href='${root}/parsegraph-${name}.lib.js'>parsegraph-${name}.lib.js</a></p>`
   );
   write(`<h2>Samples &amp; Demos</h2>`);
   write(`<ul>`);
@@ -86,5 +88,5 @@ app.use(root, express.static("./dist"));
 app.use(root, express.static("./www"));
 
 app.listen(port, () => {
-  console.log(`See graphpainter build information at http://localhost:${port}`);
+  console.log(`See ${name} build information at http://localhost:${port}${root}`);
 });
