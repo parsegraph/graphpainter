@@ -596,8 +596,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const root: ProjectedNode = new DirectionNode();
   root.setValue(new Block(root, new Color(1, 1, 1), new Color(0.5)));
-  // const freezer = new Freezer();
-  // root.value().getCache().freeze(freezer);
+  const freezer = new Freezer();
+  root.value().getCache().freeze(freezer);
 
   let n = root;
   for (let i = 0; i < 10; ++i) {
