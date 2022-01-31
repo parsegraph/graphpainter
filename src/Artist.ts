@@ -1,50 +1,18 @@
-import PaintContext from "./PaintContext";
-import { Matrix3x3 } from "parsegraph-matrix";
-import Camera from "parsegraph-camera";
+import { Projector, Projected } from "parsegraph-projector";
+import PaintSubgroup from "./graphpainter/PaintSubgroup";
 import Rect from "parsegraph-rect";
+import WorldTransform from "./WorldTransform";
 
-export type Counts = { [key: string]: number };
-
-export default interface Artist {
-  /**
-   * Given the counts, install painters into the context, and
-   * prepare them for painting.
-   *
-   * During painting, this is called immediately after each Painted's
-   * .draft() method is called.
-   *
-   * @param {ctx} the target context
-   * @param {counts} a map of counts
-   */
-  setup(ctx: PaintContext, counts: Counts): void;
+export default interface Artist<T extends Projected> {
+  bounds(projector: Projector, projected: T): Rect;
 
   /**
-   * Returns the bounds of painting, in world space.
+   * Given the subgroup, create a projected that is used to
+   * render the subgroup.
    *
-   * @return {Rect} the bounds of all objects rendered using this context.
+   * @param {projector} the target projector
    */
-  bounds(ctx: PaintContext): Rect;
+  make(subgroup: PaintSubgroup): T;
 
-  contextChanged(ctx: PaintContext, isLost: boolean): void;
-
-  tick(ctx: PaintContext, elapsed: number): boolean;
-
-  unmount(ctx: PaintContext): void;
-
-  /**
-   * Renders the painted content.
-   *
-   * @param world the 3x3 world matrix
-   * @param scale the scale of the world matrix
-   * @param forceSimple if true, this is a hint to draw low-resolution models
-   * @param {camera} the camera used for rendering
-   * @param paintContext component used for rendering
-   */
-  render(
-    world: Matrix3x3,
-    scale: number,
-    forceSimple: boolean,
-    camera: Camera,
-    ctx: PaintContext
-  ): void;
+  setWorldTransform(projected: T, worldMat: WorldTransform): void;
 }

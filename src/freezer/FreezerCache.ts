@@ -1,12 +1,12 @@
 import FrozenNode from "./FrozenNode";
-import WindowNode from "../WindowNode";
+import ProjectedNode from "../ProjectedNode";
 import Freezer from "./Freezer";
 
 export default class FreezerCache {
   _cache: FrozenNode;
-  _node: WindowNode;
+  _node: ProjectedNode;
 
-  constructor(node: WindowNode) {
+  constructor(node: ProjectedNode) {
     this._cache = null;
     this._node = node;
   }

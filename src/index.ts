@@ -1,35 +1,34 @@
-import Artist, { Counts } from "./Artist";
+import Artist from "./Artist";
 import NodeRenderData from "./NodeRenderData";
-import PaintContext from "./PaintContext";
 import Painted from "./Painted";
-import WindowCaret from "./WindowCaret";
-import WindowNode from "./WindowNode";
 import paintGroupBounds from "./paintGroupBounds";
+import ProjectedCaret from "./ProjectedCaret";
+import ProjectedNode, {ProjectedNodeValue} from "./ProjectedNode";
+import WorldTransform from "./WorldTransform";
 
 import Freezable from "./freezer/Freezable";
+import Freezer, { FREEZER_TEXTURE_SCALE } from "./freezer/Freezer";
 import FreezerCache from "./freezer/FreezerCache";
 import FreezerRow, { FREEZER_MARGIN } from "./freezer/FreezerRow";
-import FreezerSlot from "./freezer/FreezerSlot";
-import Freezer, { FREEZER_TEXTURE_SCALE } from "./freezer/Freezer";
 import FreezerSlice from "./freezer/FreezerSlice";
-import FrozenNodeFragment from "./freezer/FrozenNodeFragment";
+import FreezerSlot from "./freezer/FreezerSlot";
 import FrozenNode from "./freezer/FrozenNode";
+import FrozenNodeFragment from "./freezer/FrozenNodeFragment";
 
 import GraphPainterAnalytics from "./graphpainter/GraphPainterAnalytics";
-import GraphPainterSlice from "./graphpainter/GraphPainterSlice";
 import GraphPainter from "./graphpainter/GraphPainter";
 import PaintGroup from "./graphpainter/PaintGroup";
 import PaintSubgroup from "./graphpainter/PaintSubgroup";
 
 export {
   Artist,
-  Counts,
   NodeRenderData,
-  PaintContext,
   Painted,
-  WindowCaret,
-  WindowNode,
   paintGroupBounds,
+  ProjectedCaret,
+  ProjectedNode,
+  ProjectedNodeValue,
+  WorldTransform,
   Freezable,
   FreezerCache,
   FreezerRow,
@@ -41,7 +40,6 @@ export {
   FrozenNodeFragment,
   FrozenNode,
   GraphPainterAnalytics,
-  GraphPainterSlice,
   GraphPainter,
   PaintGroup,
   PaintSubgroup,

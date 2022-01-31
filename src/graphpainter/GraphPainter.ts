@@ -1,61 +1,80 @@
 import Camera from "parsegraph-camera";
+import GraphPainterAnalytics from "./GraphPainterAnalytics";
 
-import log, { logEnter, logLeave } from "parsegraph-log";
-import WindowNode from "../WindowNode";
-import GraphPainterSlice from "./GraphPainterSlice";
+import log, { logEnter, logEnterc, logLeave } from "parsegraph-log";
+import ProjectedNode from "../ProjectedNode";
 import { Projector, Projected } from "parsegraph-projector";
 import Method from "parsegraph-method";
+import PaintGroup from "./PaintGroup";
+
+const timer = (timeout: number) => {
+  const t: number = new Date().getTime();
+  return function (): boolean {
+    const isPast: boolean =
+      timeout !== undefined && new Date().getTime() - t > timeout;
+    if (isPast) {
+      log(
+        "Past time: timeout={0}, elapsed={1}",
+        timeout,
+        new Date().getTime() - t
+      );
+    }
+    return isPast;
+  };
+};
 
 export default class GraphPainter implements Projected {
-  _root: WindowNode;
+  _root: ProjectedNode;
+  _savedPaintGroup: number;
+  _paintGroups: PaintGroup[];
 
-  _slices: Map<Projector, GraphPainterSlice>;
   _commitLayoutFunc: Function;
   _camera: Camera;
   _onScheduleUpdate: Method;
 
-  constructor(root: WindowNode, cam: Camera) {
+  constructor(root: ProjectedNode, cam: Camera) {
     logEnter("Constructing GraphPainter");
     this._root = root;
-    this._slices = new Map();
     this._commitLayoutFunc = null;
     this._camera = cam;
     this._onScheduleUpdate = new Method();
 
     this._root.setDirtyListener(this.markDirty, this);
+    this.markDirty();
     logLeave();
   }
 
-  tick(elapsed: number): boolean {
-    let needsUpdate = false;
-    this._slices.forEach((slice) => {
-      needsUpdate = slice.tick(elapsed) || needsUpdate;
-    });
-    return needsUpdate;
+  isDirty() {
+    return this._savedPaintGroup < this._paintGroups.length;
+  }
+
+  tick(cycleStart: number): boolean {
+    if (!this._paintGroups) {
+      return false;
+    }
+    return this._paintGroups.reduce((needsUpdate, pg) => {
+      return pg.tick(cycleStart) || needsUpdate;
+    }, false);
   }
 
   unmount(projector: Projector): void {
-    if (!this._slices.has(projector)) {
+    if (!this._paintGroups) {
       return;
     }
-    const slice = this._slices.get(projector);
-    slice.unmount();
-    this._slices.delete(projector);
+    this._paintGroups.forEach((pg) => pg.unmount(projector));
   }
 
   contextChanged(projector: Projector, isLost: boolean): void {
-    if (!this._slices.has(projector)) {
-      return;
+    if (isLost) {
+      this.unmount(projector);
     }
-    const slice = this._slices.get(projector);
-    slice.contextChanged(isLost);
   }
 
   setOnScheduleUpdate(listener: () => void, listenerObj?: object): void {
     this._onScheduleUpdate.set(listener, listenerObj);
   }
 
-  root(): WindowNode {
+  root(): ProjectedNode {
     return this._root;
   }
 
@@ -64,9 +83,11 @@ export default class GraphPainter implements Projected {
       this.root().value().getCache().frozenNode().invalidate();
     }
     this._commitLayoutFunc = null;
-    this._slices.forEach((slice) => {
-      slice.markDirty();
-    });
+    /*this._paintGroups.forEach(pg=>{
+      pg.dispose();
+    });*/
+    this._paintGroups = [];
+    this._savedPaintGroup = -1;
     this._onScheduleUpdate.call();
   }
 
@@ -99,14 +120,43 @@ export default class GraphPainter implements Projected {
       return true;
     }
 
-    if (!this._slices.has(projector)) {
-      this._slices.set(
-        projector,
-        new GraphPainterSlice(projector, this.root())
-      );
+    logEnterc("Node paints", "Painting node for window={0}", window);
+    log("{0} has paint group {1}", this.root(), this._savedPaintGroup);
+    log("{0} is dirty={1}", this.root(), this.root().isDirty());
+
+    if (timeout <= 0) {
+      logLeave("Paint timeout=" + timeout);
+      return true;
     }
-    const slice = this._slices.get(projector);
-    return slice.paint(timeout);
+
+    // Create paint groups
+    if (this._paintGroups.length === 0) {
+      let node = this.root();
+      do {
+        this._paintGroups.push(new PaintGroup(node));
+        node = node.nextPaintGroup();
+      } while (node != this.root());
+      this._savedPaintGroup = 0;
+    }
+    const pastTime = timer(timeout);
+    while (this._savedPaintGroup < this._paintGroups.length) {
+      if (pastTime()) {
+        this.root()._dirty = true;
+        logLeave("Ran out of time during painting (timeout={0})", timeout);
+        return true;
+      }
+
+      const pg = this._paintGroups[this._savedPaintGroup];
+      if (pg.paint(projector)) {
+        return true;
+      }
+
+      this._savedPaintGroup++;
+    }
+
+    // Finalize painting
+    logLeave("Completed node painting");
+    return false;
   }
 
   camera(): Camera {
@@ -114,11 +164,19 @@ export default class GraphPainter implements Projected {
   }
 
   render(projector: Projector): boolean {
-    if (!this._slices.has(projector)) {
-      // No painter for window.
-      return true;
-    }
-    const slice = this._slices.get(projector);
-    return slice.render(this.camera());
+    const analytics = new GraphPainterAnalytics();
+    analytics.recordStart();
+
+    this._paintGroups.forEach((pg) => {
+      pg.setCamera(this.camera());
+      if (pg.render(projector)) {
+        analytics.recordDirtyRender();
+      } else if (pg.consecutiveRenders() > 1) {
+        analytics.recordConsecutiveRender(pg);
+      }
+    });
+
+    analytics.recordCompletion();
+    return analytics.isDirty();
   }
 }

@@ -1,6 +1,6 @@
 import Freezer from "./Freezer";
 import paintGroupBounds from "../paintGroupBounds";
-import WindowNode from "../WindowNode";
+import ProjectedNode from "../ProjectedNode";
 import FrozenNodeFragment from "./FrozenNodeFragment";
 import { Projector } from "parsegraph-projector";
 import { Matrix3x3 } from "parsegraph-matrix";
@@ -9,7 +9,7 @@ import PaintGroup from "../graphpainter/PaintGroup";
 import log from "parsegraph-log";
 
 export default class FrozenNode {
-  _node: WindowNode;
+  _node: ProjectedNode;
   _freezer: Freezer;
   _windowFragments: Map<Projector, FrozenNodeFragment[]>;
   _validated: boolean;
@@ -18,7 +18,7 @@ export default class FrozenNode {
   _width: number;
   _height: number;
 
-  constructor(freezer: Freezer, node: WindowNode) {
+  constructor(freezer: Freezer, node: ProjectedNode) {
     this._node = node;
     this._freezer = freezer;
     this._windowFragments = new Map();
@@ -53,10 +53,9 @@ export default class FrozenNode {
     this._validated = true;
   }
 
-  paint(paintGroup: PaintGroup) {
+  paint(paintGroup: PaintGroup, projector: Projector) {
     log("Painting frozen node");
     this.validate();
-    const projector = paintGroup.projector();
     if (!this._windowFragments.has(projector)) {
       this._windowFragments.set(projector, []);
     }
@@ -69,14 +68,14 @@ export default class FrozenNode {
       const fragHeight = this._height * scale;
       const fragX = this._x * scale;
       const fragY = this._y * scale;
-      const textureSize = paintGroup.projector().textureSize();
+      const textureSize = projector.textureSize();
       const fragSize = textureSize * scale;
       const numRows = Math.ceil(fragHeight / textureSize);
       const numCols = Math.ceil(fragWidth / textureSize);
       for (let y = 0; y < numRows; ++y) {
         for (let x = 0; x < numCols; ++x) {
           const frag = this._freezer.allocate(
-            paintGroup.projector(),
+            projector,
             Math.min(fragWidth - textureSize * x, textureSize),
             Math.min(fragHeight - textureSize * y, textureSize)
           );

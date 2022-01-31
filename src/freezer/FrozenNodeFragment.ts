@@ -108,7 +108,7 @@ export default class FrozenNodeFragment {
       log("Cam origin", cam.x(), cam.y(), cam.scale());
       log("Cam size", cam.width(), cam.height());
       log("Scale", scale);
-      paintGroup.renderDirect(world, scale, false, cam);
+      paintGroup.renderDirect(this.projector(), world, scale);
       logLeave();
 
       if (!this._vertexBuffer) {

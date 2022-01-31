@@ -75,7 +75,7 @@
     "parsegraph-interact": "^1.6.0",
     "parsegraph-layout": "^1.7.3",
     "parsegraph-matrix": "^1.4.7",
-    "parsegraph-projector": "^1.6.3",
+    "parsegraph-projector": "^1.6.4",
     "parsegraph-showincamera": "^1.6.0",
     "parsegraph-size": "^1.5.6",
     "parsegraph-timing": "^1.4.8",

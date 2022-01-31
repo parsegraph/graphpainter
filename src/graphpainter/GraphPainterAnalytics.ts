@@ -1,5 +1,5 @@
 import PaintGroup from "./PaintGroup";
-import { INTERVAL } from "parsegraph-window";
+import { INTERVAL } from "parsegraph-timingbelt";
 import { elapsed } from "parsegraph-timing";
 
 const renderTimes: number[] = [];

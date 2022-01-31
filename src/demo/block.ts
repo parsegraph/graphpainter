@@ -6,15 +6,15 @@ import Freezer from "../freezer/Freezer";
 import Method from "parsegraph-method";
 
 import Painted from "../Painted";
-import WindowNode from "../WindowNode";
+import ProjectedNode from "../ProjectedNode";
 import { Layout, LayoutNode } from "parsegraph-layout";
 import FreezerCache from "../freezer/FreezerCache";
 import Freezable from "../freezer/Freezable";
-import Artist, { Counts } from "../Artist";
-import PaintContext from "../PaintContext";
+import Artist from "../Artist";
 import {
   makeInverse3x3,
   Matrix3x3,
+  matrixIdentity3x3,
   matrixTransform2D,
 } from "parsegraph-matrix";
 import Camera from "parsegraph-camera";
@@ -38,6 +38,8 @@ import Direction, {
   DirectionNode,
 } from "parsegraph-direction";
 import { showInCamera } from "parsegraph-showincamera";
+import PaintSubgroup from "../graphpainter/PaintSubgroup";
+import WorldTransform from "../WorldTransform";
 
 export const LINE_COLOR = new Color(0.8, 0.8, 0.8, 0.6);
 export const SELECTED_LINE_COLOR = new Color(0.8, 0.8, 0.8, 1);
@@ -45,59 +47,180 @@ export const BUD_RADIUS = 2;
 
 export const LINE_THICKNESS = (12 * BUD_RADIUS) / 8;
 
-class BlockArtist implements Artist {
-  contextChanged(ctx: PaintContext, isLost: boolean): void {
-    const painter = BlockArtist.getBlockPainter(ctx);
-    painter.contextChanged(isLost);
+class BlockSceneData {
+  _currentNode: () => ProjectedNode<BlockScene>;
+  _blockPainter: BlockPainter;
+  _projector: Projector;
+  _scene: BlockScene;
+
+  constructor(projector: Projector, scene: BlockScene) {
+    this._currentNode = null;
+    this._scene = scene;
+
+    this._projector = projector;
+    this._blockPainter = new BlockPainter(
+      projector.glProvider(),
+      BlockType.ROUNDED
+    );
+  }
+
+  blockPainter() {
+    return this._blockPainter;
+  }
+
+  markDirty() {
+    this._currentNode = null;
+  }
+
+  draft(count: number) {
+    this._blockPainter.initBuffer(count);
+  }
+
+  scene() {
+    return this._scene;
+  }
+
+  subgroup() {
+    return this.scene().subgroup();
+  }
+
+  paint() {
+    if (!this._currentNode) {
+      this._currentNode = this.subgroup().iterate();
+    }
+    let n: ProjectedNode;
+    while ((n = this._currentNode())) {
+      if (n.value().draw(this._projector, this._scene)) {
+        return;
+      }
+    }
+    this._currentNode = null;
+    return false;
+  }
+}
+
+class BlockScene implements Projected {
+  _data: Map<Projector, BlockSceneData>;
+  _world: Matrix3x3;
+  _scale: number;
+  _onScheduleUpdate: Method;
+  _subgroup: PaintSubgroup<BlockScene>;
+  _blockCount: number;
+
+  constructor(subgroup: PaintSubgroup<BlockScene>) {
+    this._blockCount = 0;
+    this._data = new Map();
+    this._subgroup = subgroup;
+    this._world = matrixIdentity3x3();
+    this._scale = 1;
+    this._onScheduleUpdate = new Method();
+  }
+
+  subgroup() {
+    return this._subgroup;
+  }
+
+  setOnScheduleUpdate(listener: () => void, listenerObj?: object) {
+    this._onScheduleUpdate.set(listener, listenerObj);
+  }
+
+  markDirty(projector: Projector) {
+    const data = this._data.get(projector);
+    if (data) {
+      data.markDirty();
+    }
+    this._blockCount = 0;
+    this._onScheduleUpdate.call();
+  }
+
+  contextChanged(projector: Projector, isLost: boolean): void {
+    if (isLost) {
+      this.unmount(projector);
+    }
   }
 
   tick(): boolean {
     return false;
   }
 
-  unmount(ctx: PaintContext): void {
-    const painter = BlockArtist.getBlockPainter(ctx);
-    painter.clear();
+  hasBlockPainter(projector: Projector) {
+    return this._data.has(projector);
   }
 
-  setup(ctx: PaintContext, counts: Counts) {
-    const painter = new BlockPainter(
-      ctx.projector().glProvider(),
-      BlockType.ROUNDED
-    );
-    painter.initBuffer(counts.blocks || 0);
-    ctx.set("blockpainter", painter);
+  getBlockPainter(projector: Projector) {
+    return this._data.get(projector)?.blockPainter();
   }
 
-  bounds(ctx: PaintContext): Rect {
-    const painter = BlockArtist.getBlockPainter(ctx);
-    return painter.bounds();
+  unmount(projector: Projector): void {
+    if (!this.hasBlockPainter(projector)) {
+      return;
+    }
+    const painter = this.getBlockPainter(projector);
+    if (painter) {
+      painter.clear();
+    }
   }
 
-  render(
-    world: Matrix3x3,
-    scale: number,
-    forceSimple: boolean,
-    _: Camera,
-    ctx: PaintContext
-  ): void {
-    const painter = BlockArtist.getBlockPainter(ctx);
-    const gl = ctx.projector().glProvider().gl();
+  setWorldTransform(world: Matrix3x3, scale: number) {
+    this._world = world;
+    this._scale = scale;
+  }
+
+  countBlock(val: number = 1): void {
+    this._blockCount += val;
+  }
+
+  hasCount() {
+    return this._blockCount > 0;
+  }
+
+  paint(projector: Projector): boolean {
+    if (!this.hasCount()) {
+      this._subgroup.forEachNode((n) => {
+        n.value().draft(this);
+      });
+    }
+
+    if (!this.hasBlockPainter(projector)) {
+      this._data.set(projector, new BlockSceneData(projector, this));
+    }
+
+    const data = this._data.get(projector);
+    data.draft(this.blockCount());
+    return data.paint();
+  }
+
+  blockCount() {
+    return this._blockCount;
+  }
+
+  render(projector: Projector): boolean {
+    const painter = this.getBlockPainter(projector);
+    if (!painter) {
+      return true;
+    }
+    const gl = projector.glProvider().gl();
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-    painter.render(world, scale, forceSimple);
+    painter.render(this._world, this._scale);
+    return false;
+  }
+}
+
+class BlockArtist implements Artist<BlockScene> {
+  make(subgroup: PaintSubgroup<BlockScene>) {
+    return new BlockScene(subgroup);
   }
 
-  static countBlock(counts: { [key: string]: number }, val: number = 1): void {
-    counts.blocks = counts.blocks || 0;
-    counts.blocks += val;
+  bounds(projector: Projector, scene: BlockScene) {
+    return scene.getBlockPainter(projector)?.bounds();
   }
 
-  static getBlockPainter(ctx: PaintContext): BlockPainter {
-    return ctx.get("blockpainter");
+  setWorldTransform(scene: BlockScene, world: WorldTransform) {
+    scene.setWorldTransform(world.matrix(), world.scale());
   }
 
-  static _instance: BlockArtist = null;
+  static _instance: BlockArtist;
   static instance() {
     if (!BlockArtist._instance) {
       BlockArtist._instance = new BlockArtist();
@@ -204,17 +327,18 @@ class NodeLinePainter {
   }
 }
 
-export default class Block implements Interactive, Painted, Freezable {
+export default class Block
+  implements Interactive, Painted<BlockScene>, Freezable {
   _layout: Layout;
   _interactor: Interaction;
-  _node: WindowNode;
+  _node: ProjectedNode;
   _cache: FreezerCache;
   _color: Color;
   _borderColor: Color;
   _lines: NodeLinePainter;
   _focused: boolean;
 
-  constructor(node: WindowNode, color: Color, borderColor: Color) {
+  constructor(node: ProjectedNode, color: Color, borderColor: Color) {
     this._node = node;
     this._focused = false;
     this._interactor = new Interaction();
@@ -240,11 +364,6 @@ export default class Block implements Interactive, Painted, Freezable {
     return true;
   }
 
-  draft(counts: Counts): void {
-    BlockArtist.countBlock(counts);
-    BlockArtist.countBlock(counts, this._lines.countLines(this._node));
-  }
-
   getSeparation() {
     return 10;
   }
@@ -258,10 +377,15 @@ export default class Block implements Interactive, Painted, Freezable {
     return size;
   }
 
-  paint(ctx: PaintContext): boolean {
+  draft(scene: BlockScene): void {
+    scene.countBlock();
+    scene.countBlock(this._lines.countLines(this._node));
+  }
+
+  draw(projector: Projector, scene: BlockScene): boolean {
     const layout = this.getLayout();
     log("Painting BLOCK at ({0}, {1})", layout.groupX(), layout.groupY());
-    const painter = BlockArtist.getBlockPainter(ctx);
+    const painter = scene.getBlockPainter(projector);
     this._lines.paintLines(painter, this._node);
     painter.setBorderColor(
       this._focused ? new Color(1, 1, 1, 1) : this._borderColor
@@ -278,11 +402,11 @@ export default class Block implements Interactive, Painted, Freezable {
     return false;
   }
 
-  getArtist(): Artist {
+  artist(): Artist<BlockScene> {
     return BlockArtist.instance();
   }
 
-  node(): WindowNode {
+  node(): ProjectedNode {
     return this._node;
   }
 
@@ -303,12 +427,12 @@ class BlockComp implements Projected {
   _camera: Camera;
   _needsRender: boolean;
   _needsRepaint: boolean;
-  _root: WindowNode;
+  _root: ProjectedNode;
   _painter: GraphPainter;
   _inputs: Map<Projector, Input>;
   _onScheduleUpdate: Method;
 
-  constructor(root: WindowNode) {
+  constructor(root: ProjectedNode) {
     this._root = root;
     this._camera = new Camera();
     this._needsRepaint = true;
@@ -331,7 +455,7 @@ class BlockComp implements Projected {
     return this._root;
   }
 
-  tick(_: number): boolean {
+  tick(): boolean {
     return false;
   }
 
@@ -364,6 +488,8 @@ class BlockComp implements Projected {
     if (!this._painter.paint(projector, timeout)) {
       this._needsRepaint = false;
     }
+
+    return this._needsRepaint;
   }
 
   scheduleRepaint() {
@@ -391,16 +517,13 @@ class BlockComp implements Projected {
     return this._camera;
   }
 
-  render(projector: Projector): boolean {
+  render(projector: Projector, width: number, height: number): boolean {
     const gl = projector.glProvider().gl();
     if (gl.isContextLost()) {
       return false;
     }
     const cam = this.camera();
 
-    const width = document.body.clientWidth; // projector.glProvider().canvas().width;
-    const height = document.body.clientHeight; // projector.glProvider().canvas().height;
-    gl.viewport(0, 0, width, height);
     if (!cam.setSize(width, height) && !this.needsRender()) {
       // console.log("Avoided render");
       return false;
@@ -427,7 +550,7 @@ class BlockComp implements Projected {
     this._painter.contextChanged(projector, isLost);
   }
 
-  _focusedNode: WindowNode;
+  _focusedNode: ProjectedNode;
 
   handleEvent(eventType: string, event?: any): boolean {
     logc("Input events", eventType, event);
@@ -438,10 +561,10 @@ class BlockComp implements Projected {
           event.x,
           event.y
         );
-        const node: WindowNode = this.root()
+        const node: ProjectedNode = this.root()
           .value()
           .getLayout()
-          .nodeUnderCoords(mouseInWorld[0], mouseInWorld[1]) as WindowNode;
+          .nodeUnderCoords(mouseInWorld[0], mouseInWorld[1]) as ProjectedNode;
         if (node === this._focusedNode) {
           return true;
         }
@@ -471,14 +594,14 @@ class BlockComp implements Projected {
 document.addEventListener("DOMContentLoaded", () => {
   const belt = new TimingBelt();
 
-  const root: WindowNode = new DirectionNode();
+  const root: ProjectedNode = new DirectionNode();
   root.setValue(new Block(root, new Color(1, 1, 1), new Color(0.5)));
-  const freezer = new Freezer();
-  root.value().getCache().freeze(freezer);
+  // const freezer = new Freezer();
+  // root.value().getCache().freeze(freezer);
 
   let n = root;
   for (let i = 0; i < 10; ++i) {
-    const child: WindowNode = new DirectionNode();
+    const child: ProjectedNode = new DirectionNode();
     child.setValue(
       new Block(child, new Color(1 - i / 10, 0, 0), new Color(0.5))
     );
@@ -489,13 +612,16 @@ document.addEventListener("DOMContentLoaded", () => {
     n = child;
   }
 
-  const comp = new BlockComp(root);
   const projector = new BasicProjector();
-  belt.addRenderable(new Projection(projector, comp));
 
   new ResizeObserver(() => {
     belt.scheduleUpdate();
   }).observe(projector.container());
 
   document.getElementById("demo").appendChild(projector.container());
+
+  const comp = new BlockComp(root);
+  const proj = new Projection(projector, comp);
+  proj.setClip(new Rect(0, 0, projector.width(), projector.height()));
+  belt.addRenderable(proj);
 });

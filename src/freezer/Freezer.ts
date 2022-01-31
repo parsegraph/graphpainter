@@ -1,15 +1,15 @@
 import Camera from "parsegraph-camera";
 
-// The maximum scale where nodes will be rendered from a cache.
-export const FREEZER_TEXTURE_SCALE = 1;
-
 import { Projector } from "parsegraph-projector";
 
-import WindowNode from "../WindowNode";
+import ProjectedNode from "../ProjectedNode";
 
 import FrozenNode from "./FrozenNode";
 import FreezerSlice from "./FreezerSlice";
 import FreezerRow from "./FreezerRow";
+
+// The maximum scale where nodes will be rendered from a cache.
+export const FREEZER_TEXTURE_SCALE = 1;
 
 export default class Freezer {
   _frozenNodes: FrozenNode[];
@@ -40,7 +40,7 @@ export default class Freezer {
     return this._slices.get(projector);
   }
 
-  cache(node: WindowNode) {
+  cache(node: ProjectedNode) {
     const item = new FrozenNode(this, node);
     this._frozenNodes.push(item);
     return item;

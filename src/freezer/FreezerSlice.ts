@@ -8,7 +8,7 @@ import { compileProgram } from "parsegraph-compileprogram";
 import freezerVertexShader from "./Freezer_VertexShader.glsl";
 import freezerFragmentShader from "./Freezer_FragmentShader.glsl";
 
-export default class FreezerWindow {
+export default class FreezerSlice {
   _freezer: Freezer;
   _projector: Projector;
   _gl: WebGLRenderingContext;

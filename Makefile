@@ -14,18 +14,17 @@ SCRIPT_FILES = \
 	src/freezer/FrozenNodeFragment.ts \
 	src/graphpainter/GraphPainter.ts \
 	src/graphpainter/GraphPainterAnalytics.ts \
-	src/graphpainter/GraphPainterSlice.ts \
 	src/graphpainter/PaintGroup.ts \
 	src/graphpainter/PaintSubgroup.ts \
 	src/demo/block.ts \
 	src/index.ts \
 	src/Artist.ts \
 	src/NodeRenderData.ts \
-	src/PaintContext.ts \
 	src/Painted.ts \
 	src/paintGroupBounds.ts \
-	src/WindowCaret.ts \
-	src/WindowNode.ts
+	src/ProjectedCaret.ts \
+	src/ProjectedNode.ts \
+	src/WorldTransform.ts
 
 all: build lint test coverage esdoc
 

@@ -3,23 +3,22 @@ import Direction, {
   DirectionCaret,
   readDirection,
 } from "parsegraph-direction";
-import Painted from "./Painted";
-import Freezable from "./freezer/Freezable";
 import Freezer from "./freezer/Freezer";
 import {
-  Interactive,
   EventListener,
   FocusListener,
   KeyListener,
 } from "parsegraph-interact";
+import {ProjectedNodeValue} from "./ProjectedNode";
+import {Projected} from 'parsegraph-projector';
 
-export default class WindowCaret<
-  Value extends Painted & Interactive & Freezable
-> extends DirectionCaret<Value> {
+export default class ProjectedCaret<
+  T extends Projected
+> extends DirectionCaret<ProjectedNodeValue<T>> {
   _freezer: Freezer;
 
-  clone(): WindowCaret<Value> {
-    const car = new WindowCaret<Value>(this.node(), this.palette());
+  clone(): ProjectedCaret<T> {
+    const car = new ProjectedCaret<T>(this.node(), this.palette());
     car.setFreezer(this._freezer);
     return car;
   }
@@ -43,7 +42,7 @@ export default class WindowCaret<
   freeze(inDirection?: Direction | string): void {
     // Interpret the given direction for ease-of-use.
     inDirection = readDirection(inDirection);
-    let node: DirectionNode<Value>;
+    let node: DirectionNode<ProjectedNodeValue<T>>;
     if (arguments.length === 0) {
       node = this.node();
     } else {
@@ -58,7 +57,7 @@ export default class WindowCaret<
   thaw(inDirection?: Direction | string): void {
     // Interpret the given direction for ease-of-use.
     inDirection = readDirection(inDirection);
-    let node: DirectionNode<Value>;
+    let node: DirectionNode<ProjectedNodeValue<T>>;
     if (arguments.length === 0) {
       node = this.node();
     } else {

@@ -1,91 +1,108 @@
-import PaintContext from "../PaintContext";
-import WindowNode from "../WindowNode";
-import Artist, { Counts } from "../Artist";
-import { Matrix3x3 } from "parsegraph-matrix";
-import Camera from "parsegraph-camera";
-import log from "parsegraph-log";
+import ProjectedNode from "../ProjectedNode";
 import Rect from "parsegraph-rect";
-import { Projector } from "parsegraph-projector";
+import { Projector, Projected } from "parsegraph-projector";
+import Method from "parsegraph-method";
+import WorldTransform from "../WorldTransform";
 
-export default class PaintSubgroup {
-  _root: WindowNode;
+export default class PaintSubgroup<T extends Projected = Projected>
+  implements Projected {
+  _root: ProjectedNode<T>;
   _length: number;
-  _context: PaintContext;
+  _projected: T;
+  _onScheduleUpdate: Method;
 
-  constructor(projector: Projector, artist: Artist, root: WindowNode) {
+  constructor(root: ProjectedNode<T>) {
     this._root = root;
-    this._context = new PaintContext(projector, artist);
     this._length = 1;
+    this._projected = null;
+    this._onScheduleUpdate = new Method();
   }
 
-  tick(elapsed: number): boolean {
-    return this._context.artist().tick(this._context, elapsed);
+  contextChanged(projector: Projector, isLost: boolean) {
+    if (isLost) {
+      this.unmount(projector);
+    }
   }
 
-  contextChanged(isLost: boolean): void {
-    this._context.contextChanged(isLost);
-  }
-
-  unmount(): void {
-    this._context.unmount();
+  projected(): T {
+    return this._projected;
   }
 
   root() {
     return this._root;
   }
 
-  paint(): boolean {
-    let needsRepaint = false;
-    const counts: Counts = {};
-    this.forEachNode((node: WindowNode) => {
-      node.value().draft(counts);
-    });
-    this._context.artist().setup(this._context, counts);
-
-    this.forEachNode((node: WindowNode, ctx: PaintContext) => {
-      /*
-      if (paintGroup.isDirty() || !painter) {
-        if (!painter) {
-          painter = paintGroup.newPainter(window, paintContext);
-          paintGroup.setPainter(window, painter);
-        }
-      }*/
-      log("Painting " + node);
-      needsRepaint = node.value().paint(ctx) || needsRepaint;
-    });
-    return needsRepaint;
+  artist() {
+    return this.root().value().artist();
   }
 
-  render(
-    world: Matrix3x3,
-    scale: number,
-    forceSimple: boolean,
-    camera: Camera
-  ): void {
-    this.artist().render(world, scale, forceSimple, camera, this.context());
+  tick(cycleTime: number): boolean {
+    if (!this.projected()) {
+      return false;
+    }
+    return this.projected().tick(cycleTime);
+  }
+
+  unmount(projector: Projector): void {
+    if (!this.projected()) {
+      return;
+    }
+    this.projected().unmount(projector);
+  }
+
+  setWorldTransform(worldTransform: WorldTransform) {
+    this.artist().setWorldTransform(this.projected(), worldTransform);
+  }
+
+  paint(projector: Projector, timeout?: number): boolean {
+    if (!this.projected()) {
+      this._projected = this.artist().make(this);
+    }
+    return this.projected().paint(projector, timeout);
+  }
+
+  render(projector: Projector): boolean {
+    if (!this.projected()) {
+      return true;
+    }
+    return this.projected().render(projector, undefined, undefined);
   }
 
   addNode() {
     ++this._length;
   }
 
-  forEachNode(cb: (node: WindowNode, ctx: PaintContext) => void) {
+  iterate(): () => ProjectedNode<T> {
+    let n = this._root;
+    let i = 0;
+    return () => {
+      if (i >= this._length) {
+        return null;
+      }
+      ++i;
+      const rv = n;
+      n = n.nextLayout();
+      return rv;
+    };
+  }
+
+  forEachNode(cb: (node: ProjectedNode<T>) => void) {
     let n = this._root;
     for (let i = 0; i < this._length; ++i) {
-      cb(n, this.context());
+      cb(n);
       n = n.nextLayout();
     }
   }
 
-  artist(): Artist {
-    return this._context.artist();
+  bounds(projector: Projector): Rect {
+    return this.artist().bounds(projector, this.projected());
   }
 
-  bounds(): Rect {
-    return this.artist().bounds(this.context());
+  scheduleUpdate() {
+    this._onScheduleUpdate.call();
   }
 
-  context() {
-    return this._context;
+  setOnScheduleUpdate(listener: () => void, listenerObj?: object): void {
+    this._onScheduleUpdate.set(listener, listenerObj);
   }
 }
