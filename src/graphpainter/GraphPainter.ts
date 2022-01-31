@@ -83,7 +83,7 @@ export default class GraphPainter implements Projected {
       this.root().value().getCache().frozenNode().invalidate();
     }
     this._commitLayoutFunc = null;
-    /*this._paintGroups.forEach(pg=>{
+    /* this._paintGroups.forEach(pg=>{
       pg.dispose();
     });*/
     this._paintGroups = [];

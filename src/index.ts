@@ -3,7 +3,7 @@ import NodeRenderData from "./NodeRenderData";
 import Painted from "./Painted";
 import paintGroupBounds from "./paintGroupBounds";
 import ProjectedCaret from "./ProjectedCaret";
-import ProjectedNode, {ProjectedNodeValue} from "./ProjectedNode";
+import ProjectedNode, { ProjectedNodeValue } from "./ProjectedNode";
 import WorldTransform from "./WorldTransform";
 
 import Freezable from "./freezer/Freezable";

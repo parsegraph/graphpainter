@@ -139,7 +139,7 @@ export default class PaintGroup implements Projected {
   }
 
   render(projector: Projector): boolean {
-    //camera: Camera, renderData?: NodeRenderData): boolean {
+    // camera: Camera, renderData?: NodeRenderData): boolean {
     // console.log("RENDERING THE NODE");
     if (!this.root().isRoot() && !this.root().localPaintGroup()) {
       throw new Error("Cannot render a node that is not a paint group");

@@ -4,17 +4,13 @@ import Direction, {
   readDirection,
 } from "parsegraph-direction";
 import Freezer from "./freezer/Freezer";
-import {
-  EventListener,
-  FocusListener,
-  KeyListener,
-} from "parsegraph-interact";
-import {ProjectedNodeValue} from "./ProjectedNode";
-import {Projected} from 'parsegraph-projector';
+import { EventListener, FocusListener, KeyListener } from "parsegraph-interact";
+import { ProjectedNodeValue } from "./ProjectedNode";
+import { Projected } from "parsegraph-projector";
 
-export default class ProjectedCaret<
-  T extends Projected
-> extends DirectionCaret<ProjectedNodeValue<T>> {
+export default class ProjectedCaret<T extends Projected> extends DirectionCaret<
+  ProjectedNodeValue<T>
+> {
   _freezer: Freezer;
 
   clone(): ProjectedCaret<T> {
