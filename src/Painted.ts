@@ -1,14 +1,12 @@
 import { Positioned } from "parsegraph-layout";
-import Artist from "./Artist";
-import { Projector, Projected } from "parsegraph-projector";
+import Artist, { WorldRenderable } from "./Artist";
 
-export default interface Painted<T extends Projected> extends Positioned {
-  draft(projected: T): void;
-
-  draw(projector: Projector, projected: T): boolean;
-
+export default interface Painted<
+  Model = {},
+  View extends WorldRenderable = WorldRenderable
+> extends Positioned {
   /**
    * Returns the artist used to paint this object.
    */
-  artist(): Artist<T>;
+  artist(): Artist<Model, View>;
 }

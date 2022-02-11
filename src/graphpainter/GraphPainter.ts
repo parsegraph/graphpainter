@@ -40,7 +40,7 @@ export default class GraphPainter implements Projected {
     this._onScheduleUpdate = new Method();
 
     this._root.setDirtyListener(this.markDirty, this);
-    this.markDirty();
+    this.clear();
     logLeave();
   }
 
@@ -64,10 +64,8 @@ export default class GraphPainter implements Projected {
     this._paintGroups.forEach((pg) => pg.unmount(projector));
   }
 
-  contextChanged(projector: Projector, isLost: boolean): void {
-    if (isLost) {
-      this.unmount(projector);
-    }
+  dispose() {
+    this._paintGroups.forEach((pg) => pg.dispose());
   }
 
   setOnScheduleUpdate(listener: () => void, listenerObj?: object): void {
@@ -78,15 +76,22 @@ export default class GraphPainter implements Projected {
     return this._root;
   }
 
+  clear() {
+    if (this._paintGroups) {
+      this._paintGroups.forEach((pg) => {
+        pg.dispose();
+      });
+    }
+    this._commitLayoutFunc = null;
+    this._paintGroups = [];
+    this._savedPaintGroup = -1;
+  }
+
   markDirty(): void {
     if (this.root().value().getCache().isFrozen()) {
       this.root().value().getCache().frozenNode().invalidate();
     }
     this._commitLayoutFunc = null;
-    /* this._paintGroups.forEach(pg=>{
-      pg.dispose();
-    });*/
-    this._paintGroups = [];
     this._savedPaintGroup = -1;
     this._onScheduleUpdate.call();
   }
@@ -95,18 +100,14 @@ export default class GraphPainter implements Projected {
     // Commit layout
     let cont: Function;
     if (this._commitLayoutFunc) {
-      log("Continuing commit layout");
       cont = this._commitLayoutFunc(timeout);
     } else {
-      log("Beginning new commit layout");
       cont = this.root().value().getLayout().commitLayoutIteratively(timeout);
     }
     if (cont) {
-      log("Commit layout is not complete");
       this._commitLayoutFunc = cont;
       return true;
     }
-    log("Commit layout complete");
     this._commitLayoutFunc = null;
     return false;
   }
@@ -122,32 +123,56 @@ export default class GraphPainter implements Projected {
 
     logEnterc("Node paints", "Painting node for window={0}", window);
     log("{0} has paint group {1}", this.root(), this._savedPaintGroup);
-    log("{0} is dirty={1}", this.root(), this.root().isDirty());
 
-    if (timeout <= 0) {
+    const pastTime = timer(timeout);
+
+    if (pastTime()) {
       logLeave("Paint timeout=" + timeout);
       return true;
     }
 
     // Create paint groups
-    if (this._paintGroups.length === 0) {
-      let node = this.root();
+    let node = this.root();
+    if (this._savedPaintGroup === -1) {
+      let i = 0;
       do {
-        this._paintGroups.push(new PaintGroup(node));
+        if (this._paintGroups.length < i) {
+          const pg = this._paintGroups[i];
+          if (pg.root() === node) {
+            // If the paint group's root is the same node, re-use it.
+          } else {
+            // Different root, so create a new paint group.
+            this._paintGroups.splice(i, 0, new PaintGroup(node));
+          }
+        } else {
+          this._paintGroups.push(new PaintGroup(node));
+        }
+        ++i;
         node = node.nextPaintGroup();
       } while (node != this.root());
+
+      // Remove trailing stale paint groups
+      while (this._paintGroups.length > i) {
+        const pg = this._paintGroups.pop();
+        pg.dispose();
+      }
       this._savedPaintGroup = 0;
     }
-    const pastTime = timer(timeout);
+
+    if (pastTime()) {
+      logLeave("Paint timeout=" + timeout);
+      return true;
+    }
+
     while (this._savedPaintGroup < this._paintGroups.length) {
       if (pastTime()) {
-        this.root()._dirty = true;
         logLeave("Ran out of time during painting (timeout={0})", timeout);
         return true;
       }
 
       const pg = this._paintGroups[this._savedPaintGroup];
       if (pg.paint(projector)) {
+        logLeave("Painting needs another update");
         return true;
       }
 
@@ -156,6 +181,7 @@ export default class GraphPainter implements Projected {
 
     // Finalize painting
     logLeave("Completed node painting");
+    this._savedPaintGroup = 0;
     return false;
   }
 

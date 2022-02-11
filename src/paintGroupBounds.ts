@@ -1,8 +1,8 @@
 import Size from "parsegraph-size";
 import { Direction, nameDirection } from "parsegraph-direction";
-import ProjectedNode from "./ProjectedNode";
+import { LayoutNode } from "parsegraph-layout";
 
-export default function paintGroupBounds(nodeRoot: ProjectedNode) {
+export default function paintGroupBounds(nodeRoot: LayoutNode) {
   if (!nodeRoot.isRoot() && !nodeRoot.localPaintGroup()) {
     throw new Error("Node must be a paint group");
   }

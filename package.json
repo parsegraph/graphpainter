@@ -68,14 +68,14 @@
     "mocha": "^8.2.1",
     "nyc": "^15.1.0",
     "openssl": "^1.1.0",
-    "parsegraph-blockpainter": "^1.5.5",
-    "parsegraph-camera": "^1.4.5",
+    "parsegraph-blockpainter": "^1.6.0",
+    "parsegraph-camera": "^1.4.6",
     "parsegraph-direction": "^1.7.5",
     "parsegraph-input": "^1.6.1",
-    "parsegraph-interact": "^1.6.0",
-    "parsegraph-layout": "^1.7.3",
-    "parsegraph-matrix": "^1.4.7",
-    "parsegraph-projector": "^1.6.4",
+    "parsegraph-interact": "^1.6.2",
+    "parsegraph-layout": "^1.7.6",
+    "parsegraph-matrix": "^1.4.8",
+    "parsegraph-projector": "^1.7.4",
     "parsegraph-showincamera": "^1.6.0",
     "parsegraph-size": "^1.5.6",
     "parsegraph-timing": "^1.4.8",
@@ -94,6 +94,6 @@
   },
   "peerDependencies": {
     "parsegraph-checkglerror": "^1.5.1",
-    "parsegraph-log": "^1.6.1"
+    "parsegraph-log": "^1.7.0"
   }
 }

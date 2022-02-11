@@ -1,5 +1,7 @@
+import NodeValues from "./NodeValues";
 import Artist from "./Artist";
 import NodeRenderData from "./NodeRenderData";
+import Transformed from "./Transformed";
 import Painted from "./Painted";
 import paintGroupBounds from "./paintGroupBounds";
 import ProjectedCaret from "./ProjectedCaret";
@@ -18,11 +20,12 @@ import FrozenNodeFragment from "./freezer/FrozenNodeFragment";
 import GraphPainterAnalytics from "./graphpainter/GraphPainterAnalytics";
 import GraphPainter from "./graphpainter/GraphPainter";
 import PaintGroup from "./graphpainter/PaintGroup";
-import PaintSubgroup from "./graphpainter/PaintSubgroup";
 
 export {
+  NodeValues,
   Artist,
   NodeRenderData,
+  Transformed,
   Painted,
   paintGroupBounds,
   ProjectedCaret,
@@ -42,5 +45,4 @@ export {
   GraphPainterAnalytics,
   GraphPainter,
   PaintGroup,
-  PaintSubgroup,
 };

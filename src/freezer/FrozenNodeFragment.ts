@@ -1,9 +1,9 @@
 import FrozenNode from "./FrozenNode";
 import FreezerSlot from "./FreezerSlot";
 import { Matrix3x3 } from "parsegraph-matrix";
-import NodeRenderData from "../NodeRenderData";
 import PaintGroup from "../graphpainter/PaintGroup";
 import log, { logEnter, logLeave } from "parsegraph-log";
+import WorldTransform from "../WorldTransform";
 
 export default class FrozenNodeFragment {
   _width: number;
@@ -109,7 +109,10 @@ export default class FrozenNodeFragment {
       log("Cam size", cam.width(), cam.height());
       log("Scale", scale);
       paintGroup.setCamera(cam);
-      paintGroup.renderDirect(this.projector(), world, scale);
+      paintGroup.renderDirect(
+        this.projector(),
+        new WorldTransform(world, scale, cam.width(), cam.height())
+      );
       logLeave();
 
       if (!this._vertexBuffer) {
@@ -165,12 +168,7 @@ export default class FrozenNodeFragment {
     }
   }
 
-  render(
-    world: Matrix3x3,
-    _: NodeRenderData,
-    needsSetup: boolean,
-    needsLoad: boolean
-  ) {
+  render(world: Matrix3x3, needsSetup: boolean, needsLoad: boolean) {
     log("Rendering fragment");
     if (!this._vertexBuffer) {
       return false;

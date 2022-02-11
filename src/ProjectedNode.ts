@@ -2,13 +2,16 @@ import { DirectionNode } from "parsegraph-direction";
 import { Interactive } from "parsegraph-interact";
 import Freezable from "./freezer/Freezable";
 import Painted from "./Painted";
-import { Projected } from "parsegraph-projector";
+import { WorldRenderable } from "./Artist";
 
-export type ProjectedNodeValue<T extends Projected> = Painted<T> &
-  Interactive &
-  Freezable;
+export type ProjectedNodeValue<
+  Model = {},
+  View extends WorldRenderable = WorldRenderable
+> = Painted<Model, View> & Interactive & Freezable;
 
-type ProjectedNode<T extends Projected = Projected> = DirectionNode<
-  ProjectedNodeValue<T>
->;
+type ProjectedNode<
+  Model = {},
+  View extends WorldRenderable = WorldRenderable
+> = DirectionNode<ProjectedNodeValue<Model, View>>;
+
 export default ProjectedNode;

@@ -6,15 +6,17 @@ import Direction, {
 import Freezer from "./freezer/Freezer";
 import { EventListener, FocusListener, KeyListener } from "parsegraph-interact";
 import { ProjectedNodeValue } from "./ProjectedNode";
-import { Projected } from "parsegraph-projector";
+import { Renderable } from "parsegraph-timingbelt";
+import Transformed from "./Transformed";
 
-export default class ProjectedCaret<T extends Projected> extends DirectionCaret<
-  ProjectedNodeValue<T>
-> {
+export default class ProjectedCaret<
+  Model = {},
+  View extends Renderable & Transformed = Renderable & Transformed
+> extends DirectionCaret<ProjectedNodeValue<Model, View>> {
   _freezer: Freezer;
 
-  clone(): ProjectedCaret<T> {
-    const car = new ProjectedCaret<T>(this.node(), this.palette());
+  clone(): ProjectedCaret<Model, View> {
+    const car = new ProjectedCaret<Model, View>(this.node(), this.palette());
     car.setFreezer(this._freezer);
     return car;
   }
@@ -38,7 +40,7 @@ export default class ProjectedCaret<T extends Projected> extends DirectionCaret<
   freeze(inDirection?: Direction | string): void {
     // Interpret the given direction for ease-of-use.
     inDirection = readDirection(inDirection);
-    let node: DirectionNode<ProjectedNodeValue<T>>;
+    let node: DirectionNode<ProjectedNodeValue<Model, View>>;
     if (arguments.length === 0) {
       node = this.node();
     } else {
@@ -53,7 +55,7 @@ export default class ProjectedCaret<T extends Projected> extends DirectionCaret<
   thaw(inDirection?: Direction | string): void {
     // Interpret the given direction for ease-of-use.
     inDirection = readDirection(inDirection);
-    let node: DirectionNode<ProjectedNodeValue<T>>;
+    let node: DirectionNode<ProjectedNodeValue<Model, View>>;
     if (arguments.length === 0) {
       node = this.node();
     } else {

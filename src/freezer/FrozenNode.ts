@@ -4,7 +4,6 @@ import ProjectedNode from "../ProjectedNode";
 import FrozenNodeFragment from "./FrozenNodeFragment";
 import { Projector } from "parsegraph-projector";
 import { Matrix3x3 } from "parsegraph-matrix";
-import NodeRenderData from "../NodeRenderData";
 import PaintGroup from "../graphpainter/PaintGroup";
 import log from "parsegraph-log";
 
@@ -95,12 +94,7 @@ export default class FrozenNode {
     }
   }
 
-  render(
-    projector: Projector,
-    world: Matrix3x3,
-    renderData: NodeRenderData,
-    needsSetup: boolean
-  ) {
+  render(projector: Projector, world: Matrix3x3, needsSetup: boolean) {
     log("Frozen render");
     if (!this._validated) {
       return false;
@@ -112,7 +106,7 @@ export default class FrozenNode {
     let renderedClean = true;
     let needsLoad = true;
     for (const i in fragments) {
-      if (!fragments[i].render(world, renderData, needsSetup, needsLoad)) {
+      if (!fragments[i].render(world, needsSetup, needsLoad)) {
         renderedClean = false;
       } else {
         needsLoad = false;

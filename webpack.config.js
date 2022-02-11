@@ -17,7 +17,10 @@ module.exports = {
   },
   entry: {
     lib: path.resolve(__dirname, "src/index.ts"),
-    block: path.resolve(__dirname, "src/demo/block.ts"),
+    block2d: path.resolve(__dirname, "src/demo/block2d.ts"),
+    block3d: path.resolve(__dirname, "src/demo/block3d.ts"),
+    blockdom: path.resolve(__dirname, "src/demo/blockdom.ts"),
+    blockrandom: path.resolve(__dirname, "src/demo/blockrandom.ts"),
   },
   output: {
     path: path.resolve(__dirname, "dist"),
