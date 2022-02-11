@@ -1,4 +1,3 @@
-import Rect from "parsegraph-rect";
 import Color from "parsegraph-color";
 
 import ProjectedNode from "../ProjectedNode";

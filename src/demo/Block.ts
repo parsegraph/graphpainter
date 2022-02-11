@@ -6,10 +6,8 @@ import Painted from "../Painted";
 import { Layout } from "parsegraph-layout";
 import FreezerCache from "../freezer/FreezerCache";
 import Color from "parsegraph-color";
-import log from "parsegraph-log";
 import Size from "parsegraph-size";
 import Direction from "parsegraph-direction";
-import Method from "parsegraph-method";
 import Repaintable from "../Repaintable";
 
 export const BUD_RADIUS = 2;
