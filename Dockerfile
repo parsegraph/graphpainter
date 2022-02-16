@@ -5,6 +5,6 @@ COPY ./dist /usr/src/dist/
 COPY ./www /usr/src/www/
 COPY ./demo /usr/src/demo/
 COPY ./package.json /usr/src/
-COPY ./package-lock.json /usr/src/
+COPY ./yarn.lock /usr/src/
 EXPOSE 3000
-CMD ["npm", "run", "demo"]
+CMD ["make", "demo"]
