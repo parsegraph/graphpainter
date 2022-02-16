@@ -1,18 +1,9 @@
 {
   "name": "parsegraph-graphpainter",
-  "version": "1.7.0-dev",
+  "version": "1.7.0",
   "description": "graphpainter",
-  "main": "dist/parsegraph-graphpainter.js",
-  "types": "dist/graphpainter.d.ts",
-  "scripts": {
-    "coverage": "nyc npm run test",
-    "test": "cross-env TS_NODE_PROJECT=\"tsconfig.testing.json\" mocha",
-    "autotest": "cross-env TS_NODE_PROJECT=\"tsconfig.testing.json\" mocha --watch",
-    "demo": "node demo/demo.js",
-    "autobuild": "webpack --watch --config webpack.config.js",
-    "build": "webpack --config webpack.config.js",
-    "build-prod": "NODE_ENV=production webpack --config webpack.prod.js"
-  },
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/parsegraph/graphpainter.git"
@@ -23,17 +14,6 @@
     "url": "https://github.com/parsegraph/graphpainter/issues"
   },
   "homepage": "https://github.com/parsegraph/graphpainter#readme",
-  "nyc": {
-    "extends": "@istanbuljs/nyc-config-babel",
-    "reporter": [
-      "html"
-    ],
-    "exclude": [
-      "test/**.js",
-      "dist/**.js"
-    ],
-    "reportDir": "dist/coverage"
-  },
   "dependencies": {
     "@babel/cli": "^7.17.3",
     "@babel/core": "^7.17.4",
