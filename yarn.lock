@@ -2357,6 +2357,13 @@ escodegen@^2.0.0:
   optionalDependencies:
     source-map "~0.6.1"
 
+esdoc-typescript-plugin@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/esdoc-typescript-plugin/-/esdoc-typescript-plugin-1.0.1.tgz#d4b929677f2ee5587a86ec70e766537040b98662"
+  integrity sha512-QV9rdis5PkypVK1fh2wuESZPQZUVjTwt4hj97Pivb9M8wGPMOTxYu5ofkyGWm3xgNL+K0VxZY6TGEO07kfGAtg==
+  dependencies:
+    typescript "^2.8.3"
+
 eslint-config-google@^0.14.0:
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/eslint-config-google/-/eslint-config-google-0.14.0.tgz#4f5f8759ba6e11b424294a219dbfa18c508bcc1a"
@@ -3891,10 +3898,177 @@ parse5@6.0.1:
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-6.0.1.tgz#e1a1c085c569b3dc08321184f19a39cc27f7c30b"
   integrity sha512-Ofn/CTFzRGTTxwpNEs9PP93gXShHcTq255nzRYSKe8AkVpZY7e1fpmTfOyoIvjP5HG7Z2ZM7VS9PPhQGW2pOpw==
 
+parsegraph-blockpainter@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/parsegraph-blockpainter/-/parsegraph-blockpainter-1.6.0.tgz#85d70550ed67593994fe1b1b8547f2a575eeb435"
+  integrity sha512-XdKSgiNG5CBfPAqe/hCGRPjZkyvA6vBpEXD3Uo5VfQ0Opc8sKKBsq88SDGwHgmIVUoZVsKc5tAbQV6mF7yEYHw==
+  dependencies:
+    parsegraph-color "^1.4.5"
+    parsegraph-compileprogram "^2.2.0"
+    parsegraph-matrix "^1.4.8"
+    parsegraph-rect "^1.4.5"
+
+parsegraph-camera@^1.4.5, parsegraph-camera@^1.4.6:
+  version "1.4.6"
+  resolved "https://registry.yarnpkg.com/parsegraph-camera/-/parsegraph-camera-1.4.6.tgz#4d623ef11ab014f9409135c4eb7a8741bcce2dee"
+  integrity sha512-fqLu4nJRIRyTTNzzGYLdVmTD4MaqC/dyrN58h7mSqGuH2skAhuGKjmKgMdlJaenDuPsPYo8a+FZeaMa4xnkXBA==
+  dependencies:
+    parsegraph-matrix "^1.4.8"
+    parsegraph-rect "^1.4.5"
+
+parsegraph-color@^1.4.4, parsegraph-color@^1.4.5, parsegraph-color@^1.4.6:
+  version "1.4.6"
+  resolved "https://registry.yarnpkg.com/parsegraph-color/-/parsegraph-color-1.4.6.tgz#678f464cc531e19b7bdf4480135e37dd858520bd"
+  integrity sha512-gOMXt8dTANqumQ/ZiGShRALtLcAYIKFDW9t5FU0bIiJUEodT4OoOGnXhrbhRuRTUVo7uJmdJLH1MEH+Ch7muWg==
+
+parsegraph-compileprogram@^2.2.0, parsegraph-compileprogram@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/parsegraph-compileprogram/-/parsegraph-compileprogram-2.2.1.tgz#428f73251d9d594a8270c86dab5021d17e9faaff"
+  integrity sha512-jbqn4fEoT4Cw0+arjZgNQ8K7QTfqg6nQFvRuPuZwDkYD+N8LKMIn25izVsJ5xJ3ZGFFpfzPcNqmeW09xrz9EcA==
+  dependencies:
+    parsegraph-color "^1.4.4"
+    parsegraph-rect "^1.4.5"
+    parsegraph-shader "^1.5.2"
+
+parsegraph-direction@^1.7.5:
+  version "1.7.5"
+  resolved "https://registry.yarnpkg.com/parsegraph-direction/-/parsegraph-direction-1.7.5.tgz#5577a19955bb73a5c60eb5264c78b81f2c374be8"
+  integrity sha512-Jzhi/aNvcpJ5PHKzGh7tiQVQ0sfSvFhsC4m6HKH2YriFCgrikIDuNZsYAVcHEJWQbl3QdmRNV0qEtQRCZyltMw==
+  dependencies:
+    parsegraph-generateid "^1.4.5"
+    parsegraph-timing "^1.4.8"
+
+parsegraph-direction@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/parsegraph-direction/-/parsegraph-direction-2.0.0.tgz#a76920baddbe1e57cbdb586735087709bd156350"
+  integrity sha512-q4MawFspo/1DHYtL6vp6yx8/2fEhFu76Ol/5p+JgaBAPiKmy85NZJ0f5qktN05lOXyk9AZ4I2inEx1xut9Qsmw==
+  dependencies:
+    parsegraph-generateid "^1.4.5"
+    parsegraph-timing "^1.4.8"
+
+parsegraph-extent@^1.4.6:
+  version "1.4.8"
+  resolved "https://registry.yarnpkg.com/parsegraph-extent/-/parsegraph-extent-1.4.8.tgz#6fbd157be0572a8aacaa227208cc1c3134f1cadb"
+  integrity sha512-h94r8nLnbjwZmbxxRsLZdm8vRMwciAXk+/tJwZykJ1cKkX+OvBGER+39yE3Z1oHBMxfbo0M16yKA1rFgr+Jk+g==
+  dependencies:
+    parsegraph-fuzzyequals "^1.4.6"
+    parsegraph-gettimeinmillis "^1.4.3"
+
+parsegraph-fuzzyequals@^1.4.6:
+  version "1.4.8"
+  resolved "https://registry.yarnpkg.com/parsegraph-fuzzyequals/-/parsegraph-fuzzyequals-1.4.8.tgz#1850e87aa42441cbecdffa1a497f7e29b5f6fe13"
+  integrity sha512-eVBlPEZ+tOCb5j21QZKFrjCmQ0q98P9Z0g3uGDw01YA7U63QyFfM8EyiwyR04XhRLzW7it9vtZ0E7V2lIeaUVw==
+
+parsegraph-generateid@^1.4.5:
+  version "1.4.7"
+  resolved "https://registry.yarnpkg.com/parsegraph-generateid/-/parsegraph-generateid-1.4.7.tgz#d9636e891837ac8b579f29c6ff2fb9c3e9624cd3"
+  integrity sha512-GJne91gMUMUStaypi8mKCXrUzf0DKSROBXakOQob7mx765iQsIGzxbsXFL2Vk2+FcvGdLyIzTtiAgrghg5GDAA==
+
+parsegraph-gettimeinmillis@^1.4.3:
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/parsegraph-gettimeinmillis/-/parsegraph-gettimeinmillis-1.4.5.tgz#b2bb3c8351b4fa827a3e4a4f404336b2f3366493"
+  integrity sha512-J53sQzXiHZB/lenyB8Ep45aF2MoX46TPpY9lvkurl3PtxTNKoOH68Pjcn+zYEUpQh61gY/T21WvKaSmHD3YoGw==
+
+parsegraph-input@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/parsegraph-input/-/parsegraph-input-1.6.1.tgz#ab264a070f491a8b10ebd80485c9d7cd0f9577b6"
+  integrity sha512-YhiJPyFwxqu9jxdFUz67Kwp251JZdsDmblAdtVuP9ZW867G1iiHi/6ujKQewSuswdsc8CUg2ki8aDIQnX+kNuQ==
+  dependencies:
+    parsegraph-matrix "^1.4.8"
+    parsegraph-normalizewheel "^1.4.4"
+
+parsegraph-interact@^1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/parsegraph-interact/-/parsegraph-interact-1.6.2.tgz#e3f215da55640c065c6c3023065eb6714aed1d30"
+  integrity sha512-fiscbCMSYccSv5Q2YiV4QhG/3ScfHSefSUpdQcU+BE/XmusAFzuCTt2Kt4ervYh3NSk0zQTH2nbZqEoawsGJLQ==
+  dependencies:
+    parsegraph-input "^1.6.1"
+    parsegraph-method "^1.4.10"
+
+parsegraph-layout@^1.7.3, parsegraph-layout@^1.7.6:
+  version "1.7.6"
+  resolved "https://registry.yarnpkg.com/parsegraph-layout/-/parsegraph-layout-1.7.6.tgz#6f04c8fe5d71f978af2a78233796a0ad0341e155"
+  integrity sha512-eYTv1tS35tlk10x76dm7Z0C4DSdWsbsk07vfXG46DOL+i+pqvZoJitD/8VRc3Kz88NCikG1A/HdKWaWYUUToxw==
+  dependencies:
+    parsegraph-direction "^1.7.5"
+    parsegraph-extent "^1.4.6"
+    parsegraph-rect "^1.4.5"
+    parsegraph-size "^1.5.6"
+    parsegraph-timing "^1.4.8"
+
 parsegraph-log@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/parsegraph-log/-/parsegraph-log-1.7.0.tgz#3ec82420ade8c6d04396346a45469df4572ac885"
   integrity sha512-qo86Wdo/t5JYegEOz43UmQEaWBZyU0Yf4+Gm2GcHwPG6B2rSLMihwFfQBg5OFnjpF/Rnpu27y4E1BLW6BClRGw==
+
+parsegraph-matrix@^1.4.8:
+  version "1.4.8"
+  resolved "https://registry.yarnpkg.com/parsegraph-matrix/-/parsegraph-matrix-1.4.8.tgz#7ad551174641e3a5dde9760102d66c302decad51"
+  integrity sha512-yo8K6AGgkVEcQsp1CZisTyhVDeNhKLBqf/TmdtjyMppQKjlARRuqXPV5cO1QnRcEpKCPJKLbowXXlxJKD6di1w==
+
+parsegraph-method@^1.4.10, parsegraph-method@^1.4.20, parsegraph-method@^1.4.9:
+  version "1.4.20"
+  resolved "https://registry.yarnpkg.com/parsegraph-method/-/parsegraph-method-1.4.20.tgz#89097ebded9abab1691365c059fcfd48a0682213"
+  integrity sha512-LFqTsUhgN1k6UOBMvbPNL8vBMWeWfP1bBFqcEFbA6iNxt5X7q6XsaOCUAAAB0lf87Wt7rX9Go1HA2PrdO8P7mQ==
+
+parsegraph-normalizewheel@^1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/parsegraph-normalizewheel/-/parsegraph-normalizewheel-1.4.4.tgz#20e15744f5383d24a22e0bc230c2d592a958007c"
+  integrity sha512-QrgF4/gXHNP57eNThgXuiK5Os6V5YjVTyTpDRDHxV9/5Aa+KYEPjg4updfoiGK377eBJ6R6oZv8NMNURVsw2OA==
+
+parsegraph-projector@^1.7.4:
+  version "1.7.4"
+  resolved "https://registry.yarnpkg.com/parsegraph-projector/-/parsegraph-projector-1.7.4.tgz#ce5d1116f7eeb364d00e1369128447e85d6309d9"
+  integrity sha512-ETsH/OTah0xPN3OsccsFuiNbFEcp0HAIHQiHryYqHwLulMSEyUPbMKNvX2tG2X9LrLKu03SLXZQKw9ftPXVPWw==
+  dependencies:
+    parsegraph-color "^1.4.5"
+    parsegraph-compileprogram "^2.2.1"
+    parsegraph-matrix "^1.4.8"
+    parsegraph-method "^1.4.10"
+    parsegraph-rect "^1.4.5"
+    parsegraph-timing "^1.4.8"
+    parsegraph-timingbelt "^1.7.1"
+
+parsegraph-rect@^1.4.5:
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/parsegraph-rect/-/parsegraph-rect-1.4.5.tgz#aad0401b4c22381231014fd558ea967e01cdb45f"
+  integrity sha512-hgsP9N15mYeSISgeMU2l1GHJEjAouuFgdQW89EGTav8ntM93xC628Lz5+mYvx/mljbuC5lR/OBSw6EuV0A9GxA==
+
+parsegraph-shader@^1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/parsegraph-shader/-/parsegraph-shader-1.5.2.tgz#5f1fcaeb5a4b5869a608bd4ad7e5e397d88293ff"
+  integrity sha512-k19AHq6V0jguaa9By+Cd5pV8w6RCzIr2Dadq2OFarsmcO0aShOWQ3Fp97QTSM+CQL4l99TNwBK7GDVS1AMXI+A==
+
+parsegraph-showincamera@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/parsegraph-showincamera/-/parsegraph-showincamera-1.6.0.tgz#62421d6c1a2d722b73e7388ded063330b7ca9ae2"
+  integrity sha512-T6UXp/TYwl2LbwSe6ir79vqS1F67A2nRc/t6ldxA0s9kV3QbipzsS+tE+LZ49aRwzfkEZNNm7gIV/iQtxeKYJw==
+  dependencies:
+    parsegraph-camera "^1.4.5"
+    parsegraph-direction "^1.7.5"
+    parsegraph-layout "^1.7.3"
+
+parsegraph-size@^1.5.6, parsegraph-size@^1.5.7:
+  version "1.5.7"
+  resolved "https://registry.yarnpkg.com/parsegraph-size/-/parsegraph-size-1.5.7.tgz#0e79ddc6cfe3fab250bf7352ef1c907aaa1bd488"
+  integrity sha512-fiyWET1Vn6IKNLitOo9aM6kJ6GZIibabdw2fvApNxkZTsiZHO0RylVAV3jKKSY3mZPXL99XH+9q/lOQWlvPk5Q==
+
+parsegraph-timing@^1.4.8, parsegraph-timing@^1.4.9:
+  version "1.4.9"
+  resolved "https://registry.yarnpkg.com/parsegraph-timing/-/parsegraph-timing-1.4.9.tgz#48deb90b39e88f51eeedeeb9f24d0d3637f38b14"
+  integrity sha512-tu5s98rL87ieXdZC3+NNhjjBqjSn4yWoRl7HNOnDpThmY2tB9RW9IhVNGstd82gtKt7yc19Kiy3JRdnIt0749w==
+  dependencies:
+    esdoc-typescript-plugin "^1.0.1"
+    parsegraph-gettimeinmillis "^1.4.3"
+    parsegraph-method "^1.4.9"
+
+parsegraph-timingbelt@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/parsegraph-timingbelt/-/parsegraph-timingbelt-1.7.1.tgz#59b009360365ddcb2350cb46c9564e80e938859b"
+  integrity sha512-WsJ5KsxVC6S6QTh97UxAPTFCwsAdOK0YdwiUOqVtfMRwKqbps3acAtjbBwN5Q5oZOUEAyt+DX0pqXEcsrh46JQ==
+  dependencies:
+    parsegraph-method "^1.4.10"
+    parsegraph-timing "^1.4.8"
 
 path-exists@^3.0.0:
   version "3.0.0"
@@ -4578,6 +4752,11 @@ typedoc@^0.22.12:
     marked "^4.0.10"
     minimatch "^3.0.4"
     shiki "^0.10.0"
+
+typescript@^2.8.3:
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.9.2.tgz#1cbf61d05d6b96269244eb6a3bce4bd914e0f00c"
+  integrity sha512-Gr4p6nFNaoufRIY4NMdpQRNmgxVIGMs4Fcu/ujdYk3nAZqk7supzBE9idmvfZIlH/Cuj//dvi+019qEue9lV0w==
 
 typescript@^4.5.5:
   version "4.5.5"
