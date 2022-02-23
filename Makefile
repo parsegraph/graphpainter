@@ -37,7 +37,9 @@ SCRIPT_FILES =  \
 	src/ProjectedNode.ts \
 	src/demo.ts \
 	test/test.ts
+
 EXTRA_SCRIPTS =  \
 	src/freezer/Freezer_VertexShader.glsl \
 	src/freezer/Freezer_FragmentShader.glsl
+
 include ./Makefile.microproject
