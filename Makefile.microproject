@@ -22,6 +22,14 @@ CONFIG_FILES = \
 
 all: build lint test coverage doc
 
+show-runs:
+	xdg-open https://github.com/parsegraph/$(DIST_NAME)/actions
+.PHONY: show-runs
+
+show-npm:
+	xdg-open https://npmjs.com/parsegraph-$(DIST_NAME)
+.PHONY: show-npm
+
 build: $(DEST_LIB)
 .PHONY: build
 
@@ -30,7 +38,7 @@ autobuild:
 .PHONY: autobuild
 
 install-deps:
-	yarn install --immutable --immutable-cache --check-cache
+	./install-deps.sh
 .PHONY: install-deps
 
 build-prod: $(PROD_LIB)
@@ -48,7 +56,7 @@ stop-tmux:
 	tmuxify stop
 .PHONY: stop-tmux
 
-RUN_TEST=npx jest --env=jsdom
+RUN_TEST=npx jest --env=jsdom --no-cache
 
 check:
 	$(RUN_TEST)
@@ -96,7 +104,7 @@ tar-prod: parsegraph-$(DIST_NAME)-prod.tgz
 .PHONY: tar
 
 wait:
-	inotifywait -e modify -r $(CONFIG_FILES) $(SCRIPT_FILES) $(EXTRA_SCRIPTS)
+	./wait.sh $(CONFIG_FILES) $(SCRIPT_FILES) $(EXTRA_SCRIPTS)
 .PHONY: wait
 
 clean:
