@@ -1,6 +1,6 @@
 DIST_NAME = graphpainter
 
-SCRIPT_FILES =  \
+SCRIPT_FILES = \
 	src/Painted.ts \
 	src/index.ts \
 	src/paintNodeLines.ts \
@@ -38,7 +38,7 @@ SCRIPT_FILES =  \
 	src/demo.ts \
 	test/test.ts
 
-EXTRA_SCRIPTS =  \
+EXTRA_SCRIPTS = \
 	src/freezer/Freezer_VertexShader.glsl \
 	src/freezer/Freezer_FragmentShader.glsl
 
