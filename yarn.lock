@@ -4868,11 +4868,6 @@ parsegraph-camera@^1.4.9:
     parsegraph-matrix "^1.4.10"
     parsegraph-rect "^1.4.6"
 
-parsegraph-checkglerror@^1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/parsegraph-checkglerror/-/parsegraph-checkglerror-1.5.2.tgz#f47cbfeb785ba4c65b03465fbccde4be9659b617"
-  integrity sha512-sGzX99/LeHCNOayN4eApik6OTu/gBxh/9WJp+AvQFhwDzpAiAXNXqqWM3+rnHCWTBufPL6fpX/c/OsbTJY73Cw==
-
 parsegraph-color@^1.4.6:
   version "1.4.6"
   resolved "https://registry.yarnpkg.com/parsegraph-color/-/parsegraph-color-1.4.6.tgz#678f464cc531e19b7bdf4480135e37dd858520bd"
@@ -4971,11 +4966,6 @@ parsegraph-layout@^1.7.13:
     parsegraph-rect "^1.4.6"
     parsegraph-size "^1.5.7"
     parsegraph-timing "^1.4.10"
-
-parsegraph-log@^1.7.2:
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/parsegraph-log/-/parsegraph-log-1.7.2.tgz#26dd304e8f1ea2c0d413170ae518ef0a2130a495"
-  integrity sha512-j2nYy9l5A4047maMuyp01oU3c2QB0mjm5qON7aSbjpMDqSkHes4puxMEMo32w0GcYej08MmrelqVn0sk1TogDw==
 
 parsegraph-matrix@^1.4.10:
   version "1.4.10"
