@@ -108,7 +108,7 @@ const diagonalBlockDemo = (artistFunc: () => Artist<Block>) => {
     n.connectNode(i % 2 ? Direction.FORWARD : Direction.DOWNWARD, child);
     n = child;
     if (i == 5) {
-      n.setPaintGroup(true);
+      n.crease();
     }
   }
 

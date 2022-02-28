@@ -155,9 +155,6 @@ export default class PaintGroup implements Projected {
 
     if (!needsRepaint) {
       log("Clearing dirty flag");
-      root.forEachNode((node: ProjectedNode) => {
-        node.clearDirty();
-      });
       if (root.value().getCache().isFrozen()) {
         root.value().getCache().frozenNode().paint(this, projector);
       }
@@ -266,7 +263,7 @@ export default class PaintGroup implements Projected {
 
     // Get paint group bounds, transformed to world space.
     const s: Rect = this.bounds().clone(renderData.bounds);
-    s.scale(this.root().scale());
+    s.scale(this.root().state().scale());
     s.translate(layout.absoluteX(), layout.absoluteY());
 
     // Check if paint group would be visible.
@@ -346,7 +343,7 @@ export default class PaintGroup implements Projected {
       }
     }
 
-    return needsUpdate || this.root().isDirty() || layout.needsAbsolutePos();
+    return needsUpdate || layout.needsAbsolutePos();
   }
 
   contextChanged(projector: Projector, isLost: boolean) {

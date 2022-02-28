@@ -41,7 +41,6 @@ export default class Block implements Interactive, Painted<Block>, Freezable {
     this._cache = new FreezerCache(node);
     this._color = color;
     this._borderColor = borderColor;
-    this._node.setDirtyListener(this.onDirty, this);
 
     this._onUpdate = null;
   }
@@ -70,15 +69,7 @@ export default class Block implements Interactive, Painted<Block>, Freezable {
     return this._focused;
   }
 
-  onDirty() {
-    // console.log("Node is dirty");
-    if (this.getCache().isFrozen()) {
-      this.getCache().frozenNode().invalidate();
-    }
-  }
-
   scheduleRepaint() {
-    this.node().markDirty();
     if (this._onUpdate) {
       // console.log("Scheduling REPAINT");
       this._onUpdate.scheduleRepaint();

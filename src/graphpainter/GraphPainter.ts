@@ -39,7 +39,6 @@ export default class GraphPainter implements Projected {
     this._camera = cam;
     this._onScheduleUpdate = new Method();
 
-    this._root.setDirtyListener(this.markDirty, this);
     this.clear();
     logLeave();
   }
@@ -148,7 +147,7 @@ export default class GraphPainter implements Projected {
           this._paintGroups.push(new PaintGroup(node));
         }
         ++i;
-        node = node.nextPaintGroup();
+        node = node.paintGroup().next() as ProjectedNode;
       } while (node != this.root());
 
       // Remove trailing stale paint groups
