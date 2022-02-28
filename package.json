@@ -21,16 +21,16 @@
     "parsegraph-compileprogram": "^2.2.3",
     "parsegraph-direction": "^2.0.3",
     "parsegraph-input": "^1.6.3",
-    "parsegraph-interact": "^1.6.4",
-    "parsegraph-layout": "^1.7.12",
+    "parsegraph-interact": "^1.6.5",
+    "parsegraph-layout": "^1.7.13",
     "parsegraph-matrix": "^1.4.10",
     "parsegraph-method": "^1.4.20",
-    "parsegraph-projector": "^1.8.2",
+    "parsegraph-projector": "^1.8.3",
     "parsegraph-rect": "^1.4.6",
     "parsegraph-showincamera": "^1.6.3",
     "parsegraph-size": "^1.5.7",
     "parsegraph-timing": "^1.4.10",
-    "parsegraph-timingbelt": "^1.7.3"
+    "parsegraph-timingbelt": "^1.7.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",

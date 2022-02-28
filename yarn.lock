@@ -4875,11 +4875,6 @@ parsegraph-camera@^1.4.9:
     parsegraph-matrix "^1.4.10"
     parsegraph-rect "^1.4.6"
 
-parsegraph-checkglerror@^1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/parsegraph-checkglerror/-/parsegraph-checkglerror-1.5.2.tgz#f47cbfeb785ba4c65b03465fbccde4be9659b617"
-  integrity sha512-sGzX99/LeHCNOayN4eApik6OTu/gBxh/9WJp+AvQFhwDzpAiAXNXqqWM3+rnHCWTBufPL6fpX/c/OsbTJY73Cw==
-
 parsegraph-color@^1.4.6:
   version "1.4.6"
   resolved "https://registry.yarnpkg.com/parsegraph-color/-/parsegraph-color-1.4.6.tgz#678f464cc531e19b7bdf4480135e37dd858520bd"
@@ -4942,10 +4937,10 @@ parsegraph-input@^1.6.3:
     parsegraph-matrix "^1.4.10"
     parsegraph-normalizewheel "^1.4.6"
 
-parsegraph-interact@^1.6.4:
-  version "1.6.4"
-  resolved "https://registry.yarnpkg.com/parsegraph-interact/-/parsegraph-interact-1.6.4.tgz#b9015070b18cd29378af8ec36576dfb2a867be9b"
-  integrity sha512-1fC2h6chruD5AkQAVxcxJi5G6jdKu4pQOYaOTOk+raMBRXRF8uXzp2gQLT6pboGaGk4PhfKUmBqaBqXPfXwsOg==
+parsegraph-interact@^1.6.5:
+  version "1.6.5"
+  resolved "https://registry.yarnpkg.com/parsegraph-interact/-/parsegraph-interact-1.6.5.tgz#8e32f9154aa5fa5f3e99df17125844d9c81a474b"
+  integrity sha512-VYoB0LLQukr2N6MB+8T3ULCGoGAIWYUaQFpR1N4aOPMYvADHFpeReKCC7uR9CLVio3Vkmrs9N6tmcZ+vWp9XPQ==
   dependencies:
     "@babel/cli" "^7.12.10"
     "@babel/core" "^7.12.10"
@@ -4987,10 +4982,16 @@ parsegraph-layout@^1.7.12:
     parsegraph-size "^1.5.7"
     parsegraph-timing "^1.4.9"
 
-parsegraph-log@^1.7.2:
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/parsegraph-log/-/parsegraph-log-1.7.2.tgz#26dd304e8f1ea2c0d413170ae518ef0a2130a495"
-  integrity sha512-j2nYy9l5A4047maMuyp01oU3c2QB0mjm5qON7aSbjpMDqSkHes4puxMEMo32w0GcYej08MmrelqVn0sk1TogDw==
+parsegraph-layout@^1.7.13:
+  version "1.7.13"
+  resolved "https://registry.yarnpkg.com/parsegraph-layout/-/parsegraph-layout-1.7.13.tgz#45ed06cc0b4b969546d8715156eb5da6bef421bf"
+  integrity sha512-JoXZATBJw/DGxU+qc3v3dhGAtAVJe3O1ptQM3uZCxP7I2LD+S/+wnZb0YcwXaPRKxB8GoEBxviXJb9Q8HyOMnA==
+  dependencies:
+    parsegraph-direction "^2.0.3"
+    parsegraph-extent "^1.4.9"
+    parsegraph-rect "^1.4.6"
+    parsegraph-size "^1.5.7"
+    parsegraph-timing "^1.4.10"
 
 parsegraph-matrix@^1.4.10:
   version "1.4.10"
@@ -5007,16 +5008,16 @@ parsegraph-normalizewheel@^1.4.6:
   resolved "https://registry.yarnpkg.com/parsegraph-normalizewheel/-/parsegraph-normalizewheel-1.4.6.tgz#9f64ff45d72a5fac73a34946505d0799d54fdb14"
   integrity sha512-B9J2WufswsVvjjRWpO/x2GhjpbE4O/gQjkkW2l4HaIjeJYecf00QE5QULjIanmRk+87qFpYtOstu7oWson/llQ==
 
-parsegraph-projector@^1.8.2:
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/parsegraph-projector/-/parsegraph-projector-1.8.2.tgz#aff6169e14aa776e80f4f38ffe7553fd2a24ada3"
-  integrity sha512-V/Hu9kDFjkqWywnZFnxjK6igQWPQSVKLbwQYperRqiAzkTVfvAOKGW9L3wTeV7dLaJlbV/QSHMIUxXN84t6WjA==
+parsegraph-projector@^1.8.3:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/parsegraph-projector/-/parsegraph-projector-1.8.3.tgz#e6e0e663a2c7dc45bf18aa773a538b826a576c1f"
+  integrity sha512-EBLqEOi2txZn71dvcwju31PNM7OajYXZzmQ9f+EziJ9j3xV154KFkXSDqiq1GWkSEIhWRoDUgvXtW+pHi9qFKA==
   dependencies:
     parsegraph-compileprogram "^2.2.3"
     parsegraph-matrix "^1.4.10"
     parsegraph-method "^1.4.10"
     parsegraph-rect "^1.4.6"
-    parsegraph-timing "^1.4.9"
+    parsegraph-timing "^1.4.10"
     parsegraph-timingbelt "^1.7.3"
 
 parsegraph-rect@^1.4.6:
@@ -5084,6 +5085,39 @@ parsegraph-timingbelt@^1.7.3:
     jsdom-global "3.0.2"
     parsegraph-method "^1.4.20"
     parsegraph-timing "^1.4.9"
+    prettier "2.1.2"
+    raw-loader "^4.0.1"
+    source-map-loader "^1.0.2"
+    source-map-support "^0.5.19"
+    ts-loader "^9.2.6"
+    ts-node "^9.1.1"
+    typescript "^4.1.3"
+    webpack "^5.65.0"
+    webpack-cli "^4.9.1"
+
+parsegraph-timingbelt@^1.7.4:
+  version "1.7.4"
+  resolved "https://registry.yarnpkg.com/parsegraph-timingbelt/-/parsegraph-timingbelt-1.7.4.tgz#d22e7136b9f0d7addfe968786fe9ccfec7af4dc3"
+  integrity sha512-HLrTVJT+Vfg6yTgS0vpvtqVKpV7lFcY1oxKAdtsjTqMqW25k2zLBlZ25TncN1GL4D2ymCaELXeAhdGHqY7pmUw==
+  dependencies:
+    "@babel/cli" "^7.12.10"
+    "@babel/core" "^7.12.10"
+    "@babel/plugin-proposal-class-properties" "^7.10.4"
+    "@babel/plugin-proposal-private-property-in-object" "^7.16.5"
+    "@babel/preset-env" "^7.12.11"
+    "@babel/preset-typescript" "^7.10.4"
+    "@babel/register" "^7.12.10"
+    "@types/chai" "^4.3.0"
+    "@typescript-eslint/eslint-plugin" "^4.11.0"
+    "@typescript-eslint/parser" "^4.11.0"
+    babel-loader "^8.1.0"
+    eslint "^7.16.0"
+    eslint-config-google "^0.14.0"
+    eslint-config-prettier "^7.1.0"
+    jsdom "16.4.0"
+    jsdom-global "3.0.2"
+    parsegraph-method "^1.4.20"
+    parsegraph-timing "^1.4.10"
     prettier "2.1.2"
     raw-loader "^4.0.1"
     source-map-loader "^1.0.2"
