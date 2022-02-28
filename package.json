@@ -49,7 +49,7 @@
     "parsegraph-method": "^1.4.20",
     "parsegraph-projector": "^1.8.1",
     "parsegraph-rect": "^1.4.6",
-    "parsegraph-showincamera": "^1.6.2",
+    "parsegraph-showincamera": "^1.6.3",
     "parsegraph-size": "^1.5.7",
     "parsegraph-timing": "^1.4.9",
     "parsegraph-timingbelt": "^1.7.3",
