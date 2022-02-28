@@ -32,7 +32,8 @@ const drawLine = (
     );
   }
 
-  const thickness = lineThickness * scale * directionData.getNode().state().scale();
+  const thickness =
+    lineThickness * scale * directionData.getNode().state().scale();
   if (isVerticalDirection(direction)) {
     const length =
       directionSign(direction) *

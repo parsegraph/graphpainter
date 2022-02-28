@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   root.style.position = "relative";
 
   const container = document.createElement("div");
-  container.innerHTML = "See other demos"
+  container.innerHTML = "See other demos";
   container.style.position = "absolute";
   container.style.left = "0px";
   container.style.top = "0px";
