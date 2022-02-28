@@ -12,7 +12,7 @@ export default function paintGroupBounds(nodeRoot: LayoutNode) {
   // let numNodes = 0;
   do {
     // ++numNodes;
-    node = node.siblings().next();
+    node = node.siblings().next() as LayoutNode;
     node.value().size(parentSize);
     const parentBounds = {
       left: parentSize.width() / 2,

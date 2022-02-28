@@ -26,7 +26,7 @@ export default class NodeValues<Value = any> {
       }
       ++i;
       const rv = n;
-      n = n.siblings().prev();
+      n = n.siblings().prev() as DirectionNode<Value>;
       return rv.value();
     };
   }
@@ -35,7 +35,7 @@ export default class NodeValues<Value = any> {
     let n = this._root;
     for (let i = 0; i < this._length; ++i) {
       cb(n.value());
-      n = n.siblings().prev();
+      n = n.siblings().prev() as DirectionNode<Value>;
     }
   }
 }
