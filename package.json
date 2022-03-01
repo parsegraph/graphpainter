@@ -19,7 +19,7 @@
     "parsegraph-camera": "^1.4.11",
     "parsegraph-color": "^1.4.7",
     "parsegraph-compileprogram": "^2.2.9",
-    "parsegraph-direction": "^2.0.8",
+    "parsegraph-direction": "^2.0.9",
     "parsegraph-input": "^1.6.5",
     "parsegraph-interact": "^1.6.5",
     "parsegraph-layout": "^1.7.18",
