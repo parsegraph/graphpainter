@@ -14,13 +14,13 @@ class BlockScene3D implements WorldRenderable {
   _projector: Projector;
   _world: WorldTransform;
   _onScheduleUpdate: Method;
-  _subgroup: NodeValues<Block>;
+  _blocks: NodeValues<Block>;
   _blockCount: number;
 
-  constructor(projector: Projector, subgroup: NodeValues<Block>) {
+  constructor(projector: Projector, blocks: NodeValues<Block>) {
     this._projector = projector;
     this._blockCount = 0;
-    this._subgroup = subgroup;
+    this._blocks = blocks;
     this._world = null;
     this._onScheduleUpdate = new Method();
     this._blockPainter = new BlockPainter(
@@ -33,8 +33,8 @@ class BlockScene3D implements WorldRenderable {
     return this._projector.glProvider().gl();
   }
 
-  subgroup() {
-    return this._subgroup;
+  blocks() {
+    return this._blocks;
   }
 
   setOnScheduleUpdate(listener: () => void, listenerObj?: object) {
@@ -80,48 +80,48 @@ class BlockScene3D implements WorldRenderable {
     return this._blockCount > 0;
   }
 
-  setSeq(seq: NodeValues<Block>) {
+  setBlocks(blocks: NodeValues<Block>) {
     this._blockCount = 0;
-    this._subgroup = seq;
+    this._blocks = blocks;
   }
 
   paint(): boolean {
     if (!this.hasCount()) {
-      this._subgroup.forEach((val) => {
+      this._blocks.forEach((block) => {
         this.countBlock();
-        paintNodeLines(val.node(), 1, () => {
+        paintNodeLines(block.node(), 1, () => {
           this.countBlock();
         });
       });
       this._blockPainter.initBuffer(this.blockCount());
     }
 
-    this._subgroup.forEach((val: Block) => {
-      const layout = val.getLayout();
+    this._blocks.forEach((block: Block) => {
+      const layout = block.getLayout();
       log("Painting BLOCK at ({0}, {1})", layout.groupX(), layout.groupY());
       const painter = this.getBlockPainter();
       paintNodeLines(
-        val.node(),
-        val.borderThickness(),
+        block.node(),
+        block.borderThickness(),
         (x: number, y: number, w: number, h: number) => {
-          painter.setBackgroundColor(val.lineColor());
-          painter.setBorderColor(val.lineColor());
+          painter.setBackgroundColor(block.lineColor());
+          painter.setBorderColor(block.lineColor());
           painter.drawBlock(x, y, w, h, 0, 0);
         }
       );
       painter.setBorderColor(
-        val.focused()
+        block.focused()
           ? new Color(1, 1, 1, 1)
-          : val.borderColor().premultiply(val.color())
+          : block.borderColor().premultiply(block.color())
       );
-      painter.setBackgroundColor(val.color());
+      painter.setBackgroundColor(block.color());
       painter.drawBlock(
         layout.groupX(),
         layout.groupY(),
         layout.size().width(),
         layout.size().height(),
-        2.5 * val.borderRoundness(),
-        2 * val.borderThickness()
+        2.5 * block.borderRoundness(),
+        2 * block.borderThickness()
       );
     });
     return false;
@@ -138,12 +138,12 @@ class BlockScene3D implements WorldRenderable {
 }
 
 export default class BlockArtist3D implements Artist<Block> {
-  make(projector: Projector, seq: NodeValues<Block>) {
-    return new BlockScene3D(projector, seq);
+  make(projector: Projector, blocks: NodeValues<Block>) {
+    return new BlockScene3D(projector, blocks);
   }
 
-  patch(view: BlockScene3D, seq: NodeValues<Block>): boolean {
-    view.setSeq(seq);
+  patch(view: BlockScene3D, blocks: NodeValues<Block>): boolean {
+    view.setBlocks(blocks);
     return true;
   }
 
