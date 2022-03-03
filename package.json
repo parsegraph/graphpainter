@@ -22,15 +22,15 @@
     "parsegraph-direction": "^2.0.10",
     "parsegraph-input": "^1.6.5",
     "parsegraph-interact": "^1.6.5",
-    "parsegraph-layout": "^1.7.19",
+    "parsegraph-layout": "^1.7.20",
     "parsegraph-matrix": "^1.4.11",
     "parsegraph-method": "^1.4.22",
-    "parsegraph-projector": "^1.8.13",
+    "parsegraph-projector": "^1.8.14",
     "parsegraph-rect": "^1.4.7",
     "parsegraph-showincamera": "^1.6.7",
     "parsegraph-size": "^1.5.8",
     "parsegraph-timing": "^1.4.16",
-    "parsegraph-timingbelt": "^1.7.10"
+    "parsegraph-timingbelt": "^1.7.11"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
