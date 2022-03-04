@@ -2,7 +2,7 @@ import Camera from "parsegraph-camera";
 import GraphPainterAnalytics from "./GraphPainterAnalytics";
 
 import log, { logEnter, logEnterc, logLeave } from "parsegraph-log";
-import ProjectedNode from "../ProjectedNode";
+import {PaintedNode} from "parsegraph-artist";
 import { Projector, Projected } from "parsegraph-projector";
 import Method from "parsegraph-method";
 import PaintGroup from "./PaintGroup";
@@ -24,7 +24,7 @@ const timer = (timeout: number) => {
 };
 
 export default class GraphPainter implements Projected {
-  _root: ProjectedNode;
+  _root: PaintedNode;
   _savedPaintGroup: number;
   _paintGroups: PaintGroup[];
 
@@ -32,7 +32,7 @@ export default class GraphPainter implements Projected {
   _camera: Camera;
   _onScheduleUpdate: Method;
 
-  constructor(root: ProjectedNode, cam: Camera) {
+  constructor(root: PaintedNode, cam: Camera) {
     logEnter("Constructing GraphPainter");
     this._root = root;
     this._commitLayoutFunc = null;
@@ -71,7 +71,7 @@ export default class GraphPainter implements Projected {
     this._onScheduleUpdate.set(listener, listenerObj);
   }
 
-  root(): ProjectedNode {
+  root(): PaintedNode {
     return this._root;
   }
 
@@ -147,7 +147,7 @@ export default class GraphPainter implements Projected {
           this._paintGroups.push(new PaintGroup(node));
         }
         ++i;
-        node = node.paintGroup().next() as ProjectedNode;
+        node = node.paintGroup().next() as PaintedNode;
       } while (node != this.root());
 
       // Remove trailing stale paint groups
