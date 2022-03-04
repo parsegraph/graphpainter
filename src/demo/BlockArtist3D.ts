@@ -1,12 +1,10 @@
 import BlockPainter, { BlockType } from "parsegraph-blockpainter";
 import { Projector } from "parsegraph-projector";
 import Method from "parsegraph-method";
-import Artist, { WorldRenderable } from "../Artist";
-import WorldTransform from "../WorldTransform";
+import Artist, { WorldTransform, NodeValues, WorldRenderable } from "parsegraph-artist";
 import Color from "parsegraph-color";
 import log from "parsegraph-log";
 import paintNodeLines from "../paintNodeLines";
-import NodeValues from "../NodeValues";
 import Block from "./Block";
 
 class BlockScene3D implements WorldRenderable {

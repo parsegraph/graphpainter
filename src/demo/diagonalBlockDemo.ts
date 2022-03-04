@@ -1,6 +1,6 @@
 import Color from "parsegraph-color";
 
-import ProjectedNode from "../ProjectedNode";
+import {Artist, PaintedNode} from "parsegraph-artist"
 
 import TimingBelt from "parsegraph-timingbelt";
 import { Projection, BasicProjector, Projector } from "parsegraph-projector";
@@ -8,7 +8,6 @@ import Direction, { DirectionNode } from "parsegraph-direction";
 
 import Viewport from "../Viewport";
 import Block from "./Block";
-import Artist from "../Artist";
 import { Renderable } from "parsegraph-timingbelt";
 import Method from "parsegraph-method";
 
@@ -99,7 +98,7 @@ const diagonalBlockDemo = (artistFunc: () => Artist<Block>) => {
   // const freezer = new Freezer();
   // root.value().getCache().freeze(freezer);
 
-  let n: ProjectedNode = root;
+  let n: PaintedNode = root;
   for (let i = 0; i < 10; ++i) {
     const child = makeBlock(
       new Color(1 - i / 10, 0, 0),

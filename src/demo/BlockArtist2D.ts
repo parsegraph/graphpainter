@@ -1,8 +1,6 @@
 import { Projector } from "parsegraph-projector";
 import Method from "parsegraph-method";
-import NodeValues from "../NodeValues";
-import Artist, { WorldRenderable } from "../Artist";
-import WorldTransform from "../WorldTransform";
+import Artist, { NodeValues, WorldTransform, WorldRenderable } from "parsegraph-artist";
 import Block from "./Block";
 import paintNodeLines from "../paintNodeLines";
 

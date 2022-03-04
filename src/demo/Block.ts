@@ -1,10 +1,6 @@
-import ProjectedNode from "../ProjectedNode";
-import Artist from "../Artist";
-import { Interactive, Interaction } from "parsegraph-interact";
-import Freezable from "../freezer/Freezable";
-import Painted from "../Painted";
+import Artist, {PaintedNode, Painted, FreezerCache} from "parsegraph-artist";
+import { Interaction } from "parsegraph-interact";
 import { Layout } from "parsegraph-layout";
-import FreezerCache from "../freezer/FreezerCache";
 import Color from "parsegraph-color";
 import Size from "parsegraph-size";
 import Direction from "parsegraph-direction";
@@ -15,10 +11,10 @@ export const LINE_COLOR = new Color(0.8, 0.8, 0.8, 0.6);
 export const SELECTED_LINE_COLOR = new Color(0.8, 0.8, 0.8, 1);
 export const LINE_THICKNESS = (12 * BUD_RADIUS) / 8;
 
-export default class Block implements Interactive, Painted<Block>, Freezable {
+export default class Block implements Painted<Block> {
   _layout: Layout;
   _interactor: Interaction;
-  _node: ProjectedNode<Block>;
+  _node: PaintedNode<Block>;
   _cache: FreezerCache;
   _color: Color;
   _borderColor: Color;
@@ -29,7 +25,7 @@ export default class Block implements Interactive, Painted<Block>, Freezable {
   constructor(
     color: Color,
     borderColor: Color,
-    node: ProjectedNode<Block>,
+    node: PaintedNode<Block>,
     artist: Artist<Block>
   ) {
     this._node = node;
@@ -113,7 +109,7 @@ export default class Block implements Interactive, Painted<Block>, Freezable {
     return this._artist;
   }
 
-  node(): ProjectedNode {
+  node(): PaintedNode {
     return this._node;
   }
 

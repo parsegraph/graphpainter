@@ -1,11 +1,8 @@
 import { Projector } from "parsegraph-projector";
 import Method from "parsegraph-method";
-import Artist from "../Artist";
-import WorldTransform from "../WorldTransform";
+import Artist, {WorldTransform, Transformed, NodeValues} from "parsegraph-artist";
 import log from "parsegraph-log";
-import NodeValues from "../NodeValues";
 import { Renderable } from "parsegraph-timingbelt";
-import Transformed from "../Transformed";
 import Block from "./Block";
 import paintNodeLines from "../paintNodeLines";
 
