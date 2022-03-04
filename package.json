@@ -25,9 +25,9 @@
     "parsegraph-layout": "^1.7.20",
     "parsegraph-matrix": "^1.4.11",
     "parsegraph-method": "^1.4.22",
-    "parsegraph-projector": "^1.8.14",
+    "parsegraph-projector": "^1.8.15",
     "parsegraph-rect": "^1.4.7",
-    "parsegraph-showincamera": "^1.6.7",
+    "parsegraph-showincamera": "^1.6.8",
     "parsegraph-size": "^1.5.8",
     "parsegraph-timing": "^1.4.16",
     "parsegraph-timingbelt": "^1.7.11"
