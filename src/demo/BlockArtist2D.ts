@@ -4,9 +4,9 @@ import Artist, {
   NodeValues,
   WorldTransform,
   WorldRenderable,
+  paintNodeLines
 } from "parsegraph-artist";
 import Block from "./Block";
-import paintNodeLines from "../paintNodeLines";
 
 class BlockScene2D implements WorldRenderable {
   _projector: Projector;

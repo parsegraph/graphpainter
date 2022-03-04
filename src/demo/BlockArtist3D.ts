@@ -5,11 +5,11 @@ import Artist, {
   WorldTransform,
   NodeValues,
   WorldRenderable,
+  paintNodeLines
 } from "parsegraph-artist";
 import Color from "parsegraph-color";
 import log from "parsegraph-log";
-import paintNodeLines from "../paintNodeLines";
-import Block from "./Block";
+import Block from "parsegraph-block";
 
 class BlockScene3D implements WorldRenderable {
   _blockPainter: BlockPainter;

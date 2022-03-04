@@ -4,11 +4,11 @@ import Artist, {
   WorldTransform,
   Transformed,
   NodeValues,
+  paintNodeLines
 } from "parsegraph-artist";
 import log from "parsegraph-log";
 import { Renderable } from "parsegraph-timingbelt";
-import Block from "./Block";
-import paintNodeLines from "../paintNodeLines";
+import Block from "parsegraph-block";
 
 class BlockSceneDOM implements Renderable, Transformed {
   _projector: Projector;
