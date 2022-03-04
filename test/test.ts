@@ -1,5 +1,5 @@
 import { assert } from "chai";
-import { GraphPainter } from "../src/index.lib";
+import { GraphPainter } from "../src/index";
 import Camera from "parsegraph-camera";
 import { DirectionNode } from "parsegraph-direction";
 
