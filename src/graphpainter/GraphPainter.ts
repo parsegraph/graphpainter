@@ -2,7 +2,7 @@ import Camera from "parsegraph-camera";
 import GraphPainterAnalytics from "./GraphPainterAnalytics";
 
 import log, { logEnter, logEnterc, logLeave } from "parsegraph-log";
-import {PaintedNode} from "parsegraph-artist";
+import { PaintedNode } from "parsegraph-artist";
 import { Projector, Projected } from "parsegraph-projector";
 import Method from "parsegraph-method";
 import PaintGroup from "./PaintGroup";

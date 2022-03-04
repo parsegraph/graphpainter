@@ -1,7 +1,11 @@
 import BlockPainter, { BlockType } from "parsegraph-blockpainter";
 import { Projector } from "parsegraph-projector";
 import Method from "parsegraph-method";
-import Artist, { WorldTransform, NodeValues, WorldRenderable } from "parsegraph-artist";
+import Artist, {
+  WorldTransform,
+  NodeValues,
+  WorldRenderable,
+} from "parsegraph-artist";
 import Color from "parsegraph-color";
 import log from "parsegraph-log";
 import paintNodeLines from "../paintNodeLines";

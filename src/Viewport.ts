@@ -1,7 +1,7 @@
 import log, { logc } from "parsegraph-log";
 import Method from "parsegraph-method";
 
-import ProjectedNode from "./ProjectedNode";
+import {PaintedNode} from "parsegraph-artist";
 import { makeInverse3x3, matrixTransform2D } from "parsegraph-matrix";
 import Camera from "parsegraph-camera";
 
@@ -16,15 +16,15 @@ export default class Viewport implements Projected {
   _camera: Camera;
   _needsRender: boolean;
   _needsRepaint: boolean;
-  _root: ProjectedNode;
+  _root: PaintedNode;
   _painter: GraphPainter;
   _inputs: Map<Projector, Input>;
   _onScheduleUpdate: Method;
-  _focusedNode: ProjectedNode;
+  _focusedNode: PaintedNode;
   _backgroundColor: Color;
 
   constructor(
-    root: ProjectedNode,
+    root: PaintedNode,
     backgroundColor: Color = new Color(0, 0, 0, 1)
   ) {
     this._root = root;
@@ -185,10 +185,10 @@ export default class Viewport implements Projected {
           event.x,
           event.y
         );
-        const node: ProjectedNode = this.root()
+        const node: PaintedNode = this.root()
           .value()
           .getLayout()
-          .nodeUnderCoords(mouseInWorld[0], mouseInWorld[1]) as ProjectedNode;
+          .nodeUnderCoords(mouseInWorld[0], mouseInWorld[1]) as PaintedNode;
         if (node === this._focusedNode) {
           return true;
         }

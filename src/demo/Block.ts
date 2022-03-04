@@ -1,4 +1,4 @@
-import Artist, {PaintedNode, Painted, FreezerCache} from "parsegraph-artist";
+import Artist, { PaintedNode, Painted, FreezerCache } from "parsegraph-artist";
 import { Interaction } from "parsegraph-interact";
 import { Layout } from "parsegraph-layout";
 import Color from "parsegraph-color";

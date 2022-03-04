@@ -1,6 +1,6 @@
 import Color from "parsegraph-color";
 
-import {Artist, PaintedNode} from "parsegraph-artist"
+import Artist, { PaintedNode } from "parsegraph-artist";
 
 import TimingBelt from "parsegraph-timingbelt";
 import { Projection, BasicProjector, Projector } from "parsegraph-projector";

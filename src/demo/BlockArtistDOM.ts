@@ -1,6 +1,10 @@
 import { Projector } from "parsegraph-projector";
 import Method from "parsegraph-method";
-import Artist, {WorldTransform, Transformed, NodeValues} from "parsegraph-artist";
+import Artist, {
+  WorldTransform,
+  Transformed,
+  NodeValues,
+} from "parsegraph-artist";
 import log from "parsegraph-log";
 import { Renderable } from "parsegraph-timingbelt";
 import Block from "./Block";
