@@ -1,7 +1,6 @@
-import PaintGroup from "./PaintGroup";
 import { INTERVAL } from "parsegraph-timingbelt";
 import { elapsed } from "parsegraph-timing";
-import { Projector } from 'parsegraph-projector';
+import { Projector } from "parsegraph-projector";
 
 const renderTimes: number[] = [];
 
