@@ -8,26 +8,26 @@ import paintNodeLines from "../paintNodeLines";
 
 class BlockScene2D implements WorldRenderable {
   _projector: Projector;
-  _seq: NodeValues<Block>;
+  _blocks: NodeValues<Block>;
   _onUpdate: Method;
   _world: WorldTransform;
 
-  constructor(projector: Projector, seq: NodeValues<Block>) {
-    this._seq = seq;
+  constructor(projector: Projector, blocks: NodeValues<Block>) {
+    this._blocks = blocks;
     this._onUpdate = new Method();
     this._projector = projector;
   }
 
-  setSeq(seq: NodeValues<Block>) {
-    this._seq = seq;
+  setBlocks(blocks: NodeValues<Block>) {
+    this._blocks = blocks;
   }
 
   projector() {
     return this._projector;
   }
 
-  subgroup() {
-    return this._seq;
+  blocks() {
+    return this._blocks;
   }
 
   markDirty() {
@@ -71,51 +71,53 @@ class BlockScene2D implements WorldRenderable {
     ctx.closePath();
   }
 
+  protected renderBlock(val: Block) {
+    const layout = val.getLayout();
+    const ctx = this.projector().overlay();
+    const color = val.color();
+    const size = val.size();
+    const borderRoundness = val.borderRoundness();
+    const borderThickness = val.borderThickness();
+
+    ctx.scale(layout.groupScale(), layout.groupScale());
+
+    paintNodeLines(
+      val.node(),
+      val.borderThickness(),
+      (x: number, y: number, w: number, h: number) => {
+        ctx.strokeStyle = val.borderColor().asRGBA();
+        ctx.fillStyle = val.borderColor().asRGBA();
+        ctx.fillRect(x - w / 2, y - h / 2, w, h);
+      }
+    );
+
+    ctx.fillStyle = color.asRGB();
+    this.strokeRoundedRect(
+      ctx,
+      layout.groupX() + borderThickness / 2 - size.width() / 2,
+      layout.groupY() + borderThickness / 2 - size.height() / 2,
+      size.width() - borderThickness,
+      size.height() - borderThickness,
+      borderRoundness * layout.groupScale()
+    );
+    ctx.fill();
+    ctx.strokeStyle = val.focused()
+      ? "#fff"
+      : val.borderColor().premultiply(color).asRGBA();
+    ctx.lineWidth = borderThickness * layout.groupScale();
+    this.strokeRoundedRect(
+      ctx,
+      layout.groupX() + borderThickness / 2 - size.width() / 2,
+      layout.groupY() + borderThickness / 2 - size.height() / 2,
+      size.width() - borderThickness,
+      size.height() - borderThickness,
+      borderRoundness * layout.groupScale()
+    );
+    ctx.stroke();
+  }
+
   render() {
-    this.subgroup().forEach((val) => {
-      const layout = val.getLayout();
-      const ctx = this.projector().overlay();
-      const color = val.color();
-      const size = val.size();
-      const borderRoundness = val.borderRoundness();
-      const borderThickness = val.borderThickness();
-
-      ctx.scale(layout.groupScale(), layout.groupScale());
-
-      paintNodeLines(
-        val.node(),
-        val.borderThickness(),
-        (x: number, y: number, w: number, h: number) => {
-          ctx.strokeStyle = val.borderColor().asRGBA();
-          ctx.fillStyle = val.borderColor().asRGBA();
-          ctx.fillRect(x - w / 2, y - h / 2, w, h);
-        }
-      );
-
-      ctx.fillStyle = color.asRGB();
-      this.strokeRoundedRect(
-        ctx,
-        layout.groupX() + borderThickness / 2 - size.width() / 2,
-        layout.groupY() + borderThickness / 2 - size.height() / 2,
-        size.width() - borderThickness,
-        size.height() - borderThickness,
-        borderRoundness * layout.groupScale()
-      );
-      ctx.fill();
-      ctx.strokeStyle = val.focused()
-        ? "#fff"
-        : val.borderColor().premultiply(color).asRGBA();
-      ctx.lineWidth = borderThickness * layout.groupScale();
-      this.strokeRoundedRect(
-        ctx,
-        layout.groupX() + borderThickness / 2 - size.width() / 2,
-        layout.groupY() + borderThickness / 2 - size.height() / 2,
-        size.width() - borderThickness,
-        size.height() - borderThickness,
-        borderRoundness * layout.groupScale()
-      );
-      ctx.stroke();
-    });
+    this.blocks().forEach((block: Block) => this.renderBlock(block));
     return false;
   }
 
@@ -123,12 +125,12 @@ class BlockScene2D implements WorldRenderable {
 }
 
 export default class BlockArtist2D implements Artist<Block> {
-  make(projector: Projector, seq: NodeValues<Block>) {
-    return new BlockScene2D(projector, seq);
+  make(projector: Projector, blocks: NodeValues<Block>) {
+    return new BlockScene2D(projector, blocks);
   }
 
-  patch(view: BlockScene2D, seq: NodeValues<Block>): boolean {
-    view.setSeq(seq);
+  patch(view: BlockScene2D, blocks: NodeValues<Block>): boolean {
+    view.setBlocks(blocks);
     return true;
   }
 
