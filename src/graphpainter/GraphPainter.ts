@@ -189,15 +189,17 @@ export default class GraphPainter implements Projected {
   }
 
   render(projector: Projector): boolean {
-    const analytics = new GraphPainterAnalytics();
+    const analytics = new GraphPainterAnalytics(projector);
     analytics.recordStart();
 
     this._paintGroups.forEach((pg) => {
       pg.setCamera(this.camera());
+      const pizza = pg.pizzaFor(projector);
       if (pg.render(projector)) {
         analytics.recordDirtyRender();
-      } else if (pg.consecutiveRenders() > 1) {
-        analytics.recordConsecutiveRender(pg);
+      } else if (pizza.numRenders() > 1) {
+        analytics.recordConsecutiveRender();
+        analytics.recordNumRenders(pizza.numRenders());
       }
     });
 

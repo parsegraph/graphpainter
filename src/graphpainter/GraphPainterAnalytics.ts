@@ -1,6 +1,7 @@
 import PaintGroup from "./PaintGroup";
 import { INTERVAL } from "parsegraph-timingbelt";
 import { elapsed } from "parsegraph-timing";
+import { Projector } from 'parsegraph-projector';
 
 const renderTimes: number[] = [];
 
@@ -10,8 +11,10 @@ export default class GraphPainterAnalytics {
   _mostRenders: number;
   _groupsRendered: number;
   _start: Date;
+  _projector: Projector;
 
-  constructor() {
+  constructor(projector: Projector) {
+    this._projector = projector;
     this.recordStart();
   }
 
@@ -20,9 +23,12 @@ export default class GraphPainterAnalytics {
     ++this._groupsRendered;
   }
 
-  recordConsecutiveRender(pg: PaintGroup) {
+  recordConsecutiveRender() {
     ++this._groupsRendered;
-    this._mostRenders = Math.max(pg.consecutiveRenders(), this._mostRenders);
+  }
+
+  recordNumRenders(numRenders: number) {
+    this._mostRenders = Math.max(numRenders, this._mostRenders);
   }
 
   recordStart() {

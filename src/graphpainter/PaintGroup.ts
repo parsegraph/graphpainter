@@ -1,6 +1,5 @@
-import ProjectedNode from "../ProjectedNode";
 import Camera from "parsegraph-camera";
-import log, { logEnter, logLeave } from "parsegraph-log";
+import log from "parsegraph-log";
 import { Projector } from "parsegraph-projector";
 import { Projected } from "parsegraph-projector";
 import Method from "parsegraph-method";
@@ -14,10 +13,8 @@ import {
 } from "parsegraph-matrix";
 import Rect from "parsegraph-rect";
 import NodeRenderData from "../NodeRenderData";
-import WorldTransform from "../WorldTransform";
-import NodeValues from "../NodeValues";
-import Artist, { WorldRenderable } from "../Artist";
 import { Renderable } from "parsegraph-timingbelt";
+import {PaintedNode, WorldTransform, Pizza} from "parsegraph-artist";
 
 let CACHED_RENDERS: number = 0;
 let IMMEDIATE_RENDERS: number = 0;
@@ -25,56 +22,50 @@ let IMMEDIATE_RENDERS: number = 0;
 const renderData: NodeRenderData = new NodeRenderData();
 
 export default class PaintGroup implements Projected {
-  _root: ProjectedNode;
-  _projections: Map<Projector, [Artist, WorldRenderable][]>;
-  _consecutiveRenders: number;
+  _root: PaintedNode;
+  _projections: Map<Projector, Pizza>;
   _onScheduleUpdate: Method;
   _camera: Camera;
 
-  constructor(root: ProjectedNode) {
+  constructor(root: PaintedNode) {
     this._root = root;
     this._projections = new Map();
-    this._consecutiveRenders = 0;
     this._onScheduleUpdate = new Method();
   }
 
-  consecutiveRenders(): number {
-    return this._consecutiveRenders;
-  }
-
-  forEachSlice(cb: (slice: Renderable) => void): void {
-    this._projections.forEach((slices) => {
-      slices.forEach((slice) => cb(slice[1]));
+  allViews(cb: (slice: Renderable) => void): void {
+    this._projections.forEach((pizza) => {
+      pizza.eachView(cb);
     });
   }
 
   tick(cycleStart: number): boolean {
     const needsUpdate = false;
-    this.forEachSlice((slice) => {
-      return slice.tick(cycleStart) || needsUpdate;
+    this.allViews((view) => {
+      return view.tick(cycleStart) || needsUpdate;
     });
     return needsUpdate;
   }
 
-  hasSlices(projector: Projector): boolean {
+  hasPizza(projector: Projector): boolean {
     return this._projections.has(projector);
   }
 
-  getSlices(projector: Projector) {
+  pizzaFor(projector: Projector) {
     return this._projections.get(projector);
   }
 
   unmount(projector: Projector): void {
-    if (!this.hasSlices(projector)) {
+    if (!this.hasPizza(projector)) {
       return;
     }
-    // this.getSlices(projector).forEach(slice=>slice.unmount());
+    this.pizzaFor(projector).eachView((view) => view.unmount());
     this._projections.delete(projector);
   }
 
   dispose() {
-    this.forEachSlice((slice) => {
-      slice.unmount();
+    this.allViews((view) => {
+      view.unmount();
     });
     this._projections.clear();
   }
@@ -89,115 +80,26 @@ export default class PaintGroup implements Projected {
       throw new Error("Node cannot be uncommitted when painting");
     }
 
-    if (!this.hasSlices(projector)) {
-      this._projections.set(projector, []);
+    if (this.hasPizza(projector)) {
+      const pizza = new Pizza(projector);
+      pizza.setOnScheduleUpdate(this.scheduleUpdate, this);
+      this._projections.set(projector, pizza);
     }
-    const slices = this._projections.get(projector);
+    const pizza = this.pizzaFor(projector);
 
-    let seq: NodeValues = null;
-    let seqArtist: Artist = null;
-
-    let currentSlice = 0;
-
-    // Adds the current node value sequence as a new Renderable
-    // created from the root node's Artist.
-    const commit = () => {
-      if (!seq) {
-        return;
-      }
-      if (currentSlice < slices.length) {
-        const slice = slices[currentSlice];
-        if (seqArtist === slice[0] && seqArtist.patch(slice[1], seq)) {
-          // Slice is patchable, so re-use it.
-          currentSlice++;
-          return;
-        } else {
-          // Renderable cannot be patched, so remove it and replace.
-          slices[currentSlice][1].unmount();
-          slices.splice(currentSlice, 1);
-        }
-      }
-
-      // Create a new slice.
-      const renderable = seqArtist.make(projector, seq);
-      renderable.setOnScheduleUpdate(this.scheduleUpdate, this);
-      slices.splice(currentSlice++, 0, [seqArtist, renderable]);
-    };
-
-    root.forEachNode((node: ProjectedNode) => {
-      const artist = node.value().artist();
-      if (!seq || seqArtist !== artist) {
-        // Artist has changed, so commit the current sequence, if any.
-        commit();
-
-        // Artist has changed, so start a new sequence.
-        seq = new NodeValues(node);
-        seqArtist = artist;
-      } else {
-        // Artist did not change, so include node in current sequence.
-        seq.include();
-      }
-    });
-
-    // Include last sequence.
-    commit();
-
-    while (slices.length > currentSlice) {
-      const slice = slices.pop();
-      slice[1].unmount();
-    }
-
-    let needsRepaint = false;
-    slices.forEach((slice) => {
-      const renderable = slice[1];
-      needsRepaint = renderable.paint(timeout / slices.length) || needsRepaint;
-    });
-
-    if (!needsRepaint) {
-      log("Clearing dirty flag");
-      if (root.value().getCache().isFrozen()) {
-        root.value().getCache().frozenNode().paint(this, projector);
-      }
-    }
+    pizza.populate(this.root());
+    const needsRepaint = pizza.paint(timeout);
 
     return needsRepaint;
   }
 
-  /**
-   * Render using the given world matrix.
-   *
-   * @param {Projector} projector Projector used for rendering
-   * @param {WorldTransform} worldTransform the transform used for 2D orthographic projections
-   * @return {boolean} true if another render call is needed to complete rendering
-   */
-  renderDirect(projector: Projector, worldTransform: WorldTransform): boolean {
-    if (!this.root().isRoot() && !this.root().localPaintGroup()) {
-      throw new Error("Cannot render a node that is not a paint group");
-    }
-    if (!this.hasSlices(projector)) {
-      return true;
-    }
-
-    logEnter("Rendering directly");
-    ++this._consecutiveRenders;
-
-    let needsUpdate = false;
-    this.getSlices(projector).forEach((slice) => {
-      const renderable = slice[1];
-      renderable.setWorldTransform(worldTransform);
-      needsUpdate = renderable.render() || needsUpdate;
-    });
-    logLeave();
-    return needsUpdate;
-  }
-
   isPainted(projector: Projector) {
-    return this.hasSlices(projector);
+    return !!this.pizzaFor(projector);
   }
 
   bounds() {
     const b = new Rect();
-    this.root().forEachNode((node: ProjectedNode) => {
+    this.root().forEachNode((node: PaintedNode) => {
       const layout = node.value().getLayout();
       b.include(
         layout.groupX(),
@@ -313,7 +215,7 @@ export default class PaintGroup implements Projected {
     ++IMMEDIATE_RENDERS;
 
     // Set up 2D canvas
-    let needsUpdate = false;
+    const needsUpdate = false;
     if (projector.hasOverlay()) {
       projector.overlay().save();
     }
@@ -336,7 +238,7 @@ export default class PaintGroup implements Projected {
         camera.x() + layout.absoluteX(),
         camera.y() + layout.absoluteY()
       );
-      needsUpdate = this.renderDirect(projector, worldTransform);
+      this.renderDirect(projector, worldTransform);
     } finally {
       if (projector.hasOverlay()) {
         projector.overlay().restore();
@@ -346,10 +248,16 @@ export default class PaintGroup implements Projected {
     return needsUpdate || layout.needsAbsolutePos();
   }
 
-  contextChanged(projector: Projector, isLost: boolean) {
-    if (isLost) {
-      this.unmount(projector);
+  renderDirect(projector: Projector, world: WorldTransform): boolean {
+    let needsUpdate = false;
+    const pizza = this.pizzaFor(projector);
+    if (pizza) {
+      pizza.setWorldTransform(world);
+      needsUpdate = pizza.render() || needsUpdate;
+    } else {
+      needsUpdate = true;
     }
+    return needsUpdate || this.root().value().getLayout().needsAbsolutePos();
   }
 
   scheduleUpdate() {
