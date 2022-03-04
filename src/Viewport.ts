@@ -119,6 +119,32 @@ export default class Viewport implements Projected {
     this.scheduleRender();
   }
 
+  private renderBackground(projector: Projector) {
+    const hasGL = projector.glProvider()?.hasGL();
+    const container = projector.glProvider().container();
+    if (container.style.backgroundColor != this.backgroundColor().asRGBA()) {
+      container.style.backgroundColor = this.backgroundColor().asRGBA();
+    }
+    if (hasGL) {
+      // console.log("Rendering GL background");
+      const gl = projector.glProvider().gl();
+      const bg = this.backgroundColor();
+      gl.viewport(0, 0, projector.width(), projector.height());
+      gl.clearColor(bg.r(), bg.g(), bg.b(), bg.a());
+      gl.clear(gl.COLOR_BUFFER_BIT);
+    }
+    if (projector.hasOverlay()) {
+      // console.log("Rendering canvas background");
+      const overlay = projector.overlay();
+      overlay.textBaseline = "top";
+      overlay.fillStyle = this.backgroundColor().asRGBA();
+      overlay.clearRect(0, 0, projector.width(), projector.height());
+    }
+    if (projector.hasDOMContainer()) {
+      // console.log("Rendering DOM background");
+    }
+  }
+
   render(projector: Projector): boolean {
     const hasGL = projector.glProvider()?.hasGL();
     if (hasGL) {
@@ -138,28 +164,7 @@ export default class Viewport implements Projected {
 
     showInCamera(this.root(), cam, false);
 
-    const container = projector.glProvider().container();
-    if (container.style.backgroundColor != this.backgroundColor().asRGBA()) {
-      container.style.backgroundColor = this.backgroundColor().asRGBA();
-    }
-    if (hasGL) {
-      // console.log("Rendering GL");
-      const gl = projector.glProvider().gl();
-      const bg = this.backgroundColor();
-      gl.viewport(0, 0, projector.width(), projector.height());
-      gl.clearColor(bg.r(), bg.g(), bg.b(), bg.a());
-      gl.clear(gl.COLOR_BUFFER_BIT);
-    }
-    if (projector.hasOverlay()) {
-      // console.log("Rendering canvas");
-      const overlay = projector.overlay();
-      overlay.textBaseline = "top";
-      overlay.fillStyle = this.backgroundColor().asRGBA();
-      overlay.clearRect(0, 0, width, height);
-    }
-    if (projector.hasDOMContainer()) {
-      // console.log("Rendering DOM");
-    }
+    this.renderBackground(projector);
     const needsUpdate = this._painter.render(projector);
     if (needsUpdate) {
       log("World was rendered dirty.");
