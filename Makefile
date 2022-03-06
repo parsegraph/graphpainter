@@ -2,11 +2,9 @@ DIST_NAME = graphpainter
 
 SCRIPT_FILES = \
 	src/index.ts \
-	src/paintNodeLines.ts \
 	src/demo/diagonalBlockDemo.ts \
 	src/demo/BlockArtist2D.ts \
 	src/demo/block3d.ts \
-	src/demo/Block.ts \
 	src/demo/blockrandom.ts \
 	src/demo/blockdom.ts \
 	src/demo/BlockArtist3D.ts \
@@ -17,7 +15,6 @@ SCRIPT_FILES = \
 	src/graphpainter/PaintGroup.ts \
 	src/graphpainter/GraphPainter.ts \
 	src/Viewport.ts \
-	src/Repaintable.ts \
 	src/NodeRenderData.ts \
 	src/demo.ts \
 	test/test.ts
