@@ -75,6 +75,12 @@ export default class GraphPainter implements Projected {
     return this._root;
   }
 
+  setRoot(root: PaintedNode) {
+    this.clear();
+    this._root = root;
+    this.markDirty();
+  }
+
   clear() {
     if (this._paintGroups) {
       this._paintGroups.forEach((pg) => {
