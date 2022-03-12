@@ -32,7 +32,7 @@ export default class GraphPainter implements Projected {
   _camera: Camera;
   _onScheduleUpdate: Method;
 
-  constructor(root: PaintedNode, cam: Camera = null) {
+  constructor(root: PaintedNode = null, cam: Camera = null) {
     logEnter("Constructing GraphPainter");
     this._root = root;
     this._commitLayoutFunc = null;
@@ -93,7 +93,7 @@ export default class GraphPainter implements Projected {
   }
 
   markDirty(): void {
-    if (this.root().value().getCache().isFrozen()) {
+    if (this.root() && this.root().value().getCache().isFrozen()) {
       this.root().value().getCache().frozenNode().invalidate();
     }
     this._commitLayoutFunc = null;
@@ -102,6 +102,10 @@ export default class GraphPainter implements Projected {
   }
 
   commitLayout(timeout?: number): boolean {
+    if (!this.root()) {
+      this._commitLayoutFunc = null;
+      return false;
+    }
     // Commit layout
     let cont: Function;
     if (this._commitLayoutFunc) {
@@ -149,6 +153,9 @@ export default class GraphPainter implements Projected {
   }
 
   paint(projector: Projector, timeout?: number): boolean {
+    if (!this.root()) {
+      return false;
+    }
     if (!this.root().isRoot() && !this.root().localPaintGroup()) {
       throw new Error("A node must be a paint group in order to be painted");
     }
@@ -205,6 +212,9 @@ export default class GraphPainter implements Projected {
   }
 
   render(projector: Projector): boolean {
+    if (!this.root()) {
+      return false;
+    }
     const analytics = new GraphPainterAnalytics(projector);
     analytics.recordStart();
 
