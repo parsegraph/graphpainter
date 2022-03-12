@@ -117,13 +117,40 @@ export default class GraphPainter implements Projected {
     return false;
   }
 
+  private reconcilePaintGroups() {
+    // Create paint groups
+    let node = this.root();
+    if (this._savedPaintGroup !== -1) {
+      return;
+    }
+    let i = 0;
+    do {
+      if (this._paintGroups.length < i) {
+        const pg = this._paintGroups[i];
+        if (pg.root() === node) {
+          // If the paint group's root is the same node, re-use it.
+        } else {
+          // Different root, so create a new paint group.
+          this._paintGroups.splice(i, 0, new PaintGroup(node));
+        }
+      } else {
+        this._paintGroups.push(new PaintGroup(node));
+      }
+      ++i;
+      node = node.paintGroup().next() as PaintedNode;
+    } while (node != this.root());
+
+    // Remove trailing stale paint groups
+    while (this._paintGroups.length > i) {
+      const pg = this._paintGroups.pop();
+      pg.dispose();
+    }
+    this._savedPaintGroup = 0;
+  }
+
   paint(projector: Projector, timeout?: number): boolean {
     if (!this.root().isRoot() && !this.root().localPaintGroup()) {
       throw new Error("A node must be a paint group in order to be painted");
-    }
-
-    if (this.commitLayout(timeout)) {
-      return true;
     }
 
     logEnterc("Node paints", "Painting node for window={0}", window);
@@ -131,38 +158,17 @@ export default class GraphPainter implements Projected {
 
     const pastTime = timer(timeout);
 
+    if (this.commitLayout(timeout)) {
+      logLeave("Commit layout");
+      return true;
+    }
+
     if (pastTime()) {
       logLeave("Paint timeout=" + timeout);
       return true;
     }
 
-    // Create paint groups
-    let node = this.root();
-    if (this._savedPaintGroup === -1) {
-      let i = 0;
-      do {
-        if (this._paintGroups.length < i) {
-          const pg = this._paintGroups[i];
-          if (pg.root() === node) {
-            // If the paint group's root is the same node, re-use it.
-          } else {
-            // Different root, so create a new paint group.
-            this._paintGroups.splice(i, 0, new PaintGroup(node));
-          }
-        } else {
-          this._paintGroups.push(new PaintGroup(node));
-        }
-        ++i;
-        node = node.paintGroup().next() as PaintedNode;
-      } while (node != this.root());
-
-      // Remove trailing stale paint groups
-      while (this._paintGroups.length > i) {
-        const pg = this._paintGroups.pop();
-        pg.dispose();
-      }
-      this._savedPaintGroup = 0;
-    }
+    this.reconcilePaintGroups();
 
     if (pastTime()) {
       logLeave("Paint timeout=" + timeout);
