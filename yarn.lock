@@ -4324,6 +4324,22 @@ parse5@6.0.1:
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-6.0.1.tgz#e1a1c085c569b3dc08321184f19a39cc27f7c30b"
   integrity sha512-Ofn/CTFzRGTTxwpNEs9PP93gXShHcTq255nzRYSKe8AkVpZY7e1fpmTfOyoIvjP5HG7Z2ZM7VS9PPhQGW2pOpw==
 
+parsegraph-artist@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/parsegraph-artist/-/parsegraph-artist-2.4.0.tgz#23b4f3e62de6e09f3dac99e552689ce803d00db1"
+  integrity sha512-mT5/N1kzCi98QvU4c7xBQw+eR1kLtzwtdgecRKlmXXD7QhBxyq2XJKCXGzWLb6VzJ9CQ+mPPzh48isej9/Pjjw==
+  dependencies:
+    parsegraph-camera "^1.4.11"
+    parsegraph-compileprogram "^2.2.9"
+    parsegraph-direction "^2.0.10"
+    parsegraph-interact "^1.6.5"
+    parsegraph-layout "^1.8.0"
+    parsegraph-matrix "^1.4.11"
+    parsegraph-method "^1.4.22"
+    parsegraph-projector "^1.8.16"
+    parsegraph-timing "^1.4.16"
+    parsegraph-timingbelt "^1.7.11"
+
 parsegraph-camera@^1.4.11:
   version "1.4.11"
   resolved "https://registry.yarnpkg.com/parsegraph-camera/-/parsegraph-camera-1.4.11.tgz#7b5815c638ac489f7fabbad95c41b7661d72f8ac"
@@ -4457,7 +4473,7 @@ parsegraph-normalizewheel@^1.4.7:
   resolved "https://registry.yarnpkg.com/parsegraph-normalizewheel/-/parsegraph-normalizewheel-1.4.7.tgz#a7643a28597a0b275e3d4bfe15c7eb60372b915f"
   integrity sha512-F0nTb+hZVBAZ4d8W+GZ281DDl4Br1U62fHj2oW5xxKfr1E9u/b9K4243FSYNG0XfzZzhjYoSIjUwM4ew3KMPZw==
 
-parsegraph-projector@^1.9.0:
+parsegraph-projector@^1.8.16, parsegraph-projector@^1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/parsegraph-projector/-/parsegraph-projector-1.9.0.tgz#01d78b5415f8e77accf78d171266cdaa3d1f96fa"
   integrity sha512-FUh8+mjoA7Q68PDVGxAheGuVHAEfa7P5zw+m0dKbGojuMVdLJpMNkoWpl09eOnRCf/fGHYwbUflphfifQiN/6A==

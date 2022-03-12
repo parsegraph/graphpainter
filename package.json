@@ -15,6 +15,7 @@
   },
   "homepage": "https://github.com/parsegraph/graphpainter#readme",
   "dependencies": {
+    "parsegraph-artist": "^2.4.0",
     "parsegraph-camera": "^1.4.11",
     "parsegraph-color": "^1.4.7",
     "parsegraph-compileprogram": "^2.2.9",
