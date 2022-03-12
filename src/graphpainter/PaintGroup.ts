@@ -230,14 +230,19 @@ export default class PaintGroup implements Projected {
         overlay.scale(layout.absoluteScale(), layout.absoluteScale());
       }
 
-      this.renderDirect(projector, camera ? new WorldTransform(
-        this.worldMatrix(),
-        this.worldScale(),
-        camera.width(),
-        camera.height(),
-        camera.x() + layout.absoluteX(),
-        camera.y() + layout.absoluteY()
-      ) : null);
+      this.renderDirect(
+        projector,
+        camera
+          ? new WorldTransform(
+              this.worldMatrix(),
+              this.worldScale(),
+              camera.width(),
+              camera.height(),
+              camera.x() + layout.absoluteX(),
+              camera.y() + layout.absoluteY()
+            )
+          : null
+      );
     } finally {
       if (projector.hasOverlay()) {
         projector.overlay().restore();

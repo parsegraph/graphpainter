@@ -1,7 +1,7 @@
 import log, { logc } from "parsegraph-log";
 import Method from "parsegraph-method";
 
-import {PaintedNode} from "parsegraph-artist";
+import { PaintedNode } from "parsegraph-artist";
 import { makeInverse3x3, matrixTransform2D } from "parsegraph-matrix";
 import Camera from "parsegraph-camera";
 

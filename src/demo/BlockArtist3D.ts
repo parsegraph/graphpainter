@@ -5,7 +5,7 @@ import Artist, {
   WorldTransform,
   NodeValues,
   WorldRenderable,
-  paintNodeLines
+  paintNodeLines,
 } from "parsegraph-artist";
 import Color from "parsegraph-color";
 import log from "parsegraph-log";

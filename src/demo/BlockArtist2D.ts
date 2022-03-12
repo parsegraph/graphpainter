@@ -4,7 +4,7 @@ import Artist, {
   NodeValues,
   WorldTransform,
   WorldRenderable,
-  paintNodeLines
+  paintNodeLines,
 } from "parsegraph-artist";
 import Block from "./Block";
 

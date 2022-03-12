@@ -4,7 +4,7 @@ import Artist, {
   WorldTransform,
   Transformed,
   NodeValues,
-  paintNodeLines
+  paintNodeLines,
 } from "parsegraph-artist";
 import log from "parsegraph-log";
 import { Renderable } from "parsegraph-timingbelt";
