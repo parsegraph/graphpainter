@@ -54,6 +54,7 @@
     "jest": "^27.5.1",
     "jsdom": "^19.0.0",
     "jsdom-global": "^3.0.2",
+    "parsegraph-blockpainter": "^1.6.6",
     "prettier": "^2.5.1",
     "raw-loader": "^4.0.2",
     "source-map-loader": "^3.0.1",
