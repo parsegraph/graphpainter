@@ -220,7 +220,7 @@ export default class PaintGroup implements Projected {
       projector.overlay().save();
     }
     try {
-      if (projector.hasOverlay()) {
+      if (camera && projector.hasOverlay()) {
         const overlay = projector.overlay();
         overlay.scale(camera.scale(), camera.scale());
         overlay.translate(
@@ -230,15 +230,14 @@ export default class PaintGroup implements Projected {
         overlay.scale(layout.absoluteScale(), layout.absoluteScale());
       }
 
-      const worldTransform = new WorldTransform(
+      this.renderDirect(projector, camera ? new WorldTransform(
         this.worldMatrix(),
         this.worldScale(),
         camera.width(),
         camera.height(),
         camera.x() + layout.absoluteX(),
         camera.y() + layout.absoluteY()
-      );
-      this.renderDirect(projector, worldTransform);
+      ) : null);
     } finally {
       if (projector.hasOverlay()) {
         projector.overlay().restore();

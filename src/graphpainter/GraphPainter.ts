@@ -32,7 +32,7 @@ export default class GraphPainter implements Projected {
   _camera: Camera;
   _onScheduleUpdate: Method;
 
-  constructor(root: PaintedNode, cam: Camera) {
+  constructor(root: PaintedNode, cam: Camera = null) {
     logEnter("Constructing GraphPainter");
     this._root = root;
     this._commitLayoutFunc = null;
@@ -192,6 +192,10 @@ export default class GraphPainter implements Projected {
 
   camera(): Camera {
     return this._camera;
+  }
+
+  setCamera(cam: Camera) {
+    this._camera = cam;
   }
 
   render(projector: Projector): boolean {
