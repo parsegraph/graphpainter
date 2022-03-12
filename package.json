@@ -64,5 +64,9 @@
     "webpack": "^5.70.0",
     "webpack-cli": "^4.9.2"
   },
-  "peerDependencies": {}
+  "peerDependencies": {
+    "parsegraph-checkglerror": "^1.5.3",
+    "parsegraph-log": "^1.7.3",
+    "webgl-debug": "^2.0.1"
+  }
 }
