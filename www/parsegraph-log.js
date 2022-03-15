@@ -1,1 +1,1 @@
-../node_modules/parsegraph-log/dist/parsegraph-log.js
+../node_modules/parsegraph-log/dist/src/index.js
