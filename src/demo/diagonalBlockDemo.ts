@@ -7,7 +7,7 @@ import { Projection, BasicProjector, Projector } from "parsegraph-projector";
 import Direction, { DirectionNode } from "parsegraph-direction";
 
 import Viewport from "../Viewport";
-import Block from "./Block";
+import Block, { style } from "parsegraph-block";
 import { Renderable } from "parsegraph-timingbelt";
 import Method from "parsegraph-method";
 
@@ -82,9 +82,12 @@ const diagonalBlockDemo = (artistFunc: () => Artist<Block>) => {
   const makeBlock = (color: Color, borderColor: Color) => {
     const node: DirectionNode<Block> = new DirectionNode();
     const artist = artistFunc();
-    const b = new Block(color, borderColor, node, artist);
+    const blockStyle = style("b");
+    blockStyle.backgroundcolor = color;
+    blockStyle.borderColor = borderColor;
+    const b = new Block(node, blockStyle, artist);
     if (comp) {
-      b.setOnScheduleUpdate(comp);
+      b.setOnScheduleUpdate(() => comp.scheduleUpdate());
     }
     node.setValue(b);
     return node;
@@ -94,7 +97,7 @@ const diagonalBlockDemo = (artistFunc: () => Artist<Block>) => {
 
   const root = makeBlock(new Color(1, 1, 1), new Color(0.5, 0.5, 0.5, 0.5));
   const comp = new Viewport(root);
-  root.value().setOnScheduleUpdate(comp);
+  root.value().setOnScheduleUpdate(() => comp.scheduleUpdate());
   // const freezer = new Freezer();
   // root.value().getCache().freeze(freezer);
 

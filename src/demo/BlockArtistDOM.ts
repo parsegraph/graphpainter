@@ -84,7 +84,8 @@ class BlockSceneDOM implements Renderable, Transformed {
   paint() {
     let currentLine = 0;
     let currentElem = 0;
-    this.subgroup().forEach((block) => {
+    this.subgroup().forEach((node) => {
+      const block = node.value();
       const layout = block.getLayout();
       const borderThickness = block.borderThickness();
 
@@ -102,7 +103,7 @@ class BlockSceneDOM implements Renderable, Transformed {
             this.sceneRoot().appendChild(line);
           }
           const line = this._lines[currentLine++];
-          line.style.backgroundColor = block.borderColor().asRGBA();
+          line.style.backgroundColor = block.blockStyle().borderColor.asRGBA();
           line.style.transform = `translate(${x - w / 2}px, ${y - h / 2}px)`;
           line.style.width = w + "px";
           line.style.height = h + "px";
@@ -122,10 +123,14 @@ class BlockSceneDOM implements Renderable, Transformed {
         "px solid " +
         (block.focused()
           ? "#fff"
-          : block.borderColor().premultiply(block.color()).asRGBA());
+          : block
+              .blockStyle()
+              .borderColor()
+              .premultiply(block.blockStyle().backgroundColor)
+              .asRGBA());
       elem.style.borderRadius =
-        (2 + block.borderRoundness()) * layout.groupScale() + "px";
-      elem.style.backgroundColor = block.color().asRGBA();
+        (2 + block.blockStyle().borderRoundness()) * layout.groupScale() + "px";
+      elem.style.backgroundColor = block.blockStyle().backgroundColor.asRGBA();
 
       const size = block.size();
       const width = size.width() - 2 * borderThickness;

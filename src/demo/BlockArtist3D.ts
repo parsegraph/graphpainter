@@ -89,16 +89,17 @@ class BlockScene3D implements WorldRenderable {
 
   paint(): boolean {
     if (!this.hasCount()) {
-      this._blocks.forEach((block) => {
+      this._blocks.forEach((n) => {
         this.countBlock();
-        paintNodeLines(block.node(), 1, () => {
+        paintNodeLines(n, 1, () => {
           this.countBlock();
         });
       });
       this._blockPainter.initBuffer(this.blockCount());
     }
 
-    this._blocks.forEach((block: Block) => {
+    this._blocks.forEach((n) => {
+      const block = n.value();
       const layout = block.getLayout();
       log("Painting BLOCK at ({0}, {1})", layout.groupX(), layout.groupY());
       const painter = this.getBlockPainter();
@@ -114,16 +115,18 @@ class BlockScene3D implements WorldRenderable {
       painter.setBorderColor(
         block.focused()
           ? new Color(1, 1, 1, 1)
-          : block.borderColor().premultiply(block.color())
+          : block
+              .blockStyle()
+              .borderColor.premultiply(block.blockStyle().backgroundColor)
       );
-      painter.setBackgroundColor(block.color());
+      painter.setBackgroundColor(block.blockStyle().backgroundColor);
       painter.drawBlock(
         layout.groupX(),
         layout.groupY(),
         layout.size().width(),
         layout.size().height(),
-        2.5 * block.borderRoundness(),
-        2 * block.borderThickness()
+        2.5 * block.blockStyle().borderRoundness,
+        2 * block.blockStyle().borderThickness
       );
     });
     return false;

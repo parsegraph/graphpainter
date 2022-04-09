@@ -4955,6 +4955,26 @@ parsegraph-artist@^3.1.0:
     parsegraph-timing "^1.4.16"
     parsegraph-timingbelt "^1.7.11"
 
+parsegraph-block@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/parsegraph-block/-/parsegraph-block-4.1.0.tgz#0a0283d81d85e1109b44aac78e1fb1077995281b"
+  integrity sha512-mcfecwIEsdKhVodnFV4FkFR3k8CR1IBaFV5s/K+49yWzsDfH+IWBP5vhZkbYa1KhYDngrX0DkdbIdzEIFKAR6w==
+  dependencies:
+    parsegraph-artist "^3.1.0"
+    parsegraph-blockpainter "^1.6.6"
+    parsegraph-color "^1.4.7"
+    parsegraph-direction "^2.0.10"
+    parsegraph-font "^1.7.3"
+    parsegraph-interact "^1.6.5"
+    parsegraph-layout "^1.8.0"
+    parsegraph-matrix "^1.4.11"
+    parsegraph-method "^1.4.22"
+    parsegraph-projector "^1.10.0"
+    parsegraph-rect "^1.4.7"
+    parsegraph-size "^1.7.0"
+    parsegraph-timing "^1.4.16"
+    parsegraph-timingbelt "^1.7.11"
+
 parsegraph-blockpainter@^1.6.6:
   version "1.6.6"
   resolved "https://registry.yarnpkg.com/parsegraph-blockpainter/-/parsegraph-blockpainter-1.6.6.tgz#37555233b43d587f6b65fd9db19a059bbbcff192"
@@ -5007,6 +5027,37 @@ parsegraph-extent@^1.4.11:
   dependencies:
     parsegraph-fuzzyequals "^1.4.9"
     parsegraph-gettimeinmillis "^1.4.6"
+
+parsegraph-font@^1.7.3:
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/parsegraph-font/-/parsegraph-font-1.7.3.tgz#7c55608700ffa2d9e41c48f03ec5f326df0b2add"
+  integrity sha512-6XkzPzsMCHI8QzMfxwZ9uDYvoQ54bxUC/cR8xl9fh2c/zwsnKPZ+u6QVW7cFVbSvvL5dkzijSJSs5u4YGilU+A==
+  dependencies:
+    "@babel/cli" "^7.12.10"
+    "@babel/core" "^7.12.10"
+    "@babel/plugin-proposal-class-properties" "^7.10.4"
+    "@babel/plugin-proposal-private-property-in-object" "^7.16.0"
+    "@babel/preset-env" "^7.12.11"
+    "@babel/preset-typescript" "^7.10.4"
+    "@babel/register" "^7.12.10"
+    "@typescript-eslint/eslint-plugin" "^4.11.0"
+    "@typescript-eslint/parser" "^4.11.0"
+    babel-loader "^8.1.0"
+    eslint "^7.16.0"
+    eslint-config-google "^0.14.0"
+    eslint-config-prettier "^7.1.0"
+    jsdom "16.4.0"
+    jsdom-global "3.0.2"
+    node-canvas-webgl "^0.2.6"
+    prettier "2.1.2"
+    raw-loader "^4.0.1"
+    source-map-loader "^1.0.2"
+    source-map-support "^0.5.19"
+    ts-loader "^9.2.5"
+    ts-node "^9.1.1"
+    typescript "^4.1.3"
+    webpack "^5.52.0"
+    webpack-cli "^4.8.0"
 
 parsegraph-fuzzyequals@^1.4.9:
   version "1.4.9"
@@ -5113,6 +5164,18 @@ parsegraph-normalizewheel@^1.4.7:
   resolved "https://registry.yarnpkg.com/parsegraph-normalizewheel/-/parsegraph-normalizewheel-1.4.7.tgz#a7643a28597a0b275e3d4bfe15c7eb60372b915f"
   integrity sha512-F0nTb+hZVBAZ4d8W+GZ281DDl4Br1U62fHj2oW5xxKfr1E9u/b9K4243FSYNG0XfzZzhjYoSIjUwM4ew3KMPZw==
 
+parsegraph-projector@^1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/parsegraph-projector/-/parsegraph-projector-1.10.0.tgz#f9455a2805eee237cb8491608607962a218254b4"
+  integrity sha512-s14e+dTzlxuiLrZmOKpTwcM7N6IPZPV/9i8G/LcsH4czENm9Scg7dB0uWLnbIP3SRDJmE/PpAdaFvwYLslFyuQ==
+  dependencies:
+    parsegraph-compileprogram "^2.2.9"
+    parsegraph-matrix "^1.4.11"
+    parsegraph-method "^1.4.10"
+    parsegraph-rect "^1.4.7"
+    parsegraph-timing "^1.4.16"
+    parsegraph-timingbelt "^1.7.11"
+
 parsegraph-projector@^1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/parsegraph-projector/-/parsegraph-projector-1.9.0.tgz#01d78b5415f8e77accf78d171266cdaa3d1f96fa"
@@ -5154,6 +5217,11 @@ parsegraph-size@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/parsegraph-size/-/parsegraph-size-1.6.0.tgz#ccfd7c22756756c59d16d0123a0034c2a13c3ce1"
   integrity sha512-fvV5ejIPN3Eb2tlwg8UsuxuEGjhLYuYFCuSvKsx9APkXmTnCuq0pFy/e30NdkWXV0Wt3X+Ai6/ecJFg9Ksv31Q==
+
+parsegraph-size@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/parsegraph-size/-/parsegraph-size-1.7.0.tgz#5bfdf8043e84033095ccd2622c1e0205c988e5ec"
+  integrity sha512-G290b8tbUKfUqXNyMGm+p/WG6ZeJGAmMsD7Z5D7brHuZw70cJVr7d3Pgkd95G3GnHtBb/QZbgYC5mXEC3k984w==
 
 parsegraph-timing@^1.4.16:
   version "1.4.16"

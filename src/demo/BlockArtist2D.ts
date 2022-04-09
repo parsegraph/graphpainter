@@ -6,7 +6,7 @@ import Artist, {
   WorldRenderable,
   paintNodeLines,
 } from "parsegraph-artist";
-import Block from "./Block";
+import Block from "parsegraph-block";
 
 class BlockScene2D implements WorldRenderable {
   _projector: Projector;
@@ -76,10 +76,10 @@ class BlockScene2D implements WorldRenderable {
   protected renderBlock(val: Block) {
     const layout = val.getLayout();
     const ctx = this.projector().overlay();
-    const color = val.color();
+    const color = val.blockStyle().backgroundColor;
     const size = val.size();
-    const borderRoundness = val.borderRoundness();
-    const borderThickness = val.borderThickness();
+    const borderRoundness = val.blockStyle().borderRoundness;
+    const borderThickness = val.blockStyle().borderThickness;
 
     ctx.scale(layout.groupScale(), layout.groupScale());
 
@@ -87,8 +87,8 @@ class BlockScene2D implements WorldRenderable {
       val.node(),
       val.borderThickness(),
       (x: number, y: number, w: number, h: number) => {
-        ctx.strokeStyle = val.borderColor().asRGBA();
-        ctx.fillStyle = val.borderColor().asRGBA();
+        ctx.strokeStyle = val.blockStyle().borderColor.asRGBA();
+        ctx.fillStyle = val.blockStyle().borderColor.asRGBA();
         ctx.fillRect(x - w / 2, y - h / 2, w, h);
       }
     );
@@ -105,7 +105,7 @@ class BlockScene2D implements WorldRenderable {
     ctx.fill();
     ctx.strokeStyle = val.focused()
       ? "#fff"
-      : val.borderColor().premultiply(color).asRGBA();
+      : val.blockStyle().borderColor.premultiply(color).asRGBA();
     ctx.lineWidth = borderThickness * layout.groupScale();
     this.strokeRoundedRect(
       ctx,
@@ -119,7 +119,7 @@ class BlockScene2D implements WorldRenderable {
   }
 
   render() {
-    this.blocks().forEach((block: Block) => this.renderBlock(block));
+    this.blocks().forEach((n) => this.renderBlock(n.value()));
     return false;
   }
 
