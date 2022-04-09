@@ -16,7 +16,7 @@
   "homepage": "https://github.com/parsegraph/graphpainter#readme",
   "dependencies": {
     "parsegraph-artist": "^3.1.0",
-    "parsegraph-block": "^4.1.0",
+    "parsegraph-block": "^4.2.0",
     "parsegraph-blockpainter": "^1.6.6",
     "parsegraph-camera": "^1.4.11",
     "parsegraph-color": "^1.4.7",
@@ -27,7 +27,7 @@
     "parsegraph-layout": "^1.8.0",
     "parsegraph-matrix": "^1.4.11",
     "parsegraph-method": "^1.4.22",
-    "parsegraph-projector": "^1.9.0",
+    "parsegraph-projector": "^1.10.0",
     "parsegraph-rect": "^1.4.7",
     "parsegraph-showincamera": "^1.6.9",
     "parsegraph-size": "^1.5.8",

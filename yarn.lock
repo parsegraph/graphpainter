@@ -5011,10 +5011,10 @@ parsegraph-artist@^3.1.0:
     parsegraph-timing "^1.4.16"
     parsegraph-timingbelt "^1.7.11"
 
-parsegraph-block@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/parsegraph-block/-/parsegraph-block-4.1.0.tgz#0a0283d81d85e1109b44aac78e1fb1077995281b"
-  integrity sha512-mcfecwIEsdKhVodnFV4FkFR3k8CR1IBaFV5s/K+49yWzsDfH+IWBP5vhZkbYa1KhYDngrX0DkdbIdzEIFKAR6w==
+parsegraph-block@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/parsegraph-block/-/parsegraph-block-4.2.0.tgz#66b153427a2c5ee03f2a70ad389fa5e1a9bd16fc"
+  integrity sha512-/3Pal8ags/7TEVSxBs9UqqjilL35h8mCLkHS1H85QTVWGQYIw52C6S6cV37UemlmnEFWT1UbAMPjkSl9s9At4w==
   dependencies:
     parsegraph-artist "^3.1.0"
     parsegraph-blockpainter "^1.6.6"
