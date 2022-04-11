@@ -1,8 +1,10 @@
 import { Projector } from "parsegraph-projector";
 import Method from "parsegraph-method";
-import Artist, {
+import {
   WorldTransform,
-  Transformed,
+  Transformed
+} from 'parsegraph-scene';
+import Artist, {
   NodeValues,
   paintNodeLines,
 } from "parsegraph-artist";
@@ -125,11 +127,11 @@ class BlockSceneDOM implements Renderable, Transformed {
           ? "#fff"
           : block
               .blockStyle()
-              .borderColor()
+              .borderColor
               .premultiply(block.blockStyle().backgroundColor)
               .asRGBA());
       elem.style.borderRadius =
-        (2 + block.blockStyle().borderRoundness()) * layout.groupScale() + "px";
+        (2 + block.blockStyle().borderRoundness) * layout.groupScale() + "px";
       elem.style.backgroundColor = block.blockStyle().backgroundColor.asRGBA();
 
       const size = block.size();

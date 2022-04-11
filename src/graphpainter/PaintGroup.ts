@@ -14,7 +14,8 @@ import {
 import Rect from "parsegraph-rect";
 import NodeRenderData from "../NodeRenderData";
 import { Renderable } from "parsegraph-timingbelt";
-import { PaintedNode, WorldTransform, Pizza } from "parsegraph-artist";
+import { PaintedNode, Pizza } from "parsegraph-artist";
+import { WorldTransform } from 'parsegraph-scene';
 
 let CACHED_RENDERS: number = 0;
 let IMMEDIATE_RENDERS: number = 0;
@@ -80,7 +81,7 @@ export default class PaintGroup implements Projected {
       throw new Error("Node cannot be uncommitted when painting");
     }
 
-    if (this.hasPizza(projector)) {
+    if (!this.hasPizza(projector)) {
       const pizza = new Pizza(projector);
       pizza.setOnScheduleUpdate(this.scheduleUpdate, this);
       this._projections.set(projector, pizza);
