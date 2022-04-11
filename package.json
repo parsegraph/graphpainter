@@ -29,6 +29,7 @@
     "parsegraph-method": "^1.4.22",
     "parsegraph-projector": "^1.10.0",
     "parsegraph-rect": "^1.4.7",
+    "parsegraph-scene": "^2.2.1",
     "parsegraph-showincamera": "^1.7.0",
     "parsegraph-size": "^1.5.8",
     "parsegraph-timing": "^1.4.16",
