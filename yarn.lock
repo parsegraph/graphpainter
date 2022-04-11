@@ -4992,10 +4992,10 @@ parse5@6.0.1:
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-6.0.1.tgz#e1a1c085c569b3dc08321184f19a39cc27f7c30b"
   integrity sha512-Ofn/CTFzRGTTxwpNEs9PP93gXShHcTq255nzRYSKe8AkVpZY7e1fpmTfOyoIvjP5HG7Z2ZM7VS9PPhQGW2pOpw==
 
-parsegraph-artist@^3.3.1, parsegraph-artist@^3.3.3:
-  version "3.3.3"
-  resolved "https://registry.yarnpkg.com/parsegraph-artist/-/parsegraph-artist-3.3.3.tgz#48e68a6feb70aa96cb90c9da501f87d505e41ff8"
-  integrity sha512-KSKjaemSa11l3MSXr2u/3A+xtIQNbs+rBgtk5pjzjV8TiByDdZStVNsgbYYNJsC/OD+vaO2I0uMwq3TdLD6e0A==
+parsegraph-artist@^3.3.3, parsegraph-artist@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/parsegraph-artist/-/parsegraph-artist-3.4.0.tgz#89a82d56f836f4c595926a9b68922574dd72c583"
+  integrity sha512-OOUu6jq9xv46V6vNO0ckTNIl01/QL0KxLxdeibDujDtZ6fngCkNBolAt1NiIZFYch/YbQbxtG0R/j47SEb1vZg==
   dependencies:
     parsegraph-camera "^1.4.11"
     parsegraph-color "^1.4.7"
@@ -5012,15 +5012,16 @@ parsegraph-artist@^3.3.1, parsegraph-artist@^3.3.3:
     parsegraph-timing "^1.4.16"
     parsegraph-timingbelt "^1.7.11"
 
-parsegraph-block@^4.2.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/parsegraph-block/-/parsegraph-block-4.2.1.tgz#1c96ebe4c0a8b49cd3c7d419c2c5219583eb3b5c"
-  integrity sha512-Aq8CTEeFGTbuXu8HRTzkALZa6jSMYHte2o+UhX76Jlfkb5UqFvYBwl4ZKl0CdqhYFIDZee/O5hAVV2y1GPTqKQ==
+parsegraph-block@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/parsegraph-block/-/parsegraph-block-4.3.0.tgz#60c12d13794e357a32635d54dd5df23ebc0ef9dc"
+  integrity sha512-wYAz2yxU2GhiiKMxaJBODejrgBOjppiy9onNEZn33psbKGSmgU2EywQ8i9GTVllc9FwbkIPoYN6njxSn+qgu1Q==
   dependencies:
-    parsegraph-artist "^3.3.1"
+    parsegraph-artist "^3.3.3"
     parsegraph-blockpainter "^1.6.6"
+    parsegraph-camera "^1.4.11"
     parsegraph-color "^1.4.7"
-    parsegraph-direction "^2.0.10"
+    parsegraph-direction "^2.1.0"
     parsegraph-font "^1.7.3"
     parsegraph-interact "^1.6.5"
     parsegraph-layout "^1.8.0"
@@ -5028,6 +5029,8 @@ parsegraph-block@^4.2.1:
     parsegraph-method "^1.4.22"
     parsegraph-projector "^1.10.0"
     parsegraph-rect "^1.4.7"
+    parsegraph-scene "^2.2.1"
+    parsegraph-showincamera "^1.7.0"
     parsegraph-size "^1.7.0"
     parsegraph-timing "^1.4.16"
     parsegraph-timingbelt "^1.7.11"
