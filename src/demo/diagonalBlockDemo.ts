@@ -118,12 +118,16 @@ const diagonalBlockDemo = (artistFunc: () => Artist<Block>) => {
     belt.scheduleUpdate();
   });
 
+  const topElem = document.getElementById("demo");
+
   const projector = new BasicProjector();
-  document.getElementById("demo").appendChild(projector.container());
+  topElem.appendChild(projector.container());
+  projector.container().style.position = "absolute";
   const proj = new Projection(projector, comp);
   belt.addRenderable(proj);
   const debugOverlay = new DebugOverlay();
-  document.getElementById("demo").appendChild(debugOverlay.container());
+  topElem.appendChild(debugOverlay.container());
+  debugOverlay.container().style.position = "absolute";
   belt.addRenderable(debugOverlay);
 };
 
