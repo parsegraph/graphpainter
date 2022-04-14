@@ -60,7 +60,8 @@ class BlockSceneDOM implements Renderable, Transformed {
   }
 
   sceneRoot() {
-    if (!this._sceneRoot) {
+    if (!this._sceneRoot || this._sceneRoot.parentNode !== this.projector().getDOMContainer()) {
+      this.unmount();
       const rootContainer = this.projector().getDOMContainer();
       this._sceneRoot = document.createElement("div");
       this._sceneRoot.style.display = "none";
@@ -99,6 +100,10 @@ class BlockSceneDOM implements Renderable, Transformed {
             this.sceneRoot().appendChild(line);
           }
           const line = this._lines[currentLine++];
+          if (line.parentNode !== this.sceneRoot()) {
+            line.remove();
+            this.sceneRoot().appendChild(line);
+          }
           line.style.backgroundColor = block.blockStyle().borderColor.asRGBA();
           line.style.transform = `translate(${x - w / 2}px, ${y - h / 2}px)`;
           line.style.width = w + "px";
@@ -114,6 +119,10 @@ class BlockSceneDOM implements Renderable, Transformed {
         this.sceneRoot().appendChild(elem);
       }
       const elem = this._elems[currentElem++];
+      if (elem.parentNode !== this.sceneRoot()) {
+        elem.remove();
+        this.sceneRoot().appendChild(elem);
+      }
       elem.style.border =
         block.borderThickness() +
         "px solid " +
@@ -150,15 +159,12 @@ class BlockSceneDOM implements Renderable, Transformed {
   }
 
   render() {
-    if (!this._sceneRoot) {
-      return true;
-    }
-    this._sceneRoot.style.display = "block";
+    this.sceneRoot().style.display = "block";
 
     const cam = this._world;
     const translate = `translate(${cam.x()}px, ${cam.y()}px)`;
     const scale = `scale(${cam.scale()})`;
-    this._sceneRoot.style.transform = `${scale} ${translate}`;
+    this.sceneRoot().style.transform = `${scale} ${translate}`;
     return false;
   }
 }
