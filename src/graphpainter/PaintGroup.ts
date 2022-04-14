@@ -15,7 +15,7 @@ import Rect from "parsegraph-rect";
 import NodeRenderData from "../NodeRenderData";
 import { Renderable } from "parsegraph-timingbelt";
 import { PaintedNode, Pizza } from "parsegraph-artist";
-import { WorldTransform } from 'parsegraph-scene';
+import { WorldTransform } from "parsegraph-scene";
 
 let CACHED_RENDERS: number = 0;
 let IMMEDIATE_RENDERS: number = 0;

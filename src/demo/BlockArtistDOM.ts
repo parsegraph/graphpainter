@@ -121,8 +121,7 @@ class BlockSceneDOM implements Renderable, Transformed {
           ? "#fff"
           : block
               .blockStyle()
-              .borderColor
-              .premultiply(block.blockStyle().backgroundColor)
+              .borderColor.premultiply(block.blockStyle().backgroundColor)
               .asRGBA());
       elem.style.borderRadius =
         (2 + block.blockStyle().borderRoundness) * layout.groupScale() + "px";
