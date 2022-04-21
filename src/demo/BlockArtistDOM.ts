@@ -60,7 +60,10 @@ class BlockSceneDOM implements Renderable, Transformed {
   }
 
   sceneRoot() {
-    if (!this._sceneRoot || this._sceneRoot.parentNode !== this.projector().getDOMContainer()) {
+    if (
+      !this._sceneRoot ||
+      this._sceneRoot.parentNode !== this.projector().getDOMContainer()
+    ) {
       this.unmount();
       const rootContainer = this.projector().getDOMContainer();
       this._sceneRoot = document.createElement("div");

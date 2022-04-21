@@ -1,14 +1,8 @@
 import { Projector } from "parsegraph-projector";
 import Method from "parsegraph-method";
-import Artist, {
-  NodeValues,
-  paintNodeLines,
-} from "parsegraph-artist";
+import Artist, { NodeValues, paintNodeLines } from "parsegraph-artist";
 import Block from "parsegraph-block";
-import {
-  WorldTransform,
-  WorldRenderable,
-} from "parsegraph-scene";
+import { WorldTransform, WorldRenderable } from "parsegraph-scene";
 
 class BlockScene2D implements WorldRenderable {
   _projector: Projector;
