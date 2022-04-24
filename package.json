@@ -15,10 +15,10 @@
   },
   "homepage": "https://github.com/parsegraph/graphpainter#readme",
   "dependencies": {
-    "parsegraph-artist": "^3.4.3",
+    "parsegraph-artist": "^3.4.5",
     "parsegraph-block": "^4.3.3",
-    "parsegraph-blockpainter": "^1.6.9",
-    "parsegraph-camera": "^1.4.13",
+    "parsegraph-blockpainter": "^1.6.10",
+    "parsegraph-camera": "^1.4.14",
     "parsegraph-color": "^1.4.7",
     "parsegraph-compileprogram": "^2.2.9",
     "parsegraph-direction": "^2.1.0",
