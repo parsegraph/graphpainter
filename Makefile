@@ -7,6 +7,7 @@ SCRIPT_FILES = \
 	src/demo/block3d.ts \
 	src/demo/blockrandom.ts \
 	src/demo/blockdom.ts \
+	src/demo/Viewport.ts \
 	src/demo/BlockArtist3D.ts \
 	src/demo/block2d.ts \
 	src/demo/BlockArtistDOM.ts \
@@ -14,7 +15,6 @@ SCRIPT_FILES = \
 	src/graphpainter/GraphPainterAnalytics.ts \
 	src/graphpainter/PaintGroup.ts \
 	src/graphpainter/GraphPainter.ts \
-	src/Viewport.ts \
 	src/NodeRenderData.ts \
 	src/demo.ts \
 	test/test.ts
