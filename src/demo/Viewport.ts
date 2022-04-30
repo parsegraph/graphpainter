@@ -5,7 +5,7 @@ import { PaintedNode } from "parsegraph-artist";
 import { makeInverse3x3, matrixTransform2D } from "parsegraph-matrix";
 import Camera from "parsegraph-camera";
 
-import GraphPainter from "./graphpainter/GraphPainter";
+import GraphPainter from "../graphpainter/GraphPainter";
 
 import { Projector, Projected } from "parsegraph-projector";
 import Input from "parsegraph-input";
