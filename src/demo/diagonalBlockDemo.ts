@@ -6,7 +6,7 @@ import TimingBelt from "parsegraph-timingbelt";
 import { Projection, BasicProjector, Projector } from "parsegraph-projector";
 import Direction, { DirectionNode } from "parsegraph-direction";
 
-import Viewport from "./Viewport";
+import Viewport from "../Viewport";
 import Block, { style } from "parsegraph-block";
 import { Renderable } from "parsegraph-timingbelt";
 import Method from "parsegraph-method";
