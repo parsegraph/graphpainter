@@ -4152,18 +4152,6 @@ parsegraph-projector@^1.13.10:
     parsegraph-timing "^1.4.16"
     parsegraph-timingbelt "^1.7.11"
 
-parsegraph-projector@^1.13.9:
-  version "1.13.9"
-  resolved "https://registry.yarnpkg.com/parsegraph-projector/-/parsegraph-projector-1.13.9.tgz#e4d5d6da909113c9f9e7228b82877240607f848c"
-  integrity sha512-hlsg6ykvzXuhy8yML8udvZHJfpi4AY1qEx+DZ2Fzsn2qzFXSwX/ctHZCvBvbbVYYljNFcAWx0hav+T5vYlhr5Q==
-  dependencies:
-    parsegraph-compileprogram "^2.2.15"
-    parsegraph-matrix "^1.4.12"
-    parsegraph-method "^1.4.10"
-    parsegraph-rect "^1.5.1"
-    parsegraph-timing "^1.4.16"
-    parsegraph-timingbelt "^1.7.11"
-
 parsegraph-projector@^1.14.0:
   version "1.14.0"
   resolved "https://registry.yarnpkg.com/parsegraph-projector/-/parsegraph-projector-1.14.0.tgz#164a71ea48d70e728ec904d406c78571a8983328"
@@ -4180,20 +4168,7 @@ parsegraph-rect@^1.5.1:
   resolved "https://registry.yarnpkg.com/parsegraph-rect/-/parsegraph-rect-1.5.1.tgz#ee95591098bacc34284f04969a73f5b851ddfdb4"
   integrity sha512-ScHgiKnEpvOKVbc0aIn0mMJSZoqCGkak1Nlud9oezvHLDsVsMcHUO6KzPiN1DNfLaqQGn+mNBvSf0B04OeFIYw==
 
-parsegraph-scene@^2.2.18:
-  version "2.2.18"
-  resolved "https://registry.yarnpkg.com/parsegraph-scene/-/parsegraph-scene-2.2.18.tgz#f571dea1987651067978d412a893b77e81438d63"
-  integrity sha512-GQP9RrbrOSIn3EPLztyFegYhKGyKRgBbYRaO41M9r4wX4gW+eAC4aXvEehpx0ci1J4bs+pmvnCWeN8z6I8UW8g==
-  dependencies:
-    parsegraph-camera "^1.4.18"
-    parsegraph-layout "^1.13.6"
-    parsegraph-matrix "^1.4.12"
-    parsegraph-method "^1.4.22"
-    parsegraph-projector "^1.13.9"
-    parsegraph-timing "^1.4.16"
-    parsegraph-timingbelt "^1.7.11"
-
-parsegraph-scene@^2.2.20:
+parsegraph-scene@^2.2.18, parsegraph-scene@^2.2.20:
   version "2.2.20"
   resolved "https://registry.yarnpkg.com/parsegraph-scene/-/parsegraph-scene-2.2.20.tgz#e79e7d737d463f37fd14ab090c7709631a321875"
   integrity sha512-0JjSRyGVPdyPCwU/HBhUq5hMU1iWo6nuxHPRB6iaC4gMxFVY05e66WcH4bNfBWGRRXAtCMjw648Nh9T/DQZpWg==
