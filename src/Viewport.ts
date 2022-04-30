@@ -5,12 +5,12 @@ import { PaintedNode } from "parsegraph-artist";
 import { makeInverse3x3, matrixTransform2D } from "parsegraph-matrix";
 import Camera from "parsegraph-camera";
 
-import GraphPainter from "../graphpainter/GraphPainter";
-
 import { Projector, Projected } from "parsegraph-projector";
 import { showInCamera } from "parsegraph-showincamera";
 import Color from "parsegraph-color";
 import { BasicMouseController, MouseInput } from "parsegraph-input";
+
+import GraphPainter from "./graphpainter/GraphPainter";
 
 export default class Viewport
   extends BasicMouseController
