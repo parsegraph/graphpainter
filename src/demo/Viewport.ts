@@ -1,4 +1,4 @@
-import log, { logc } from "parsegraph-log";
+import log from "parsegraph-log";
 import Method from "parsegraph-method";
 
 import { PaintedNode } from "parsegraph-artist";
@@ -8,17 +8,17 @@ import Camera from "parsegraph-camera";
 import GraphPainter from "../graphpainter/GraphPainter";
 
 import { Projector, Projected } from "parsegraph-projector";
-import Input from "parsegraph-input";
 import { showInCamera } from "parsegraph-showincamera";
 import Color from "parsegraph-color";
+import {BasicMouseController, MouseInput} from "parsegraph-input";
 
-export default class Viewport implements Projected {
+export default class Viewport extends BasicMouseController implements Projected {
   _camera: Camera;
   _needsRender: boolean;
   _needsRepaint: boolean;
   _root: PaintedNode;
   _painter: GraphPainter;
-  _inputs: Map<Projector, Input>;
+  _inputs: Map<Projector, MouseInput>;
   _onScheduleUpdate: Method;
   _focusedNode: PaintedNode;
   _backgroundColor: Color;
@@ -27,6 +27,7 @@ export default class Viewport implements Projected {
     root: PaintedNode,
     backgroundColor: Color = new Color(0, 0, 0, 1)
   ) {
+    super();
     this._root = root;
     this._backgroundColor = backgroundColor;
     this._camera = new Camera();
@@ -56,20 +57,10 @@ export default class Viewport implements Projected {
 
   paint(projector: Projector, timeout?: number): boolean {
     if (!this._inputs.has(projector)) {
-      this._inputs.set(
-        projector,
-        new Input(
-          projector.glProvider().container(),
-          projector.glProvider().container(),
-          (eventType: string, inputData?: any) => {
-            if (this.handleEvent(eventType, inputData)) {
-              this.scheduleRepaint();
-              return true;
-            }
-            return false;
-          }
-        )
-      );
+      const input = new MouseInput();
+      input.setControl(this);
+      input.mount(projector.glProvider().container());
+      this._inputs.set(projector, input);
     }
     if (!this.needsRepaint()) {
       // console.log("No need to paint; viewport is not dirty");
@@ -176,41 +167,34 @@ export default class Viewport implements Projected {
     return needsUpdate;
   }
 
-  handleEvent(eventType: string, event?: any): boolean {
-    logc("Input events", eventType, event);
-    switch (eventType) {
-      case "mousemove":
-        const mouseInWorld = matrixTransform2D(
-          makeInverse3x3(this.camera().worldMatrix()),
-          event.x,
-          event.y
-        );
-        const node: PaintedNode = this.root()
-          .value()
-          .getLayout()
-          .nodeUnderCoords(mouseInWorld[0], mouseInWorld[1]) as PaintedNode;
-        if (node === this._focusedNode) {
-          return true;
-        }
-        if (this._focusedNode) {
-          this._focusedNode.value().interact().blur();
-        }
-        this._focusedNode = node;
-        if (this._focusedNode) {
-          this._focusedNode.value().interact().focus();
-        }
-        log("" + node);
-        return true;
+  mousemove(x: number, y:number): void {
+    super.mousemove(x, y);
+    const mouseInWorld = matrixTransform2D(
+      makeInverse3x3(this.camera().worldMatrix()), x, y
+    );
+    const node: PaintedNode = this.root()
+      .value()
+      .getLayout()
+      .nodeUnderCoords(mouseInWorld[0], mouseInWorld[1]) as PaintedNode;
+    if (node === this._focusedNode) {
+      return;
     }
-    return false;
+    if (this._focusedNode) {
+      this._focusedNode.value().interact().blur();
+    }
+    this._focusedNode = node;
+    if (this._focusedNode) {
+      this._focusedNode.value().interact().focus();
+    }
+    log("" + node);
   }
 
   unmount(projector: Projector): void {
     if (!this._inputs.has(projector)) {
       return;
     }
-    // const input = this._inputs.get(projector);
-    // input.unmount();
+    const input = this._inputs.get(projector);
+    input.unmount();
     this._inputs.delete(projector);
   }
 
