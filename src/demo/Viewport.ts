@@ -10,9 +10,12 @@ import GraphPainter from "../graphpainter/GraphPainter";
 import { Projector, Projected } from "parsegraph-projector";
 import { showInCamera } from "parsegraph-showincamera";
 import Color from "parsegraph-color";
-import {BasicMouseController, MouseInput} from "parsegraph-input";
+import { BasicMouseController, MouseInput } from "parsegraph-input";
 
-export default class Viewport extends BasicMouseController implements Projected {
+export default class Viewport
+  extends BasicMouseController
+  implements Projected
+{
   _camera: Camera;
   _needsRender: boolean;
   _needsRepaint: boolean;
@@ -167,10 +170,12 @@ export default class Viewport extends BasicMouseController implements Projected 
     return needsUpdate;
   }
 
-  mousemove(x: number, y:number): void {
+  mousemove(x: number, y: number): void {
     super.mousemove(x, y);
     const mouseInWorld = matrixTransform2D(
-      makeInverse3x3(this.camera().worldMatrix()), x, y
+      makeInverse3x3(this.camera().worldMatrix()),
+      x,
+      y
     );
     const node: PaintedNode = this.root()
       .value()
@@ -185,6 +190,7 @@ export default class Viewport extends BasicMouseController implements Projected 
     this._focusedNode = node;
     if (this._focusedNode) {
       this._focusedNode.value().interact().focus();
+      this.scheduleRepaint();
     }
     log("" + node);
   }
