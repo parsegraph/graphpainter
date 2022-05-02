@@ -1,4 +1,4 @@
-import BlockPainter, { BlockType } from "parsegraph-blockpainter";
+import { WebGLBlockPainter, BlockType } from "parsegraph-blockpainter";
 import { Projector } from "parsegraph-projector";
 import Method from "parsegraph-method";
 import { WorldTransform, WorldRenderable } from "parsegraph-scene";
@@ -8,7 +8,7 @@ import log from "parsegraph-log";
 import Block from "parsegraph-block";
 
 class BlockScene3D implements WorldRenderable {
-  _blockPainter: BlockPainter;
+  _blockPainter: WebGLBlockPainter;
   _projector: Projector;
   _world: WorldTransform;
   _onScheduleUpdate: Method;
@@ -21,7 +21,7 @@ class BlockScene3D implements WorldRenderable {
     this._blocks = blocks;
     this._world = null;
     this._onScheduleUpdate = new Method();
-    this._blockPainter = new BlockPainter(
+    this._blockPainter = new WebGLBlockPainter(
       projector.glProvider(),
       BlockType.ROUNDED
     );
