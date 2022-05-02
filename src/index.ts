@@ -6,4 +6,10 @@ import PaintGroup from "./graphpainter/PaintGroup";
 
 import Viewport from "./Viewport";
 
-export { NodeRenderData, GraphPainterAnalytics, GraphPainter, PaintGroup, Viewport };
+export {
+  NodeRenderData,
+  GraphPainterAnalytics,
+  GraphPainter,
+  PaintGroup,
+  Viewport,
+};
