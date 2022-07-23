@@ -3914,10 +3914,10 @@ parsegraph-artist@^3.4.26:
     parsegraph-timing "^1.4.16"
     parsegraph-timingbelt "^1.7.11"
 
-parsegraph-block@^4.4.18:
-  version "4.4.18"
-  resolved "https://registry.yarnpkg.com/parsegraph-block/-/parsegraph-block-4.4.18.tgz#51ab399c155cf8f7a44bf539e6abf43ff12f1403"
-  integrity sha512-QzbANaRfbDNCm/M8vP51HcawkMBwjnYb+/tX6bpK3dEtYnrY/RD4TBuvf2RIg929aI5+t3z4U6/DHjGADmNbvQ==
+parsegraph-block@^4.4.19:
+  version "4.4.19"
+  resolved "https://registry.yarnpkg.com/parsegraph-block/-/parsegraph-block-4.4.19.tgz#afdf666115292b9176f4bb8ea9b3fb9ab10db096"
+  integrity sha512-GXILdlhxecJ3ZEuYo2id4AN0Y+8ik7yAZT2RFZDHMMTijzcKeo7KefHzCa9uxV31C4tygcn9el99aGdM3YNwZQ==
   dependencies:
     parsegraph-artist "^3.4.26"
     parsegraph-blockpainter "^1.7.1"
