@@ -1,6 +1,6 @@
 {
   "name": "parsegraph-graphpainter",
-  "version": "2.5.9",
+  "version": "2.5.10",
   "description": "graphpainter",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -37,6 +37,8 @@
     "jest-environment-jsdom": "^28.1.3",
     "jsdom": "^20.0.0",
     "jsdom-global": "^3.0.2",
+    "parsegraph-checkglerror": "^1.5.3",
+    "parsegraph-log": "^1.7.3",
     "prettier": "^2.7.1",
     "raw-loader": "^4.0.2",
     "source-map-loader": "^4.0.0",
@@ -53,20 +55,6 @@
     "parsegraph-log": "^1.7.3"
   },
   "dependencies": {
-    "parsegraph-artist": "^3.4.26",
-    "parsegraph-block": "^4.4.19",
-    "parsegraph-blockpainter": "^1.7.1",
-    "parsegraph-camera": "^1.4.18",
-    "parsegraph-color": "^1.4.7",
-    "parsegraph-direction": "^2.1.0",
-    "parsegraph-input": "^2.0.6",
-    "parsegraph-matrix": "^1.4.12",
-    "parsegraph-method": "^1.4.22",
-    "parsegraph-projector": "^1.14.0",
-    "parsegraph-rect": "^1.5.1",
-    "parsegraph-scene": "^2.3.1",
-    "parsegraph-showincamera": "^1.7.4",
-    "parsegraph-timing": "^1.4.16",
-    "parsegraph-timingbelt": "^1.7.11"
+    "parsegraph-block": "^4.4.21"
   }
 }
