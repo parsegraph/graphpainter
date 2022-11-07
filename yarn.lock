@@ -3939,22 +3939,22 @@ parse5@^7.1.1:
   dependencies:
     entities "^4.4.0"
 
-parsegraph-artist@^3.4.30:
-  version "3.4.30"
-  resolved "https://registry.yarnpkg.com/parsegraph-artist/-/parsegraph-artist-3.4.30.tgz#7bab2d1eb18f758f7061220651b306e2d41a9ee8"
-  integrity sha512-8W0CkpJIwmLqfzbLY6Uzys0LprFRzFOO7dUclOoejLZTMtuxMnVJmcpMXBvI5RahCQfcIyqdmMTEE08MP/GWKw==
+parsegraph-artist@^3.4.31:
+  version "3.4.31"
+  resolved "https://registry.yarnpkg.com/parsegraph-artist/-/parsegraph-artist-3.4.31.tgz#538f90d6b9aaf33e7d77e265557bcab7be1ac1c0"
+  integrity sha512-xPVJi4Llfr5VnQlYLsGmIf6l8DUCEk6OjqN8zK0+YMWxklbMQrnCUnE69hoLp7DGFdooy4C8pODnfPNB2Zk6Sg==
   dependencies:
     parsegraph-color "^1.4.7"
     parsegraph-interact "^1.6.12"
     parsegraph-scene "^2.3.3"
     parsegraph-showincamera "^1.7.5"
 
-parsegraph-block@^4.4.22:
-  version "4.4.22"
-  resolved "https://registry.yarnpkg.com/parsegraph-block/-/parsegraph-block-4.4.22.tgz#6e83be7a584ea774dd989055bdec1501867a6314"
-  integrity sha512-bK7p07pYzNW6fxOMemB4sMXaaVwnCZ7eiLFK8FZ5rYEf4uGg0NHhtznjKMvtLEgTCzBkAQGo8LoS8uP8JiWwLA==
+parsegraph-block@^4.4.23:
+  version "4.4.23"
+  resolved "https://registry.yarnpkg.com/parsegraph-block/-/parsegraph-block-4.4.23.tgz#5271bcea562d02622a5aae44db6e3c656a535759"
+  integrity sha512-K1V5GIBaclKIai7BfzxmdbyEFVV4L18rBE3IIQtKC9irTRJ2o/otwuuXd5DMQQfhKbgAzuRC9N+1rde9zXRDvA==
   dependencies:
-    parsegraph-artist "^3.4.30"
+    parsegraph-artist "^3.4.31"
     parsegraph-blockpainter "^1.7.2"
     parsegraph-font "^1.7.4"
 

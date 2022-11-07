@@ -1,6 +1,6 @@
 {
   "name": "parsegraph-graphpainter",
-  "version": "2.5.11",
+  "version": "2.5.12",
   "description": "graphpainter",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -55,6 +55,6 @@
     "parsegraph-log": "^1.7.3"
   },
   "dependencies": {
-    "parsegraph-block": "^4.4.22"
+    "parsegraph-block": "^4.4.23"
   }
 }
