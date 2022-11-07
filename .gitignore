@@ -85,6 +85,7 @@ typings/
 .nuxt
 dist
 dist-types
+dist-prod
 
 # Gatsby files
 .cache/
