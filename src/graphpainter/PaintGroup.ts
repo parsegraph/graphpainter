@@ -3,6 +3,7 @@ import log from "parsegraph-log";
 import { Projector } from "parsegraph-projector";
 import { Projected } from "parsegraph-projector";
 import Method from "parsegraph-method";
+import { WorldLabels } from 'parsegraph-scene';
 
 import {
   makeScale3x3I,
@@ -27,11 +28,13 @@ export default class PaintGroup implements Projected {
   _projections: Map<Projector, Pizza>;
   _onScheduleUpdate: Method;
   _camera: Camera;
+  _labels: WorldLabels;
 
   constructor(root: PaintedNode) {
     this._root = root;
     this._projections = new Map();
     this._onScheduleUpdate = new Method();
+    this._labels = null;
   }
 
   allViews(cb: (slice: Renderable) => void): void {
@@ -118,6 +121,14 @@ export default class PaintGroup implements Projected {
 
   setCamera(cam: Camera) {
     this._camera = cam;
+  }
+
+  labels() {
+    return this._labels;
+  }
+
+  setLabels(labels: WorldLabels) {
+    this._labels = labels;
   }
 
   layout() {

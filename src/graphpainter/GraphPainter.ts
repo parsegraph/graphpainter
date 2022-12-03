@@ -40,6 +40,7 @@ export default class GraphPainter implements Projected {
     this._commitLayoutFunc = null;
     this._camera = cam;
     this._onScheduleUpdate = new Method();
+    this._worldLabels = new WorldLabels();
 
     this.clear();
     logLeave();
@@ -213,6 +214,10 @@ export default class GraphPainter implements Projected {
     this._camera = cam;
   }
 
+  labels(): WorldLabels {
+    return this._worldLabels;
+  }
+
   render(projector: Projector): boolean {
     if (!this.root()) {
       return false;
@@ -220,8 +225,10 @@ export default class GraphPainter implements Projected {
     const analytics = new GraphPainterAnalytics(projector);
     analytics.recordStart();
 
+    this._worldLabels.clear();
     this._paintGroups.forEach((pg) => {
       pg.setCamera(this.camera());
+      pg.setLabels(this.labels());
       const pizza = pg.pizzaFor(projector);
       if (pg.render(projector)) {
         analytics.recordDirtyRender();
@@ -230,6 +237,7 @@ export default class GraphPainter implements Projected {
         analytics.recordNumRenders(pizza.numRenders());
       }
     });
+    this._worldLabels.render(projector, this.camera().scale());
 
     analytics.recordCompletion();
     return analytics.isDirty();
