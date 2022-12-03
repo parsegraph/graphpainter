@@ -222,6 +222,8 @@ export default class GraphPainter implements Projected {
     if (!this.root()) {
       return false;
     }
+    const proj = projector;
+    proj.overlay().resetTransform();
     const analytics = new GraphPainterAnalytics(projector);
     analytics.recordStart();
 
@@ -237,7 +239,11 @@ export default class GraphPainter implements Projected {
         analytics.recordNumRenders(pizza.numRenders());
       }
     });
-    WorldTransform.fromCamera(this.root(), this.camera()).applyTransform(projector, this.root(), this.camera().scale());
+    const cam = this.camera();
+    proj.overlay().resetTransform();
+    proj.overlay().translate(cam.x(), cam.y());
+    proj.overlay().scale(cam.scale(), cam.scale());
+    proj.overlay().scale(this.root().value().getLayout().absoluteScale(), this.root().value().getLayout().absoluteScale());
     this.labels().render(projector, this.camera().scale());
 
     analytics.recordCompletion();
