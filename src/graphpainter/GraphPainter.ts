@@ -237,7 +237,7 @@ export default class GraphPainter implements Projected {
         analytics.recordNumRenders(pizza.numRenders());
       }
     });
-    WorldTransform.fromCamera(null, this.camera()).applyTransform(projector, null, this.camera().scale());
+    WorldTransform.fromCamera(this.root(), this.camera()).applyTransform(projector, this.root(), this.camera().scale());
     this.labels().render(projector, this.camera().scale());
 
     analytics.recordCompletion();
