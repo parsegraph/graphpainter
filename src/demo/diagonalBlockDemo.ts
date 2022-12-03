@@ -126,11 +126,11 @@ const diagonalBlockDemo = (artistFunc: () => Artist<Block>) => {
   projector.container().style.position = "absolute";
   const proj = new Projection(projector, comp);
   belt.addRenderable(proj);
-  /*const debugOverlay = new DebugOverlay();
+  const debugOverlay = new DebugOverlay();
   topElem.appendChild(debugOverlay.container());
   debugOverlay.container().style.position = "absolute";
   debugOverlay.container().style.pointerEvents = "none";
-  belt.addRenderable(debugOverlay);*/
+  belt.addRenderable(debugOverlay);
   setTimeout(()=>{
     showInCamera(comp.root(), comp.camera(), false);
   }, 0);
