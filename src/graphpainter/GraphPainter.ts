@@ -3,6 +3,7 @@ import GraphPainterAnalytics from "./GraphPainterAnalytics";
 
 import log, { logEnter, logEnterc, logLeave } from "parsegraph-log";
 import { PaintedNode } from "parsegraph-artist";
+import { WorldLabels } from 'parsegraph-scene';
 import { Projector, Projected } from "parsegraph-projector";
 import Method from "parsegraph-method";
 import PaintGroup from "./PaintGroup";
@@ -31,6 +32,7 @@ export default class GraphPainter implements Projected {
   _commitLayoutFunc: Function;
   _camera: Camera;
   _onScheduleUpdate: Method;
+  _worldLabels: WorldLabels;
 
   constructor(root: PaintedNode = null, cam: Camera = null) {
     logEnter("Constructing GraphPainter");
