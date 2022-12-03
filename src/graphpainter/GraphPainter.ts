@@ -3,7 +3,7 @@ import GraphPainterAnalytics from "./GraphPainterAnalytics";
 
 import log, { logEnter, logEnterc, logLeave } from "parsegraph-log";
 import { PaintedNode } from "parsegraph-artist";
-import { WorldLabels } from 'parsegraph-scene';
+import { WorldTransform, WorldLabels } from 'parsegraph-scene';
 import { Projector, Projected } from "parsegraph-projector";
 import Method from "parsegraph-method";
 import PaintGroup from "./PaintGroup";
@@ -225,7 +225,7 @@ export default class GraphPainter implements Projected {
     const analytics = new GraphPainterAnalytics(projector);
     analytics.recordStart();
 
-    this._worldLabels.clear();
+    this.labels().clear();
     this._paintGroups.forEach((pg) => {
       pg.setCamera(this.camera());
       pg.setLabels(this.labels());
@@ -237,7 +237,8 @@ export default class GraphPainter implements Projected {
         analytics.recordNumRenders(pizza.numRenders());
       }
     });
-    this._worldLabels.render(projector, this.camera().scale());
+    WorldTransform.fromCamera(null, this.camera()).applyTransform(projector, null, this.camera().scale());
+    this.labels().render(projector, this.camera().scale());
 
     analytics.recordCompletion();
     return analytics.isDirty();
