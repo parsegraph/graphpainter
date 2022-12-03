@@ -10,6 +10,7 @@ import Viewport from "../Viewport";
 import Block, { style } from "parsegraph-block";
 import { Renderable } from "parsegraph-timingbelt";
 import Method from "parsegraph-method";
+import { showInCamera } from "parsegraph-showincamera";
 
 // import Freezer from "../freezer/Freezer";
 
@@ -95,13 +96,13 @@ const diagonalBlockDemo = (artistFunc: () => Artist<Block>) => {
 
   const belt = new TimingBelt();
 
-  const root = makeBlock(new Color(1, 1, 1), new Color(0.5, 0.5, 0.5, 0.5));
-  const comp = new Viewport(root);
-  root.value().setOnScheduleUpdate(() => comp.scheduleUpdate());
+  const rootNode = makeBlock(new Color(1, 1, 1), new Color(0.5, 0.5, 0.5, 0.5));
+  const comp = new Viewport(rootNode);
+  rootNode.value().setOnScheduleUpdate(() => comp.scheduleUpdate());
   // const freezer = new Freezer();
   // root.value().getCache().freeze(freezer);
 
-  let n: PaintedNode = root;
+  let n: PaintedNode = rootNode;
   for (let i = 0; i < 10; ++i) {
     const child = makeBlock(
       new Color(1 - i / 10, 0, 0),
@@ -125,10 +126,45 @@ const diagonalBlockDemo = (artistFunc: () => Artist<Block>) => {
   projector.container().style.position = "absolute";
   const proj = new Projection(projector, comp);
   belt.addRenderable(proj);
-  const debugOverlay = new DebugOverlay();
+  /*const debugOverlay = new DebugOverlay();
   topElem.appendChild(debugOverlay.container());
   debugOverlay.container().style.position = "absolute";
-  belt.addRenderable(debugOverlay);
+  debugOverlay.container().style.pointerEvents = "none";
+  belt.addRenderable(debugOverlay);*/
+  setTimeout(()=>{
+    showInCamera(comp.root(), comp.camera(), false);
+  }, 0);
+
+
+  const root = projector.container();
+  root.tabIndex = 0;
+  let clicked = false;
+  root.addEventListener("mousedown", (e) => {
+    if (e.button === 0) {
+      clicked = true;
+    }
+  });
+  root.addEventListener("mousemove", (e) => {
+    if (!clicked) {
+      return;
+    }
+    const cam = comp.camera();
+    cam.adjustOrigin(e.movementX / cam.scale(), e.movementY / cam.scale());
+    comp.scheduleRepaint();
+    belt.scheduleUpdate();
+  });
+  root.addEventListener("mouseup", (e) => {
+    if (e.button === 0) {
+      clicked = false;
+    }
+  });
+  root.addEventListener("wheel", (e) => {
+    const zoomIn = (e as WheelEvent).deltaY < 0;
+    console.log(e);
+    comp.camera().zoomToPoint(zoomIn ? 1.1 : 0.9, e.clientX, e.clientY);
+    comp.scheduleRepaint();
+    belt.scheduleUpdate();
+  });
 };
 
 export default diagonalBlockDemo;

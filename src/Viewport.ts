@@ -6,7 +6,6 @@ import { makeInverse3x3, matrixTransform2D } from "parsegraph-matrix";
 import Camera from "parsegraph-camera";
 
 import { Projector, Projected } from "parsegraph-projector";
-import { showInCamera } from "parsegraph-showincamera";
 import Color from "parsegraph-color";
 import { BasicMouseController, MouseInput } from "parsegraph-input";
 
@@ -132,6 +131,7 @@ export default class Viewport
       const overlay = projector.overlay();
       overlay.textBaseline = "top";
       overlay.fillStyle = this.backgroundColor().asRGBA();
+      overlay.resetTransform();
       overlay.clearRect(0, 0, projector.width(), projector.height());
     }
     if (projector.hasDOMContainer()) {
@@ -155,8 +155,6 @@ export default class Viewport
       // console.log("Avoided render");
       return false;
     }
-
-    showInCamera(this.root(), cam, false);
 
     this.renderBackground(projector);
     const needsUpdate = this._painter.render(projector);
