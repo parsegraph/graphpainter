@@ -239,12 +239,17 @@ export default class GraphPainter implements Projected {
         analytics.recordNumRenders(pizza.numRenders());
       }
     });
-    const cam = this.camera();
+    const camera = this.camera();
     proj.overlay().resetTransform();
-    proj.overlay().scale(cam.scale(), cam.scale());
-    proj.overlay().translate(cam.x(), cam.y());
     const layout = this.root().value().getLayout();
-    proj.overlay().translate(layout.absoluteX(), layout.absoluteY());
+    const overlay = projector.overlay();
+    overlay.scale(camera.scale(), camera.scale());
+    overlay.translate(
+      camera.x() + layout.absoluteX(),
+      camera.y() + layout.absoluteY()
+    );
+    overlay.scale(layout.absoluteScale(), layout.absoluteScale());
+
     this.labels().render(projector, this.camera().scale());
 
     analytics.recordCompletion();
