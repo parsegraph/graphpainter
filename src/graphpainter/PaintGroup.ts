@@ -265,6 +265,7 @@ export default class PaintGroup implements Projected {
   }
 
   renderDirect(projector: Projector, world: WorldTransform): boolean {
+    world.setLabels(this.labels());
     let needsUpdate = false;
     const pizza = this.pizzaFor(projector);
     if (pizza) {
