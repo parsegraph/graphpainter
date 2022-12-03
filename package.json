@@ -1,6 +1,6 @@
 {
   "name": "parsegraph-graphpainter",
-  "version": "2.5.16",
+  "version": "2.5.17",
   "description": "graphpainter",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
