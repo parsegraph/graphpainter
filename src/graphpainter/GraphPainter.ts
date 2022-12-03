@@ -243,6 +243,7 @@ export default class GraphPainter implements Projected {
     proj.overlay().resetTransform();
     const layout = this.root().value().getLayout();
     const overlay = projector.overlay();
+    overlay.resetTransform();
     overlay.scale(camera.scale(), camera.scale());
     overlay.translate(
       camera.x() + layout.absoluteX(),
