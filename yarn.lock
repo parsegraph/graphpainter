@@ -3939,22 +3939,22 @@ parse5@^7.1.1:
   dependencies:
     entities "^4.4.0"
 
-parsegraph-artist@^3.4.40:
-  version "3.4.40"
-  resolved "https://registry.yarnpkg.com/parsegraph-artist/-/parsegraph-artist-3.4.40.tgz#c496ca555e50c73128adedba1ab3c906ea481cfd"
-  integrity sha512-c14SB+86+VJ5q/5m6ngpDABldR01Rpjnq/bLkhSNByDWC/p/xBMk5tl9pE4Wm2lb0V0pG8/4gdk/606Tw6r5Vw==
+parsegraph-artist@^3.4.41:
+  version "3.4.41"
+  resolved "https://registry.yarnpkg.com/parsegraph-artist/-/parsegraph-artist-3.4.41.tgz#b8aad3215e44a2651b09f562540f730d5d3532f0"
+  integrity sha512-R1TaZr12uqR//RE+oysecJncghpOw1rLicEGFfPRJR5+3TcoJqbh46K5q1EplJYTRYi4UhTKHDo+4m0lw0d7MQ==
   dependencies:
     parsegraph-color "^1.4.7"
     parsegraph-interact "^1.6.12"
-    parsegraph-scene "^2.3.12"
+    parsegraph-scene "^2.3.13"
     parsegraph-showincamera "^1.7.5"
 
-parsegraph-block@^4.4.30:
-  version "4.4.30"
-  resolved "https://registry.yarnpkg.com/parsegraph-block/-/parsegraph-block-4.4.30.tgz#cd234a1c65359deffb55080a25582d8b12aa850d"
-  integrity sha512-wLRVL3plGMOBmDwHIeRejEoHze6MywR5J4/JLg9eVuAdEBB5d0JHj1HczBiliwn5HZyIFGlMTCvlBn4QS5ZsXQ==
+parsegraph-block@^4.4.31:
+  version "4.4.31"
+  resolved "https://registry.yarnpkg.com/parsegraph-block/-/parsegraph-block-4.4.31.tgz#b9ee0e7a7e4e0f43d7ff76b3a43599455a5b3279"
+  integrity sha512-g5nDuJuX1Nha+2E/9LIHovJOu4V4hENc4XN6B0eTkJU+O9kZYXVDt4W9S9y4dvgkGGMeEZMJ/h4Uih2RaQTO4g==
   dependencies:
-    parsegraph-artist "^3.4.40"
+    parsegraph-artist "^3.4.41"
     parsegraph-blockpainter "^1.7.2"
     parsegraph-font "^1.7.4"
 
@@ -4103,10 +4103,10 @@ parsegraph-rect@^1.5.1:
   resolved "https://registry.yarnpkg.com/parsegraph-rect/-/parsegraph-rect-1.5.1.tgz#ee95591098bacc34284f04969a73f5b851ddfdb4"
   integrity sha512-ScHgiKnEpvOKVbc0aIn0mMJSZoqCGkak1Nlud9oezvHLDsVsMcHUO6KzPiN1DNfLaqQGn+mNBvSf0B04OeFIYw==
 
-parsegraph-scene@^2.3.12:
-  version "2.3.12"
-  resolved "https://registry.yarnpkg.com/parsegraph-scene/-/parsegraph-scene-2.3.12.tgz#ab02ccbd4847586b098681e66fb14d6e507f8cfa"
-  integrity sha512-F7toTS2CIXIEfEUuOgZaeSChQ4udq8+p0ojSOWi2NgEUKKEZDjHwiXiYrO6hnl+XD03crsazHTH8taINAe2I1A==
+parsegraph-scene@^2.3.13:
+  version "2.3.13"
+  resolved "https://registry.yarnpkg.com/parsegraph-scene/-/parsegraph-scene-2.3.13.tgz#04a4c3e54aab19c4971e348b362ad545aaafcf16"
+  integrity sha512-FPgKHErT/cA/hCXvkozZuEEUKJ7e+lnfN9ehrZ2afsQpTk0QDPDE2LJCAr5DKZQbrCgPHNiiPDTJP2M2ppu0rQ==
   dependencies:
     parsegraph-camera "^1.4.18"
     parsegraph-layout "^1.13.6"
