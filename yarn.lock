@@ -3948,10 +3948,10 @@ parsegraph-artist@^3.4.43:
     parsegraph-scene "^2.3.16"
     parsegraph-showincamera "^1.7.6"
 
-parsegraph-block@^4.5.6:
-  version "4.5.6"
-  resolved "https://registry.yarnpkg.com/parsegraph-block/-/parsegraph-block-4.5.6.tgz#ba6f7e9285920ceecf210cb9fa84aa28782bb142"
-  integrity sha512-Boe0Z4eV3F3WsO60G8Yaz7GhZeZY9tGYs+teAngJ0k7PWOXjFgGIhAlTConAbfpwpKiLI7VTIJGipsRYvAvVpg==
+parsegraph-block@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/parsegraph-block/-/parsegraph-block-4.6.0.tgz#c1dc60cbcaa6920fda56cacc57de415b84a7ef3f"
+  integrity sha512-8MnOSoUNSOmS2Ro70OKo9gzfQzO2eeXRrafndyNgIz1rZQh1v4fqE9/n5vCmhfRwzyGn0VIZkp8wdftZSDjk9g==
   dependencies:
     parsegraph-artist "^3.4.43"
     parsegraph-blockpainter "^1.7.4"
