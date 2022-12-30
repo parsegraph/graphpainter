@@ -103,11 +103,14 @@ const diagonalBlockDemo = (artistFunc: () => Artist<Block>) => {
   // root.value().getCache().freeze(freezer);
 
   let n: PaintedNode = rootNode;
-  for (let i = 0; i < 10; ++i) {
+  for (let i = 0; i < 100; ++i) {
     const child = makeBlock(
       new Color(1 - i / 10, 0, 0),
       new Color(0.5, 0.5, 0.5, 0.5)
     );
+    if (Math.random() < 0.5) {
+      child.state().setScale(0.85);
+    }
     n.connectNode(i % 2 ? Direction.FORWARD : Direction.DOWNWARD, child);
     n = child;
     if (i == 5) {
