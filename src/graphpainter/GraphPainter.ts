@@ -251,7 +251,14 @@ export default class GraphPainter implements Projected {
     );
     overlay.scale(layout.absoluteScale(), layout.absoluteScale());
 
-    this.labels().render(projector, this.camera().scale());
+    this.labels().render(
+      projector,
+      -camera.x() + camera.width()/2,
+      -camera.y() + camera.height()/2,
+      2*camera.width()/camera.scale(),
+      2*camera.height()/camera.scale(),
+      camera.scale()
+    );
 
     analytics.recordCompletion();
     return analytics.isDirty();
