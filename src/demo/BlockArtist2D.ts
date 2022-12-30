@@ -116,14 +116,16 @@ class BlockScene2D implements WorldRenderable {
 
   render() {
     this.blocks().forEach((n) => {
-      this.renderBlock(n.value())
-      this._world.labels()?.draw(
-        "BLOCK",
-        n.value().getLayout().absoluteX(),
-        n.value().getLayout().absoluteY(),
-        12,
-        n.value().getLayout().absoluteScale() * 2.0,
-      );
+      this.renderBlock(n.value());
+      this._world
+        .labels()
+        ?.draw(
+          "BLOCK",
+          n.value().getLayout().absoluteX(),
+          n.value().getLayout().absoluteY(),
+          12,
+          n.value().getLayout().absoluteScale() * 2.0
+        );
     });
     return false;
   }

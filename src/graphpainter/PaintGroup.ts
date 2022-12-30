@@ -3,7 +3,7 @@ import log from "parsegraph-log";
 import { Projector } from "parsegraph-projector";
 import { Projected } from "parsegraph-projector";
 import Method from "parsegraph-method";
-import { WorldLabels } from 'parsegraph-scene';
+import { WorldLabels } from "parsegraph-scene";
 
 import {
   makeScale3x3I,

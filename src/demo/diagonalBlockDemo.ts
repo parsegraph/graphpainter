@@ -131,10 +131,9 @@ const diagonalBlockDemo = (artistFunc: () => Artist<Block>) => {
   debugOverlay.container().style.position = "absolute";
   debugOverlay.container().style.pointerEvents = "none";
   belt.addRenderable(debugOverlay);
-  setTimeout(()=>{
+  setTimeout(() => {
     showInCamera(comp.root(), comp.camera(), false);
   }, 0);
-
 
   const root = projector.container();
   root.tabIndex = 0;

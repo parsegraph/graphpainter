@@ -3,7 +3,7 @@ import GraphPainterAnalytics from "./GraphPainterAnalytics";
 
 import log, { logEnter, logEnterc, logLeave } from "parsegraph-log";
 import { PaintedNode } from "parsegraph-artist";
-import { WorldTransform, WorldLabels } from 'parsegraph-scene';
+import { WorldTransform, WorldLabels } from "parsegraph-scene";
 import { Projector, Projected } from "parsegraph-projector";
 import Method from "parsegraph-method";
 import PaintGroup from "./PaintGroup";
