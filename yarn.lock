@@ -3939,21 +3939,21 @@ parse5@^7.1.1:
   dependencies:
     entities "^4.4.0"
 
-parsegraph-artist@^3.4.49:
-  version "3.4.49"
-  resolved "https://registry.yarnpkg.com/parsegraph-artist/-/parsegraph-artist-3.4.49.tgz#4dc618311aa4dec3420d323d32913ba9dd5b9f84"
-  integrity sha512-vwGdC9AK7sxmMvG4Ad+gRcTWsEOsFiT6zZJuv7Dje8XMUlWtlGCmV/KztNfvPrk2F0GukHTDhK73GZujvS+6ng==
+parsegraph-artist@^3.4.50:
+  version "3.4.50"
+  resolved "https://registry.yarnpkg.com/parsegraph-artist/-/parsegraph-artist-3.4.50.tgz#625e3373e82342936755c5019eb57772b14330d0"
+  integrity sha512-z3POV+FtMNycVNlMtiRoXD7Rc+IlWqDQUN/hnbLFtSynJuKkj/n0P/xGVpaCGu7CULuem36NVNgb1Cp8GXiVHg==
   dependencies:
-    parsegraph-interact "^1.7.1"
+    parsegraph-interact "^1.7.2"
     parsegraph-scene "^2.3.21"
     parsegraph-showincamera "^1.7.6"
 
-parsegraph-block@^4.6.6:
-  version "4.6.6"
-  resolved "https://registry.yarnpkg.com/parsegraph-block/-/parsegraph-block-4.6.6.tgz#875f05388dc655b325426da150a3a64a40884d05"
-  integrity sha512-gJDGlTHhUl5Xx9NxmA0+fBkYPZuGCR9r6DnTCawIugTle3L5QALREy3ZUnruP42Y8xWyjWd0ylq8hxwFkbVjiA==
+parsegraph-block@^4.6.7:
+  version "4.6.7"
+  resolved "https://registry.yarnpkg.com/parsegraph-block/-/parsegraph-block-4.6.7.tgz#094266262f854f26092cd5708240348899478efe"
+  integrity sha512-3fgi5vd/bt393/TmyZLlfVXAxoE6ZMbsaL+rAGFO0bH4/6PaQ2KA4biBNjXwqujA+291fPyAla31hWuEQ2kbTw==
   dependencies:
-    parsegraph-artist "^3.4.49"
+    parsegraph-artist "^3.4.50"
     parsegraph-blockpainter "^1.7.4"
     parsegraph-font "^1.7.4"
 
@@ -4038,10 +4038,10 @@ parsegraph-input@^2.0.7:
     parsegraph-matrix "^1.4.12"
     parsegraph-normalizewheel "^1.4.7"
 
-parsegraph-interact@^1.7.1:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/parsegraph-interact/-/parsegraph-interact-1.7.1.tgz#2ce812fa387d4286aa3942a64fc5113a8a78a5d0"
-  integrity sha512-0TmE+QL4oIHFQ06a2j4MqtJaMdF3FzGPvtLO9pwOLsB9FStLE07QqgTnVQDb2GWSQRr6XwaFGJEQjB5YWciqNQ==
+parsegraph-interact@^1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/parsegraph-interact/-/parsegraph-interact-1.7.2.tgz#ec494db964ba141c8c05bd1fb0baeb76dff4e884"
+  integrity sha512-iV5stxcEPNAmNX+cuQZULBZApWeE10VbnRkMlNAepCMs1GjOhuTgeW//TMdhHsobqUOe0T3VtvyA5hh+TMmsLw==
   dependencies:
     parsegraph-input "^2.0.7"
     parsegraph-method "^1.4.22"
