@@ -1,7 +1,9 @@
 DIST_NAME = graphpainter
 
 SCRIPT_FILES = \
+	src/GraphPainterAnalytics.ts \
 	src/index.ts \
+	src/PaintGroup.ts \
 	src/demo/diagonalBlockDemo.ts \
 	src/demo/BlockArtist2D.ts \
 	src/demo/block3d.ts \
@@ -10,10 +12,8 @@ SCRIPT_FILES = \
 	src/demo/BlockArtist3D.ts \
 	src/demo/block2d.ts \
 	src/demo/BlockArtistDOM.ts \
+	src/GraphPainter.ts \
 	src/glsl.d.ts \
-	src/graphpainter/GraphPainterAnalytics.ts \
-	src/graphpainter/PaintGroup.ts \
-	src/graphpainter/GraphPainter.ts \
 	src/Viewport.ts \
 	src/NodeRenderData.ts \
 	src/demo.ts \
