@@ -1,8 +1,8 @@
 import NodeRenderData from "./NodeRenderData";
 
-import GraphPainterAnalytics from "./graphpainter/GraphPainterAnalytics";
-import GraphPainter from "./graphpainter/GraphPainter";
-import PaintGroup from "./graphpainter/PaintGroup";
+import GraphPainterAnalytics from "./GraphPainterAnalytics";
+import GraphPainter from "./GraphPainter";
+import PaintGroup from "./PaintGroup";
 
 import Viewport from "./Viewport";
 
