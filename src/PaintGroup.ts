@@ -270,6 +270,7 @@ export default class PaintGroup implements Projected {
     const pizza = this.pizzaFor(projector);
     if (pizza) {
       pizza.setWorldTransform(world);
+      pizza.populate(this.root());
       needsUpdate = pizza.render() || needsUpdate;
     } else {
       needsUpdate = true;
