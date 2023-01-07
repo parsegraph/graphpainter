@@ -97,15 +97,16 @@ class BlockScene3D implements WorldRenderable {
     this._blocks.forEach((n) => {
       const block = n.value();
       const layout = block.getLayout();
+      const scale = layout.groupScale();
       log("Painting BLOCK at ({0}, {1})", layout.groupX(), layout.groupY());
       const painter = this.getBlockPainter();
       paintNodeLines(
         block.node(),
-        block.borderThickness(),
+        scale*block.borderThickness(),
         (x: number, y: number, w: number, h: number) => {
           painter.setBackgroundColor(block.lineColor());
           painter.setBorderColor(block.lineColor());
-          painter.drawBlock(x, y, w, h, 0, 0);
+          painter.drawBlock(x, y, scale*w, scale*h, 0, 0);
         }
       );
       painter.setBorderColor(
@@ -119,10 +120,10 @@ class BlockScene3D implements WorldRenderable {
       painter.drawBlock(
         layout.groupX(),
         layout.groupY(),
-        layout.size().width(),
-        layout.size().height(),
-        2.5 * block.blockStyle().borderRoundness,
-        2 * block.blockStyle().borderThickness
+        scale*layout.size().width(),
+        scale*layout.size().height(),
+        scale*2.5 * block.blockStyle().borderRoundness,
+        scale*2 * block.blockStyle().borderThickness
       );
     });
     return false;

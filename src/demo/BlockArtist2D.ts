@@ -71,21 +71,20 @@ class BlockScene2D implements WorldRenderable {
 
   protected renderBlock(val: Block) {
     const layout = val.getLayout();
+    const scale = layout.groupScale();
     const ctx = this.projector().overlay();
     const color = val.blockStyle().backgroundColor;
     const size = val.size();
     const borderRoundness = val.blockStyle().borderRoundness;
     const borderThickness = val.blockStyle().borderThickness;
 
-    ctx.scale(layout.groupScale(), layout.groupScale());
-
     paintNodeLines(
       val.node(),
-      val.borderThickness(),
+      scale*val.borderThickness(),
       (x: number, y: number, w: number, h: number) => {
         ctx.strokeStyle = val.blockStyle().borderColor.asRGBA();
         ctx.fillStyle = val.blockStyle().borderColor.asRGBA();
-        ctx.fillRect(x - w / 2, y - h / 2, w, h);
+        ctx.fillRect(x - scale*w / 2, y - scale*h / 2, scale*w, scale*h);
       }
     );
 
@@ -94,22 +93,22 @@ class BlockScene2D implements WorldRenderable {
       ctx,
       layout.groupX() + borderThickness / 2 - size.width() / 2,
       layout.groupY() + borderThickness / 2 - size.height() / 2,
-      size.width() - borderThickness,
-      size.height() - borderThickness,
-      borderRoundness * layout.groupScale()
+      scale*(size.width() - borderThickness),
+      scale*(size.height() - borderThickness),
+      borderRoundness * scale
     );
     ctx.fill();
     ctx.strokeStyle = val.focused()
       ? "#fff"
       : val.blockStyle().borderColor.premultiply(color).asRGBA();
-    ctx.lineWidth = borderThickness * layout.groupScale();
+    ctx.lineWidth = borderThickness * scale;
     this.strokeRoundedRect(
       ctx,
       layout.groupX() + borderThickness / 2 - size.width() / 2,
       layout.groupY() + borderThickness / 2 - size.height() / 2,
-      size.width() - borderThickness,
-      size.height() - borderThickness,
-      borderRoundness * layout.groupScale()
+      scale*(size.width() - borderThickness),
+      scale*(size.height() - borderThickness),
+      borderRoundness * scale
     );
     ctx.stroke();
   }
@@ -124,7 +123,7 @@ class BlockScene2D implements WorldRenderable {
           n.value().getLayout().absoluteX(),
           n.value().getLayout().absoluteY(),
           12,
-          n.value().getLayout().absoluteScale() * 2.0
+          2.0 / n.value().getLayout().absoluteScale()
         );
     });
     return false;

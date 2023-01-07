@@ -87,13 +87,14 @@ class BlockSceneDOM implements Renderable, Transformed {
     this.subgroup().forEach((node) => {
       const block = node.value();
       const layout = block.getLayout();
+      const scale = layout.groupScale();
       const borderThickness = block.borderThickness();
 
       log("Painting BLOCK at ({0}, {1})", layout.groupX(), layout.groupY());
 
       paintNodeLines(
         block.node(),
-        block.borderThickness(),
+        scale*block.borderThickness(),
         (x: number, y: number, w: number, h: number) => {
           if (currentLine === this._lines.length) {
             const line = document.createElement("div");
@@ -127,7 +128,7 @@ class BlockSceneDOM implements Renderable, Transformed {
         this.sceneRoot().appendChild(elem);
       }
       elem.style.border =
-        block.borderThickness() +
+        scale*block.borderThickness() +
         "px solid " +
         (block.focused()
           ? "#fff"
@@ -136,19 +137,19 @@ class BlockSceneDOM implements Renderable, Transformed {
               .borderColor.premultiply(block.blockStyle().backgroundColor)
               .asRGBA());
       elem.style.borderRadius =
-        (2 + block.blockStyle().borderRoundness) * layout.groupScale() + "px";
+        (2 + block.blockStyle().borderRoundness) * scale + "px";
       elem.style.backgroundColor = block.blockStyle().backgroundColor.asRGBA();
 
       const size = block.size();
-      const width = size.width() - 2 * borderThickness;
-      const height = size.height() - 2 * borderThickness;
+      const width = scale*size.width();
+      const height = scale*size.height();
       elem.style.width = width + "px";
       elem.style.height = height + "px";
 
       elem.style.transform = `translate(${
-        layout.groupX() - width / 2 - borderThickness
+        layout.groupX() - width/2
       }px, ${
-        layout.groupY() - layout.groupScale() * (height / 2 + borderThickness)
+        layout.groupY() - height/2
       }px)`;
     });
 
@@ -167,7 +168,7 @@ class BlockSceneDOM implements Renderable, Transformed {
     const cam = this._world;
     const translate = `translate(${cam.x()}px, ${cam.y()}px)`;
     const scale = `scale(${cam.scale()})`;
-    this.sceneRoot().style.transform = `${scale} ${translate}`;
+    this.sceneRoot().style.transform = `${translate} ${scale}`;
     return false;
   }
 }
