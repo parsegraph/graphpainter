@@ -253,11 +253,11 @@ export default class GraphPainter implements Projected {
 
     this.labels().render(
       projector,
-      -camera.x() + (camera.width()/camera.scale())/2,
-      -camera.y() + (camera.height()/camera.scale())/2,
-      camera.width()/camera.scale(),
-      camera.height()/camera.scale(),
-      camera.scale()
+      -camera.x() + camera.width() / camera.scale() / 2,
+      -camera.y() + camera.height() / camera.scale() / 2,
+      camera.width() / camera.scale(),
+      camera.height() / camera.scale(),
+      camera.scale() / window.visualViewport.scale
     );
 
     analytics.recordCompletion();
