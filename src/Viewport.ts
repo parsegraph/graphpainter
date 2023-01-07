@@ -9,7 +9,7 @@ import { Projector, Projected } from "parsegraph-projector";
 import Color from "parsegraph-color";
 import { BasicMouseController, MouseInput } from "parsegraph-input";
 
-import GraphPainter from "./graphpainter/GraphPainter";
+import GraphPainter from "./GraphPainter";
 
 export default class Viewport
   extends BasicMouseController

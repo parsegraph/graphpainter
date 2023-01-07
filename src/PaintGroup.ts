@@ -13,7 +13,7 @@ import {
   matrixIdentity3x3,
 } from "parsegraph-matrix";
 import Rect from "parsegraph-rect";
-import NodeRenderData from "../NodeRenderData";
+import NodeRenderData from "./NodeRenderData";
 import { Renderable } from "parsegraph-timingbelt";
 import { PaintedNode, Pizza } from "parsegraph-artist";
 import { WorldTransform } from "parsegraph-scene";
