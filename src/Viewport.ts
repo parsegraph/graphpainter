@@ -64,11 +64,6 @@ export default class Viewport
       input.mount(projector.glProvider().container());
       this._inputs.set(projector, input);
     }
-    if (!this.needsRepaint()) {
-      // console.log("No need to paint; viewport is not dirty");
-      return false;
-    }
-
     if (!this._painter.paint(projector, timeout)) {
       this._needsRepaint = false;
     } else {

@@ -178,7 +178,7 @@ export default class PaintGroup implements Projected {
     }
 
     const layout = this.root().value().getLayout();
-    if (layout.needsAbsolutePos()) {
+    if (layout.needsPosition()) {
       logc("Rendering", "PaintGroup wants to render but is not yet laid out")
       return true;
     }
