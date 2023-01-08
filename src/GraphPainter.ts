@@ -134,17 +134,22 @@ export default class GraphPainter implements Projected {
     if (this._savedPaintGroup !== -1) {
       return;
     }
+
+    logEnterc("Painting", "Reconciling paint groups");
     let i = 0;
     do {
       if (this._paintGroups.length < i) {
         const pg = this._paintGroups[i];
         if (pg.root() === node) {
           // If the paint group's root is the same node, re-use it.
+          log("Re-using paint group for node " + pg.root().state().id());
         } else {
           // Different root, so create a new paint group.
+          log("Inserting new paint group at index " + i + " for node ", node.state().id());
           this._paintGroups.splice(i, 0, new PaintGroup(node));
         }
       } else {
+        log("Appending new paint group for node " + node.state().id());
         this._paintGroups.push(new PaintGroup(node));
       }
       ++i;
@@ -157,6 +162,7 @@ export default class GraphPainter implements Projected {
       pg.dispose();
     }
     this._savedPaintGroup = 0;
+    logLeave();
   }
 
   paint(projector: Projector, timeout?: number): boolean {
