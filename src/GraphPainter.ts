@@ -138,7 +138,7 @@ export default class GraphPainter implements Projected {
     logEnterc("Painting", "Reconciling paint groups");
     let i = 0;
     do {
-      if (this._paintGroups.length < i) {
+      if (i < this._paintGroups.length) {
         const pg = this._paintGroups[i];
         if (pg.root() === node) {
           // If the paint group's root is the same node, re-use it.
