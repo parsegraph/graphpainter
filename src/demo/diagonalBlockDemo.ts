@@ -113,7 +113,7 @@ const diagonalBlockDemo = (artistFunc: () => Artist<Block>) => {
     }
     n.connectNode(i % 2 ? Direction.FORWARD : Direction.DOWNWARD, child);
     n = child;
-    if (i == 5) {
+    if (i % 5 == 0) {
       n.crease();
     }
   }
