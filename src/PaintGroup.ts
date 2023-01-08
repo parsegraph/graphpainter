@@ -1,5 +1,5 @@
 import Camera from "parsegraph-camera";
-import log from "parsegraph-log";
+import log, {logc, logEnterc, logLeave} from "parsegraph-log";
 import { Projector } from "parsegraph-projector";
 import { Projected } from "parsegraph-projector";
 import Method from "parsegraph-method";
@@ -63,15 +63,19 @@ export default class PaintGroup implements Projected {
     if (!this.hasPizza(projector)) {
       return;
     }
+    logEnterc("Destructors", "Unmounting paint group");
     this.pizzaFor(projector).eachView((view) => view.unmount());
     this._projections.delete(projector);
+    logLeave();
   }
 
   dispose() {
+    logEnterc("Destructors", "Disposing paint group");
     this.allViews((view) => {
       view.unmount();
     });
     this._projections.clear();
+    logLeave();
   }
 
   root() {
@@ -84,6 +88,7 @@ export default class PaintGroup implements Projected {
       throw new Error("Node cannot be uncommitted when painting");
     }
 
+    logEnterc("Painting", "Painting paint group");
     if (!this.hasPizza(projector)) {
       const pizza = new Pizza(projector);
       pizza.setOnScheduleUpdate(this.scheduleUpdate, this);
@@ -93,6 +98,7 @@ export default class PaintGroup implements Projected {
 
     pizza.populate(this.root());
     const needsRepaint = pizza.paint(timeout);
+    logLeave();
 
     return needsRepaint;
   }
@@ -167,11 +173,13 @@ export default class PaintGroup implements Projected {
       throw new Error("Cannot render a node that is not a paint group");
     }
     if (!this.isPainted(projector)) {
+      logc("Rendering", "PaintGroup wants to render but is not yet painted")
       return true;
     }
 
     const layout = this.root().value().getLayout();
     if (layout.needsAbsolutePos()) {
+      logc("Rendering", "PaintGroup wants to render but is not yet laid out")
       return true;
     }
 
@@ -183,13 +191,15 @@ export default class PaintGroup implements Projected {
     // Check if paint group would be visible.
     const camera = this.camera();
     if (!camera) {
+      logc("Rendering", "PaintGroup wants to render but there is no camera");
       return true;
     }
     if (!camera.containsAny(s)) {
-      return layout.needsAbsolutePos();
+      logc("Rendering", "PaintGroup is not visible, so not rendering");
+      return false;
     }
 
-    log(
+    logEnterc("Rendering",
       "Rendering paint group: ",
       layout.absoluteX(),
       layout.absoluteY(),
@@ -211,16 +221,17 @@ export default class PaintGroup implements Projected {
         .frozenNode()
         .render(projector, this.worldMatrix(), true);
       if (IMMEDIATE_RENDERS > 0) {
-        log("Immediately rendered ", IMMEDIATE_RENDERS, " times");
+        logc("Rendering", "Immediately rendered ", IMMEDIATE_RENDERS, " times");
         IMMEDIATE_RENDERS = 0;
       }
       ++CACHED_RENDERS;
+      logLeave();
       return !cleanRender || layout.needsAbsolutePos();
     }
 
     // Check if we were cached before this render.
     if (CACHED_RENDERS > 0) {
-      log("Rendered from cache ", CACHED_RENDERS, " times");
+      logc("Rendering", "Rendered from cache ", CACHED_RENDERS, " times");
       // Clear cached render counter, since this is an immediate render.
       CACHED_RENDERS = 0;
     }
@@ -261,10 +272,13 @@ export default class PaintGroup implements Projected {
       }
     }
 
-    return needsUpdate || layout.needsAbsolutePos();
+    const rv = needsUpdate || layout.needsAbsolutePos();
+    logLeave(rv ? "Paintgroup needs update" : "PaintGroup completed rendering");
+    return rv;
   }
 
   renderDirect(projector: Projector, world: WorldTransform): boolean {
+    logEnterc("Rendering", "Rendering paint group");
     world.setLabels(this.labels());
     let needsUpdate = false;
     const pizza = this.pizzaFor(projector);
@@ -275,7 +289,9 @@ export default class PaintGroup implements Projected {
     } else {
       needsUpdate = true;
     }
-    return needsUpdate || this.root().value().getLayout().needsAbsolutePos();
+    const rv = needsUpdate || this.root().value().getLayout().needsAbsolutePos();
+    logLeave();
+    return rv;
   }
 
   scheduleUpdate() {

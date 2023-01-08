@@ -112,15 +112,19 @@ export default class GraphPainter implements Projected {
     // Commit layout
     let cont: Function;
     if (this._commitLayoutFunc) {
+      logEnterc("Layout", "Continuing layout");
       cont = this._commitLayoutFunc(timeout);
     } else {
+      logEnterc("Layout", "Starting new layout");
       cont = this.root().value().getLayout().commitLayoutIteratively(timeout);
     }
     if (cont) {
       this._commitLayoutFunc = cont;
+      logLeave("Layout needs more time");
       return true;
     }
     this._commitLayoutFunc = null;
+    logLeave("Layout complete");
     return false;
   }
 
@@ -163,7 +167,7 @@ export default class GraphPainter implements Projected {
       throw new Error("A node must be a paint group in order to be painted");
     }
 
-    logEnterc("Node paints", "Painting node for window={0}", window);
+    logEnterc("Painting", "Painting node for window={0}", window);
     log("{0} has paint group {1}", this.root(), this._savedPaintGroup);
 
     const pastTime = timer(timeout);
