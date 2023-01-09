@@ -1,7 +1,7 @@
 import Camera from "parsegraph-camera";
 import GraphPainterAnalytics from "./GraphPainterAnalytics";
 
-import log, { logEnter, logEnterc, logLeave } from "parsegraph-log";
+import log, { logc, logEnter, logEnterc, logLeave } from "parsegraph-log";
 import { PaintedNode } from "parsegraph-artist";
 import { WorldTransform, WorldLabels } from "parsegraph-scene";
 import { Projector, Projected } from "parsegraph-projector";
@@ -99,6 +99,7 @@ export default class GraphPainter implements Projected {
     if (this.root() && this.root().value().getCache().isFrozen()) {
       this.root().value().getCache().frozenNode().invalidate();
     }
+    logc("Invalidation", "Marking graphPainter as dirty");
     this._commitLayoutFunc = null;
     this._savedPaintGroup = -1;
     this._onScheduleUpdate.call();
