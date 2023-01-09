@@ -55,6 +55,6 @@
     "parsegraph-log": "^1.9.0"
   },
   "dependencies": {
-    "parsegraph-block": "^4.6.16"
+    "parsegraph-block": "^4.6.17"
   }
 }
