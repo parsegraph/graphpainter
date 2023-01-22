@@ -35,7 +35,7 @@
     "eslint-config-prettier": "^8.6.0",
     "jest": "^29.3.1",
     "jest-environment-jsdom": "^29.3.1",
-    "jsdom": "^21.0.0",
+    "jsdom": "^21.1.0",
     "jsdom-global": "^3.0.2",
     "parsegraph-checkglerror": "^1.5.6",
     "parsegraph-log": "^1.9.2",
