@@ -3951,15 +3951,7 @@ parsegraph-block@^4.6.17:
     parsegraph-blockpainter "^1.7.6"
     parsegraph-font "^1.7.5"
 
-parsegraph-blockpainter@^1.7.6:
-  version "1.7.6"
-  resolved "https://registry.yarnpkg.com/parsegraph-blockpainter/-/parsegraph-blockpainter-1.7.6.tgz#d962df91ebdf6bf4fefa75d234ac5838dc60fe1a"
-  integrity sha512-dtNf5NtcJY0yk9192HDJ/mITCSyAviflEFBihLxCcXGbop0Uz1tQOSFZFnIEW/Ck0rNOPjG3LxKT84K4sfJ1ZQ==
-  dependencies:
-    parsegraph-compileprogram "^2.2.18"
-    parsegraph-matrix "^1.4.13"
-
-parsegraph-blockpainter@^1.7.8:
+parsegraph-blockpainter@^1.7.6, parsegraph-blockpainter@^1.7.8:
   version "1.7.8"
   resolved "https://registry.yarnpkg.com/parsegraph-blockpainter/-/parsegraph-blockpainter-1.7.8.tgz#182d6cc9d042b28b738805432b2623d1f399e81b"
   integrity sha512-eruYHYPYefEFD2+fYW1tMsQV+cafLrLfshmbkXJOsqRMuZj76DxSoLXY6++jalPrtjnvbJcPeGfw9ZQyXiN2sg==
