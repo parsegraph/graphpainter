@@ -3913,7 +3913,7 @@ parse5@^7.0.0, parse5@^7.1.1:
   dependencies:
     entities "^4.4.0"
 
-parsegraph-artist@^3.4.63, parsegraph-artist@^3.4.65:
+parsegraph-artist@^3.4.65:
   version "3.4.65"
   resolved "https://registry.yarnpkg.com/parsegraph-artist/-/parsegraph-artist-3.4.65.tgz#f759c2c740dd6ebcaf916dec8b5c88b506009a80"
   integrity sha512-41GSLWZrnKn2xBWRRVIFJIB69gz+/w8fbw5fYpQz98XfA5zO1WZRxB6FdnpLWbqmT0nBPekS2h13LN8IEO2BKQ==
@@ -3933,19 +3933,19 @@ parsegraph-artist@^3.4.63, parsegraph-artist@^3.4.65:
     parsegraph-timing "^1.4.19"
     parsegraph-timingbelt "^1.8.3"
 
-parsegraph-block@^4.6.22:
-  version "4.6.22"
-  resolved "https://registry.yarnpkg.com/parsegraph-block/-/parsegraph-block-4.6.22.tgz#53a45becae0d999a14219200d97f6131330e946d"
-  integrity sha512-xhJaodcbnTkD4zKvQ82PMFS9WMc/KLWvJkjPO4mcLgEw2mXnDjZp/p040vpCznzHm3rL1Vf1TEPJFvk7g2xqZw==
+parsegraph-block@^4.6.23:
+  version "4.6.23"
+  resolved "https://registry.yarnpkg.com/parsegraph-block/-/parsegraph-block-4.6.23.tgz#d39393bbcae2bb389dedbc210b6170cf427b264d"
+  integrity sha512-Zgwd6LKQrGx82FHH59lsuriM9qbCZX5xMlOwfJlcHRCsEpPjY+zKxI6vRMy4DIo77/UqenqLq4YGkKdOGdpsNA==
   dependencies:
-    parsegraph-artist "^3.4.63"
-    parsegraph-blockpainter "^1.7.9"
+    parsegraph-artist "^3.4.65"
+    parsegraph-blockpainter "^1.7.10"
     parsegraph-camera "^1.4.22"
     parsegraph-color "^1.4.12"
     parsegraph-direction "^2.2.4"
     parsegraph-font "^1.7.6"
     parsegraph-method "^1.4.25"
-    parsegraph-projector "^1.14.9"
+    parsegraph-projector "^1.14.10"
     parsegraph-rect "^1.5.4"
     parsegraph-scene "^2.3.31"
     parsegraph-showincamera "^1.7.15"
@@ -3960,16 +3960,6 @@ parsegraph-blockpainter@^1.7.10:
   dependencies:
     parsegraph-color "^1.4.12"
     parsegraph-compileprogram "^2.2.21"
-    parsegraph-matrix "^1.4.15"
-    parsegraph-rect "^1.5.4"
-
-parsegraph-blockpainter@^1.7.9:
-  version "1.7.9"
-  resolved "https://registry.yarnpkg.com/parsegraph-blockpainter/-/parsegraph-blockpainter-1.7.9.tgz#8088ea005e883a63ea350ca9692eab51ae470e83"
-  integrity sha512-TPvjPkE8M4Ec6+sJTrEFpNbGlbrCRRN9wBidJMnISNSZqzdy1uL4fK5w2NGqX4MVKGd2oSkx8ZmuRAlTT1fO9w==
-  dependencies:
-    parsegraph-color "^1.4.12"
-    parsegraph-compileprogram "^2.2.20"
     parsegraph-matrix "^1.4.15"
     parsegraph-rect "^1.5.4"
 
