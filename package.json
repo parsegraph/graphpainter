@@ -57,18 +57,18 @@
   "dependencies": {
     "parsegraph-artist": "^3.4.65",
     "parsegraph-block": "^4.6.23",
-    "parsegraph-blockpainter": "^1.7.10",
-    "parsegraph-camera": "^1.4.22",
-    "parsegraph-color": "^1.4.12",
-    "parsegraph-direction": "^2.2.4",
-    "parsegraph-input": "^2.0.10",
-    "parsegraph-matrix": "^1.4.15",
-    "parsegraph-method": "^1.4.25",
-    "parsegraph-projector": "^1.14.10",
-    "parsegraph-rect": "^1.5.4",
-    "parsegraph-scene": "^2.3.31",
-    "parsegraph-showincamera": "^1.7.15",
-    "parsegraph-timing": "^1.4.19",
-    "parsegraph-timingbelt": "^1.8.3"
+    "parsegraph-blockpainter": "^1.7.12",
+    "parsegraph-camera": "^1.4.24",
+    "parsegraph-color": "^1.4.13",
+    "parsegraph-direction": "^2.2.6",
+    "parsegraph-input": "^2.0.11",
+    "parsegraph-matrix": "^1.4.16",
+    "parsegraph-method": "^1.4.26",
+    "parsegraph-projector": "^1.14.11",
+    "parsegraph-rect": "^1.5.5",
+    "parsegraph-scene": "^2.3.32",
+    "parsegraph-showincamera": "^1.7.16",
+    "parsegraph-timing": "^1.4.20",
+    "parsegraph-timingbelt": "^1.8.4"
   }
 }
