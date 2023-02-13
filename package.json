@@ -55,8 +55,8 @@
     "parsegraph-log": "^1.9.3"
   },
   "dependencies": {
-    "parsegraph-artist": "^3.4.68",
-    "parsegraph-block": "^4.6.26",
+    "parsegraph-artist": "^3.4.69",
+    "parsegraph-block": "^4.6.27",
     "parsegraph-blockpainter": "^1.7.12",
     "parsegraph-camera": "^1.4.24",
     "parsegraph-color": "^1.4.13",
@@ -66,8 +66,8 @@
     "parsegraph-method": "^1.4.26",
     "parsegraph-projector": "^1.14.12",
     "parsegraph-rect": "^1.5.5",
-    "parsegraph-scene": "^2.3.35",
-    "parsegraph-showincamera": "^1.7.19",
+    "parsegraph-scene": "^2.3.36",
+    "parsegraph-showincamera": "^1.7.20",
     "parsegraph-timing": "^1.4.20",
     "parsegraph-timingbelt": "^1.8.4"
   }
