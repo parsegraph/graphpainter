@@ -239,7 +239,7 @@ export default class GraphPainter implements Projected {
     analytics.recordStart();
 
     this.labels().clear();
-    this._paintGroups.forEach((pg) => {
+    [...this._paintGroups].reverse().forEach((pg) => {
       pg.setCamera(this.camera());
       pg.setLabels(this.labels());
       const pizza = pg.pizzaFor(projector);
