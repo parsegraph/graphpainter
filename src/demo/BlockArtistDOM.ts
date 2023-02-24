@@ -94,7 +94,7 @@ class BlockSceneDOM implements Renderable, Transformed {
 
       paintNodeLines(
         block.node(),
-        scale*block.borderThickness(),
+        scale * block.borderThickness(),
         (x: number, y: number, w: number, h: number) => {
           if (currentLine === this._lines.length) {
             const line = document.createElement("div");
@@ -128,7 +128,7 @@ class BlockSceneDOM implements Renderable, Transformed {
         this.sceneRoot().appendChild(elem);
       }
       elem.style.border =
-        scale*block.borderThickness() +
+        scale * block.borderThickness() +
         "px solid " +
         (block.focused()
           ? "#fff"
@@ -141,15 +141,13 @@ class BlockSceneDOM implements Renderable, Transformed {
       elem.style.backgroundColor = block.blockStyle().backgroundColor.asRGBA();
 
       const size = block.size();
-      const width = scale*size.width();
-      const height = scale*size.height();
+      const width = scale * size.width();
+      const height = scale * size.height();
       elem.style.width = width + "px";
       elem.style.height = height + "px";
 
-      elem.style.transform = `translate(${
-        layout.groupX() - width/2
-      }px, ${
-        layout.groupY() - height/2
+      elem.style.transform = `translate(${layout.groupX() - width / 2}px, ${
+        layout.groupY() - height / 2
       }px)`;
     });
 

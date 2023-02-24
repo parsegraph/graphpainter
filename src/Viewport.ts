@@ -1,4 +1,4 @@
-import log, {logc} from "parsegraph-log";
+import log, { logc } from "parsegraph-log";
 import Method from "parsegraph-method";
 
 import { PaintedNode } from "parsegraph-artist";

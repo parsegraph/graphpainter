@@ -1,5 +1,5 @@
 import Camera from "parsegraph-camera";
-import log, {logc, logEnterc, logLeave} from "parsegraph-log";
+import log, { logc, logEnterc, logLeave } from "parsegraph-log";
 import { Projector } from "parsegraph-projector";
 import { Projected } from "parsegraph-projector";
 import Method from "parsegraph-method";
@@ -173,13 +173,13 @@ export default class PaintGroup implements Projected {
       throw new Error("Cannot render a node that is not a paint group");
     }
     if (!this.isPainted(projector)) {
-      logc("Rendering", "PaintGroup wants to render but is not yet painted")
+      logc("Rendering", "PaintGroup wants to render but is not yet painted");
       return true;
     }
 
     const layout = this.root().value().getLayout();
     if (layout.needsPosition()) {
-      logc("Rendering", "PaintGroup wants to render but is not yet laid out")
+      logc("Rendering", "PaintGroup wants to render but is not yet laid out");
       return true;
     }
 
@@ -199,7 +199,8 @@ export default class PaintGroup implements Projected {
       return false;
     }
 
-    logEnterc("Rendering",
+    logEnterc(
+      "Rendering",
       "Rendering paint group: ",
       layout.absoluteX(),
       layout.absoluteY(),
@@ -289,7 +290,8 @@ export default class PaintGroup implements Projected {
     } else {
       needsUpdate = true;
     }
-    const rv = needsUpdate || this.root().value().getLayout().needsAbsolutePos();
+    const rv =
+      needsUpdate || this.root().value().getLayout().needsAbsolutePos();
     logLeave();
     return rv;
   }

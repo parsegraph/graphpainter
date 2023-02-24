@@ -80,11 +80,16 @@ class BlockScene2D implements WorldRenderable {
 
     paintNodeLines(
       val.node(),
-      scale*val.borderThickness(),
+      scale * val.borderThickness(),
       (x: number, y: number, w: number, h: number) => {
         ctx.strokeStyle = val.blockStyle().borderColor.asRGBA();
         ctx.fillStyle = val.blockStyle().borderColor.asRGBA();
-        ctx.fillRect(x - scale*w / 2, y - scale*h / 2, scale*w, scale*h);
+        ctx.fillRect(
+          x - (scale * w) / 2,
+          y - (scale * h) / 2,
+          scale * w,
+          scale * h
+        );
       }
     );
 
@@ -93,8 +98,8 @@ class BlockScene2D implements WorldRenderable {
       ctx,
       layout.groupX() + borderThickness / 2 - size.width() / 2,
       layout.groupY() + borderThickness / 2 - size.height() / 2,
-      scale*(size.width() - borderThickness),
-      scale*(size.height() - borderThickness),
+      scale * (size.width() - borderThickness),
+      scale * (size.height() - borderThickness),
       borderRoundness * scale
     );
     ctx.fill();
@@ -106,8 +111,8 @@ class BlockScene2D implements WorldRenderable {
       ctx,
       layout.groupX() + borderThickness / 2 - size.width() / 2,
       layout.groupY() + borderThickness / 2 - size.height() / 2,
-      scale*(size.width() - borderThickness),
-      scale*(size.height() - borderThickness),
+      scale * (size.width() - borderThickness),
+      scale * (size.height() - borderThickness),
       borderRoundness * scale
     );
     ctx.stroke();

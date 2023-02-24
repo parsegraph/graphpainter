@@ -146,7 +146,10 @@ export default class GraphPainter implements Projected {
           log("Re-using paint group for node " + pg.root().state().id());
         } else {
           // Different root, so create a new paint group.
-          log("Inserting new paint group at index " + i + " for node ", node.state().id());
+          log(
+            "Inserting new paint group at index " + i + " for node ",
+            node.state().id()
+          );
           this._paintGroups.splice(i, 0, new PaintGroup(node));
         }
       } else {
