@@ -33,6 +33,7 @@ export default class GraphPainter implements Projected {
   _camera: Camera;
   _onScheduleUpdate: Method;
   _worldLabels: WorldLabels;
+  _reverseRenderOrder: boolean;
 
   constructor(root: PaintedNode = null, cam: Camera = null) {
     logEnter("Constructing GraphPainter");
@@ -41,6 +42,7 @@ export default class GraphPainter implements Projected {
     this._camera = cam;
     this._onScheduleUpdate = new Method();
     this._worldLabels = new WorldLabels();
+    this._reverseRenderOrder = false;
 
     this.clear();
     logLeave();
@@ -232,6 +234,18 @@ export default class GraphPainter implements Projected {
     return this._worldLabels;
   }
 
+  reverseRenderOrder() {
+    return this._reverseRenderOrder;
+  }
+
+  setReverseRenderOrder(reverseRendering: boolean) {
+    if (this._reverseRenderOrder === reverseRendering) {
+      return;
+    }
+    this._reverseRenderOrder = reverseRendering;
+    this.markDirty();
+  }
+
   render(projector: Projector): boolean {
     if (!this.root()) {
       return false;
@@ -242,7 +256,11 @@ export default class GraphPainter implements Projected {
     analytics.recordStart();
 
     this.labels().clear();
-    [...this._paintGroups].reverse().forEach((pg) => {
+
+    for (let i = 0; i < this._paintGroups.length; ++i) {
+      const pg = this._paintGroups[this.reverseRenderOrder() ?
+        this._paintGroups.length - 1 - i : i
+      ];
       pg.setCamera(this.camera());
       pg.setLabels(this.labels());
       const pizza = pg.pizzaFor(projector);
@@ -252,7 +270,7 @@ export default class GraphPainter implements Projected {
         analytics.recordConsecutiveRender();
         analytics.recordNumRenders(pizza.numRenders());
       }
-    });
+    }
     const camera = this.camera();
     proj.overlay().resetTransform();
     const layout = this.root().value().getLayout();
