@@ -258,9 +258,10 @@ export default class GraphPainter implements Projected {
     this.labels().clear();
 
     for (let i = 0; i < this._paintGroups.length; ++i) {
-      const pg = this._paintGroups[this.reverseRenderOrder() ?
-        this._paintGroups.length - 1 - i : i
-      ];
+      const pg =
+        this._paintGroups[
+          this.reverseRenderOrder() ? this._paintGroups.length - 1 - i : i
+        ];
       pg.setCamera(this.camera());
       pg.setLabels(this.labels());
       const pizza = pg.pizzaFor(projector);
