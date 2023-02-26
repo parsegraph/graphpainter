@@ -55,20 +55,6 @@
     "parsegraph-log": "^1.9.3"
   },
   "dependencies": {
-    "parsegraph-artist": "^3.4.71",
-    "parsegraph-block": "^4.7.3",
-    "parsegraph-blockpainter": "^1.8.0",
-    "parsegraph-camera": "^1.4.24",
-    "parsegraph-color": "^1.4.13",
-    "parsegraph-direction": "^2.4.1",
-    "parsegraph-input": "^2.0.11",
-    "parsegraph-matrix": "^1.4.16",
-    "parsegraph-method": "^1.4.26",
-    "parsegraph-projector": "^1.14.12",
-    "parsegraph-rect": "^1.5.5",
-    "parsegraph-scene": "^2.3.38",
-    "parsegraph-showincamera": "^1.7.22",
-    "parsegraph-timing": "^1.4.20",
-    "parsegraph-timingbelt": "^1.8.4"
+    "parsegraph-block": "^4.7.4"
   }
 }
